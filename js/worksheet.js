@@ -185,8 +185,8 @@ function insertTeacherBanner(s) {
   const themeName = (s.mode === 'engineering')
     ? (s.theme ? THEMES_FOR_WS[s.theme - 1] : '工程地景・全部主題')
     : (s.mode === 'curated' ? '精選地景' : (s.mode === 'trial' ? '試玩 20 題' : 'Mapillary'));
-  const code = (s.code || '').slice(0, 60);
-  banner.innerHTML = `📚 <b>教師版（含參考答案）</b>　·　模式：${escapeHtml(themeName)}　·　總分 ${s.totalScore}　·　成績碼：<code>${escapeHtml(code)}…</code>`;
+  const shortCode = (s.code || '').replace(/^TWEG:/, '').slice(0, 12);
+  banner.innerHTML = `📚 <b>教師版（含參考答案）</b>　·　模式：${escapeHtml(themeName)}　·　總分 ${s.totalScore}　·　紀錄 <code>#${escapeHtml(shortCode)}</code>`;
   meta.parentNode.insertBefore(banner, meta.nextSibling);
 }
 
