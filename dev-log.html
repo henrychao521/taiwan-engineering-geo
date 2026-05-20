@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>開發紀錄 ｜ 台灣工程地景探索</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📒%3C/text%3E%3C/svg%3E">
+<style>
+  body.devlog {
+    background:
+      radial-gradient(ellipse 60% 50% at 85% -5%, rgba(30,82,102,.08), transparent),
+      var(--c-paper);
+  }
+  .dl-wrap { max-width: 880px; margin: 0 auto; padding: 0 28px 90px; }
+  .dl-hero { padding: 56px 0 24px; }
+  .dl-hero h1 { font-size: 42px; font-weight: 900; letter-spacing: -.025em; }
+  .dl-hero h1 .grad {
+    background: linear-gradient(120deg, var(--c-primary), var(--c-amber));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .dl-hero p { font-size: 16px; color: var(--c-ink-soft); margin-top: 10px; line-height: 1.85; }
+
+  .rule-box {
+    background: linear-gradient(135deg, #FEF9C3, #fff);
+    border: 1px solid #FDE68A; border-left: 4px solid #D97706;
+    border-radius: var(--r); padding: 18px 22px; margin: 22px 0 32px;
+  }
+  .rule-box h3 { font-size: 16px; font-weight: 800; color: #92400E; margin-bottom: 8px; }
+  .rule-box ol { margin: 6px 0 0 20px; }
+  .rule-box li { font-size: 14px; color: var(--c-ink-soft); margin-bottom: 5px; }
+
+  .dl-meta {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 30px;
+  }
+  .dl-stat {
+    background: #fff; border: 1px solid var(--c-line); border-radius: var(--r);
+    padding: 16px; text-align: center;
+  }
+  .dl-stat .ds-n {
+    font-size: 28px; font-weight: 900; color: var(--c-primary);
+    font-family: var(--f-mono);
+  }
+  .dl-stat .ds-l {
+    font-size: 12px; color: var(--c-muted); font-weight: 600; margin-top: 2px;
+  }
+  @media (max-width: 680px) { .dl-meta { grid-template-columns: repeat(2, 1fr); } }
+
+  .timeline-h { font-size: 22px; font-weight: 900; margin: 8px 0 18px; color: var(--c-ink); }
+
+  .log-phase { position: relative; padding-left: 36px; padding-bottom: 8px; }
+  .log-phase::before {
+    content: ''; position: absolute; left: 11px; top: 8px; bottom: -8px;
+    width: 2px; background: var(--c-line);
+  }
+  .log-phase:last-child::before { display: none; }
+  .log-phase::after {
+    content: ''; position: absolute; left: 4px; top: 8px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--c-primary);
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 1.5px var(--c-primary);
+  }
+
+  .lp-card {
+    background: #fff;
+    border: 1px solid var(--c-line);
+    border-radius: var(--r-lg);
+    padding: 22px 24px;
+    margin-bottom: 22px;
+    box-shadow: var(--sh-sm);
+  }
+  .lp-tag {
+    font-family: var(--f-mono);
+    font-size: 12px; font-weight: 700;
+    color: var(--c-primary);
+  }
+  .lp-date {
+    font-family: var(--f-mono);
+    font-size: 12px; color: var(--c-muted); float: right;
+  }
+  .lp-commit {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    background: var(--c-paper-2); color: var(--c-muted);
+    padding: 2px 8px; border-radius: 6px;
+    margin-left: 8px;
+  }
+  .lp-card h3 { font-size: 19px; font-weight: 800; margin: 4px 0 14px; }
+  .lp-sec { margin-bottom: 14px; }
+  .lp-sec h4 {
+    font-size: 13.5px; font-weight: 800;
+    color: var(--c-ink); margin-bottom: 6px;
+  }
+  .lp-sec p { font-size: 14px; color: var(--c-ink-soft); line-height: 1.78; }
+  .lp-sec ul { margin: 4px 0 0 20px; }
+  .lp-sec li { font-size: 13.5px; color: var(--c-ink-soft); margin-bottom: 3px; }
+  blockquote.verbatim {
+    background: var(--c-paper-2);
+    border-left: 3px solid var(--c-primary);
+    border-radius: 0 8px 8px 0;
+    padding: 11px 15px; margin: 0;
+    font-size: 13.5px; color: var(--c-ink-soft); line-height: 1.75;
+  }
+  blockquote.verbatim .vq-mark { color: var(--c-primary); font-weight: 800; }
+  .lp-decisions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .lp-decisions span {
+    font-size: 12px; font-weight: 600;
+    background: var(--c-primary-l); color: var(--c-primary-d);
+    padding: 3px 10px; border-radius: 999px;
+  }
+  @media (max-width: 680px) {
+    .lp-date { float: none; display: block; margin-bottom: 4px; }
+  }
+</style>
+</head>
+<body class="devlog">
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">
+      <div class="logo">📒</div>
+      <div class="t">
+        <div class="t-1">開發紀錄</div>
+        <div class="t-2">TAIWAN · ENGINEERING · GEO</div>
+      </div>
+    </a>
+    <nav class="topnav">
+      <a href="index.html">← 回平台首頁</a>
+    </nav>
+  </div>
+</header>
+
+<main class="dl-wrap">
+  <section class="dl-hero">
+    <h1>開發紀錄與<span class="grad">發展脈絡</span></h1>
+    <p>本頁逐段記錄「台灣工程地景探索」的開發歷程——保留每個段落的使用者需求逐字稿、決策脈絡與執行產出，作為專案的完整發展軌跡。</p>
+  </section>
+
+  <div class="rule-box">
+    <h3>📌 紀錄維護規則</h3>
+    <ol>
+      <li><strong>逐段紀錄</strong>：專案每完成一個開發段落（一個明確的需求或里程碑），即在本頁「開發歷程」新增一張階段卡片。</li>
+      <li><strong>三段式結構</strong>：每張卡片須含「💬 使用者需求（逐字稿）」「🧭 決策與脈絡」「✅ 執行產出」三部分。</li>
+      <li><strong>逐字稿忠實保留</strong>：使用者需求以原文引用，不改寫，以保存真實的溝通脈絡。</li>
+      <li><strong>同步版控</strong>：每次更新本頁後，連同該段落的程式碼一起 commit 並 push。</li>
+    </ol>
+  </div>
+
+  <div class="dl-meta">
+    <div class="dl-stat"><div class="ds-n" id="mPhase">0</div><div class="ds-l">開發段落</div></div>
+    <div class="dl-stat"><div class="ds-n">200</div><div class="ds-l">工程地景</div></div>
+    <div class="dl-stat"><div class="ds-n">6</div><div class="ds-l">站內頁面</div></div>
+    <div class="dl-stat"><div class="ds-n" id="mCommits">0</div><div class="ds-l">commits</div></div>
+  </div>
+
+  <h2 class="timeline-h">📅 開發歷程</h2>
+  <div id="timeline"></div>
+</main>
+
+<script src="js/devlog.js"></script>
+</body>
+</html>
