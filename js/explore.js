@@ -33,17 +33,57 @@ function clearMap() {
   lmap.invalidateSize();
 }
 
-/* ---------- 衛星空照（無金鑰、開放 CORS） ---------- */
-const ZOOMS = [665, 1330, 3325, 8000, 20000];
+/* ---------- 衛星空照：Esri World Imagery 瓦片
+ * 改用瓦片端點（256x256 預渲染、CDN 快取、可重複使用），
+ * 取代以往 export 端點（每次伺服器即時合成單張 JPEG，無快取） */
 const ZOOM_NAMES = ['街廓', '近', '中', '遠', '最遠'];
-function esriUrl(lat, lon, hw) {
-  const R = 20037508.34;
-  const mx = lon * R / 180;
-  const my = Math.log(Math.tan((90 + lat) * Math.PI / 360)) / (Math.PI / 180) * R / 180;
-  const hh = hw * 0.75;
-  const bbox = [mx - hw, my - hh, mx + hw, my + hh].join(',');
-  return 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export'
-    + '?bbox=' + bbox + '&size=1024,768&format=jpg&f=image';
+const SAT_ZOOMS  = [17, 16, 15, 13, 12];   /* 對應五段視野的 Leaflet zoom */
+const SAT_TILE_URL =
+  'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+let satMap = null, satLayer = null;
+function initSatMap() {
+  if (satMap) return satMap;
+  satMap = L.map('satMap', {
+    zoomControl: false, attributionControl: true,
+    minZoom: 10, maxZoom: 19,
+    inertia: false, worldCopyJump: false, fadeAnimation: true,
+  }).setView([23.7, 120.95], 13);
+  satLayer = L.tileLayer(SAT_TILE_URL, {
+    maxZoom: 19, tileSize: 256, keepBuffer: 2, updateWhenZooming: false,
+    attribution: 'Esri, Maxar, Earthstar Geographics, USDA, USGS, AeroGRID, IGN',
+  }).addTo(satMap);
+  /* 補一個十字標記（揭曉前看不到，揭曉時才打開 — 由 applyZoom 控制） */
+  return satMap;
+}
+function showSatMap() {
+  $('photo').style.display = 'none';
+  $('photoMsg').classList.add('hidden');
+  $('satMap').classList.add('on');
+  initSatMap();
+  /* 容器寬高在 display:none → block 後才正確，需告訴 Leaflet 重算 */
+  setTimeout(() => satMap && satMap.invalidateSize(), 30);
+}
+function hideSatMap() { $('satMap').classList.remove('on'); }
+
+/* 預載指定座標附近的瓦片（背景靜默載入，僅為了暖快取）
+ * 範圍：以中心點為中心的 3x3 = 9 個瓦片，預設為「遠」視野 z=13 */
+function prefetchSatTiles(lat, lon, z) {
+  const n = Math.pow(2, z);
+  const xc = (lon + 180) / 360 * n;
+  const latRad = lat * Math.PI / 180;
+  const yc = (1 - Math.asinh(Math.tan(latRad)) / Math.PI) / 2 * n;
+  const cx = Math.floor(xc), cy = Math.floor(yc);
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      const x = cx + dx, y = cy + dy;
+      if (x < 0 || y < 0 || x >= n || y >= n) continue;
+      const url = SAT_TILE_URL.replace('{z}', z).replace('{x}', x).replace('{y}', y);
+      const img = new Image();
+      img.decoding = 'async';
+      img.loading = 'eager';
+      img.src = url;
+    }
+  }
 }
 
 function distKm(a, b) {
@@ -58,16 +98,14 @@ let mode, rounds, idx, total, guess, actual, state, current, roundCount, zoomIdx
 let deepMode = false;
 let sessionRounds = [];   /* 收集本局每題的紀錄 */
 
-/* 工程地景：依目前視野等級重新載入衛星空照圖 */
+/* 工程地景：依目前視野等級，把衛星迷你地圖切到對應 Leaflet zoom */
 function applyZoom() {
-  zoomIdx = Math.max(0, Math.min(ZOOMS.length - 1, zoomIdx));
-  $('zoomOut').disabled = zoomIdx >= ZOOMS.length - 1;
+  zoomIdx = Math.max(0, Math.min(SAT_ZOOMS.length - 1, zoomIdx));
+  $('zoomOut').disabled = zoomIdx >= SAT_ZOOMS.length - 1;
   $('zoomIn').disabled = zoomIdx <= 0;
   $('zoomLabel').textContent = '視野：' + ZOOM_NAMES[zoomIdx] + '（➖ 拉遠看地理位置、➕ 拉近看工程結構）';
-  const img = $('photo');
-  $('photoMsg').classList.add('hidden');
-  img.style.display = 'block';
-  img.src = esriUrl(current.lat, current.lon, ZOOMS[zoomIdx]);
+  showSatMap();
+  satMap.setView([current.lat, current.lon], SAT_ZOOMS[zoomIdx], { animate: true });
 }
 
 /* ---------- Mapillary ---------- */
@@ -262,6 +300,7 @@ async function loadRound() {
   pano.stop();
   $('pano').classList.remove('on');
   $('panoBadge').classList.add('hidden');
+  hideSatMap();
   $('refs').classList.remove('on');
   $('refs').innerHTML = '';
 
@@ -526,6 +565,13 @@ function confirmGuess() {
   }
 
   $('actBtn').textContent = idx < roundCount - 1 ? '下一題 ▶' : '看成績';
+
+  /* 預載下一題的衛星瓦片：揭曉後到使用者按下一題之間，背景靜默暖快取，
+   * 等真正切過去時瓦片多半已在瀏覽器快取裡 */
+  if (mode === 'engineering' && idx < roundCount - 1) {
+    const next = rounds[idx + 1];
+    if (next) prefetchSatTiles(next.lat, next.lon, SAT_ZOOMS[3]);
+  }
 }
 
 function nextRound() {

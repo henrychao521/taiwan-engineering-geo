@@ -490,6 +490,16 @@ table.t tbody tr:hover { background: var(--c-line-soft); }
 }
 #pano.on { display: block; }
 #pano.drag { cursor: grabbing; }
+#satMap {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  display: none; background: #0d0c1f;
+}
+#satMap.on { display: block; }
+#satMap .leaflet-control-attribution {
+  font-size: 9px;
+  background: rgba(0,0,0,.5); color: #ddd;
+}
+#satMap .leaflet-control-attribution a { color: #ffd34e; }
 .pano-badge {
   position: absolute; left: 10px; top: 10px; z-index: 3;
   background: var(--c-amber); color: #fff;
