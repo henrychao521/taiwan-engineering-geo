@@ -1,5 +1,5 @@
 /* ============================================================
- * 我的帳號頁：登入 / 註冊 / 個人資料 / 紀錄 / Drive 備份
+ * 我的檔案頁（簡化版）：建立 / 個人資料 / 紀錄 / Drive 備份
  * ============================================================ */
 
 const $ = id => document.getElementById(id);
@@ -17,55 +17,26 @@ function escapeHtml(s) {
 
 function refreshUI() {
   const u = TwegAuth.currentUser();
-  if (u) showProfile(u); else showAuth();
+  if (u) showProfile(u); else showCreate();
   TwegAuth.renderTopnavChip();
 }
 
-/* ---------- 未登入：登入 / 註冊 ---------- */
-function showAuth() {
-  $('authSec').style.display = '';
+/* ---------- 尚未建檔：建立檔案 ---------- */
+function showCreate() {
+  $('createSec').style.display = '';
   $('profileSec').style.display = 'none';
-  /* tab 切換 */
-  document.querySelectorAll('.auth-tab').forEach(btn => {
-    btn.onclick = () => {
-      const tab = btn.dataset.tab;
-      document.querySelectorAll('.auth-tab').forEach(b => b.classList.toggle('active', b === btn));
-      $('loginForm').classList.toggle('on', tab === 'login');
-      $('registerForm').classList.toggle('on', tab === 'register');
-    };
-  });
-  $('loginForm').onsubmit = handleLogin;
-  $('registerForm').onsubmit = handleRegister;
+  $('createForm').onsubmit = handleCreate;
 }
 
-async function handleLogin(e) {
+function handleCreate(e) {
   e.preventDefault();
-  const msg = $('loginMsg');
+  const msg = $('createMsg');
   msg.textContent = '';
   try {
-    await TwegAuth.login($('loginEmail').value, $('loginPin').value);
-    refreshUI();
-  } catch (err) {
-    msg.innerHTML = `<span style="color:var(--c-red)">⚠ ${escapeHtml(err.message)}</span>`;
-  }
-}
-
-async function handleRegister(e) {
-  e.preventDefault();
-  const msg = $('regMsg');
-  msg.textContent = '';
-  const pin = $('regPin').value, pin2 = $('regPin2').value;
-  if (pin !== pin2) {
-    msg.innerHTML = '<span style="color:var(--c-red)">⚠ 兩次密碼不一致</span>';
-    return;
-  }
-  try {
-    await TwegAuth.register({
-      email: $('regEmail').value,
-      pin,
-      nick: $('regNick').value,
-      age: $('regAge').value,
-      gender: $('regGender').value,
+    TwegAuth.create({
+      nick: $('cNick').value,
+      age: $('cAge').value,
+      gender: $('cGender').value,
     });
     refreshUI();
   } catch (err) {
@@ -73,14 +44,14 @@ async function handleRegister(e) {
   }
 }
 
-/* ---------- 已登入：個人資料 + 紀錄 + Drive ---------- */
+/* ---------- 已建檔：資料 / 紀錄 / Drive ---------- */
 function showProfile(u) {
-  $('authSec').style.display = 'none';
+  $('createSec').style.display = 'none';
   $('profileSec').style.display = '';
   $('hello').textContent = `嗨，${u.nick}！`;
   $('profMeta').innerHTML =
-    `${escapeHtml(u.email)} · ${u.gender || '不提供'}${u.age ? `・${u.age} 歲` : ''}` +
-    ` · 加入於 ${(u.createdAt || '').slice(0, 10)}`;
+    `${u.gender || '不提供'}${u.age ? `・${u.age} 歲` : ''}` +
+    ` · 建立於 ${(u.createdAt || '').slice(0, 10)}`;
 
   /* 統計 */
   const hist = u.history || [];
@@ -94,12 +65,13 @@ function showProfile(u) {
   if (!hist.length) {
     list.innerHTML = '<div class="tc-empty">尚無紀錄，去 <a href="explore.html">開始探索</a> 吧！</div>';
   } else {
-    list.innerHTML = '<div class="hist-list">' + hist.slice(0, 20).map((s, i) => {
+    list.innerHTML = '<div class="hist-list">' + hist.slice(0, 20).map(s => {
       const d = new Date(s.date);
       const ds = isNaN(d) ? s.date : `${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-      const themeName = s.mode === 'engineering'
+      const themeName = (s.mode === 'engineering')
         ? (s.theme ? THEMES_AC[s.theme - 1] : '全部主題')
-        : (s.mode === 'curated' ? '精選地景' : (s.mode === 'trial' ? '試玩 20 題' : 'Mapillary'));
+        : (s.mode === 'trial' ? '試玩 20 題'
+        : s.mode === 'curated' ? '精選地景' : 'Mapillary');
       const max = (s.rounds?.length || 0) * 1000;
       const pct = max ? Math.round((s.totalScore / max) * 100) : 0;
       return `<div class="hist-row">
@@ -112,34 +84,33 @@ function showProfile(u) {
   }
 
   /* 按鈕事件 */
-  $('logoutBtn').onclick = () => { TwegAuth.logout(); refreshUI(); };
-  $('changePinBtn').onclick = handleChangePin;
-  $('deleteAccBtn').onclick = handleDeleteAccount;
+  $('editBtn').onclick = handleEdit;
+  $('resetBtn').onclick = handleReset;
 
-  /* Drive 區塊狀態 */
+  /* Drive 區塊 */
   initDriveSection();
-  /* 純檔案版下載／上傳（不需 OAuth） */
   $('driveDownload').onclick = downloadJson;
   $('driveUpload').onclick = () => $('fileInput').click();
   $('fileInput').onchange = uploadJson;
 }
 
-function handleChangePin() {
-  const oldP = prompt('請輸入原本的 4 碼密碼：');
-  if (oldP == null) return;
-  const newP = prompt('請輸入新的 4 碼密碼：');
-  if (newP == null) return;
-  TwegAuth.changePin(oldP.trim(), newP.trim())
-    .then(() => alert('✅ 密碼已變更'))
-    .catch(err => alert('⚠ ' + err.message));
+function handleEdit() {
+  const u = TwegAuth.currentUser();
+  const nick = prompt('新的暱稱：', u.nick);
+  if (nick == null) return;
+  const ageStr = prompt('年齡（可留空）：', u.age == null ? '' : String(u.age));
+  if (ageStr == null) return;
+  const gender = prompt('性別（請輸入：男 / 女 / 不提供）：', u.gender);
+  if (gender == null) return;
+  try {
+    TwegAuth.update({ nick, age: ageStr, gender: gender.trim() || '不提供' });
+    refreshUI();
+  } catch (err) { alert('⚠ ' + err.message); }
 }
 
-function handleDeleteAccount() {
-  const u = TwegAuth.currentUser();
-  if (!u) return;
-  const c = prompt(`確定要刪除帳號 "${u.email}" 嗎？\n所有本機紀錄會清除（Drive 備份不受影響）。\n\n請輸入 DELETE 確認：`);
-  if (c !== 'DELETE') { if (c != null) alert('已取消'); return; }
-  TwegAuth.deleteAccount();
+function handleReset() {
+  if (!confirm('確定要清除目前的檔案與所有紀錄嗎？\n（已備份的 Drive / JSON 檔不受影響）')) return;
+  TwegAuth.clearProfile();
   refreshUI();
 }
 
@@ -149,12 +120,14 @@ function downloadJson() {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
+  const u = TwegAuth.currentUser();
+  const safeName = (u?.nick || 'profile').replace(/[^\w一-龥-]+/g, '_');
   const date = new Date().toISOString().slice(0, 10);
   a.href = url;
-  a.download = `tweg-record-${date}.json`;
+  a.download = `tweg-${safeName}-${date}.json`;
   document.body.appendChild(a); a.click(); a.remove();
   URL.revokeObjectURL(url);
-  $('driveMsg').innerHTML = '<span style="color:var(--c-green)">✅ 已下載到本機。請自行存到 Drive / Dropbox / Email。</span>';
+  $('driveMsg').innerHTML = '<span style="color:var(--c-green)">✅ 已下載到本機。請自行存到 Drive / Dropbox / Email 帶到下一台電腦。</span>';
 }
 
 function uploadJson(e) {
@@ -164,9 +137,9 @@ function uploadJson(e) {
   reader.onload = () => {
     try {
       const data = JSON.parse(reader.result);
-      if (!data.accounts) throw new Error('檔案格式錯誤（缺 accounts 欄位）');
+      if (!data.profile && !data.accounts) throw new Error('檔案格式錯誤（找不到 profile 欄位）');
       TwegAuth.importAllData(data, 'merge');
-      $('driveMsg').innerHTML = '<span style="color:var(--c-green)">✅ 已從本機 JSON 還原。請重新整理頁面或按下方</span>';
+      $('driveMsg').innerHTML = '<span style="color:var(--c-green)">✅ 已從本機 JSON 還原</span>';
       setTimeout(refreshUI, 500);
     } catch (err) {
       $('driveMsg').innerHTML = `<span style="color:var(--c-red)">⚠ 還原失敗：${escapeHtml(err.message)}</span>`;
@@ -183,7 +156,7 @@ function initDriveSection() {
   const restoreBtn = $('driveRestore');
 
   if (typeof TwegDrive === 'undefined' || !TwegDrive.isConfigured()) {
-    status.innerHTML = '<span style="color:var(--c-amber)">ℹ️ Google Drive 一鍵備份尚未由站長設定，目前可用「⬇️ 純下載 JSON 檔」自行管理備份。</span>';
+    status.innerHTML = 'ℹ️ Google Drive 一鍵備份尚未由站長設定。可以用上方「⬇️ 下載 JSON 檔」自行管理。';
     backupBtn.disabled = true; restoreBtn.disabled = true;
     backupBtn.style.opacity = restoreBtn.style.opacity = .5;
     backupBtn.style.cursor = restoreBtn.style.cursor = 'not-allowed';
@@ -213,10 +186,10 @@ async function driveRestoreClick() {
   try {
     const data = await TwegDrive.restore();
     if (!data) {
-      msg.innerHTML = '<span style="color:var(--c-amber)">ℹ️ Drive 上沒有備份檔（先按「備份到 Drive」吧）</span>';
+      msg.innerHTML = 'ℹ️ Drive 上沒有備份檔（先按「備份到 Drive」吧）';
       return;
     }
-    if (!confirm('要把 Drive 上的紀錄合併進本機嗎？已存在的帳號會保留，新的會加入。')) return;
+    if (!confirm('要把 Drive 上的紀錄合併進本機嗎？')) return;
     TwegAuth.importAllData(data, 'merge');
     msg.innerHTML = '<span style="color:var(--c-green)">✅ 已從 Drive 還原</span>';
     setTimeout(refreshUI, 500);

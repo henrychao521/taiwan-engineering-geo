@@ -599,11 +599,11 @@ function endGame() {
   /* 不同儲存結果決定下方提示文字 */
   let savedNote;
   if (session._savedTo === 'trial') {
-    savedNote = `<p style="color:var(--c-amber);font-weight:700">⚠ 試玩模式不保存紀錄。<a href="account.html" style="color:var(--c-primary)">建立帳號</a>，下一局起就能存到你的紀錄。</p>`;
+    savedNote = `<p style="color:var(--c-amber);font-weight:700">⚠ 試玩模式不保存紀錄。<a href="account.html" style="color:var(--c-primary)">建立個人檔案</a>，下一局起就能存到你的紀錄。</p>`;
   } else if (session._savedTo === 'user') {
-    savedNote = `<p>✅ 已存到你的帳號紀錄，可以到「<a href="account.html">我的帳號</a>」或「<a href="worksheet.html">學習單</a>」查看。</p>`;
+    savedNote = `<p>✅ 已存到你的紀錄，可以到「<a href="account.html">我的檔案</a>」或「<a href="worksheet.html">學習單</a>」查看。</p>`;
   } else {
-    savedNote = `<p>已存到這個瀏覽器（訪客模式）。<a href="account.html">建立帳號</a>後紀錄可保留更久、可備份到 Drive。</p>`;
+    savedNote = `<p>已存到這個瀏覽器。<a href="account.html">建立個人檔案</a>後可記下暱稱、年齡與性別，並備份到 Drive。</p>`;
   }
 
   $('ovBox').innerHTML =
@@ -730,8 +730,8 @@ function showStart() {
   const hasToken = !!localStorage.getItem(TOKEN_KEY);
   const u = (typeof TwegAuth !== 'undefined') ? TwegAuth.currentUser() : null;
   const userLine = u
-    ? `<div class="ov-userline logged-in">👤 已登入：<b>${u.nick}</b>，每局結束會自動存到你的紀錄。<a href="account.html">我的帳號</a></div>`
-    : `<div class="ov-userline">📋 訪客模式 — 紀錄只暫存在這個瀏覽器。<a href="account.html">登入 / 註冊</a> 後可長期保存。</div>`;
+    ? `<div class="ov-userline logged-in">👤 目前玩家：<b>${u.nick}</b>，每局結束會自動存到你的紀錄。<a href="account.html">我的檔案</a></div>`
+    : `<div class="ov-userline">📋 尚未建立檔案 — 紀錄只暫存在這個瀏覽器。<a href="account.html">建立個人檔案</a> 後可長期保存。</div>`;
 
   $('ovBox').innerHTML =
     `<h1>準備出發</h1>` +
