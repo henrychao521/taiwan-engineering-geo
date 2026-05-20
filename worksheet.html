@@ -46,8 +46,9 @@
 
   <div class="ws-actions no-print">
     <select id="versionSel">
-      <option value="auto">📥 自動填入（最近一局）</option>
-      <option value="blank">📃 空白版（手寫填入）</option>
+      <option value="auto">📥 學生版（自動填入最近一局）</option>
+      <option value="blank">📃 學生版（空白手寫）</option>
+      <option value="teacher">📚 教師版（含參考答案）</option>
     </select>
     <select id="sessionSel" style="display:none"></select>
     <div class="info" id="wsInfo">尚未載入任何紀錄</div>
@@ -99,50 +100,58 @@
     <h3>二、反思題</h3>
     <p style="font-size:13.5px;color:var(--c-ink-soft);margin-bottom:8px">請用完整句子回答。</p>
 
-    <p style="font-size:14px;margin:14px 0 4px"><b>1.</b> 從這 10 個景點中，挑出你<strong>最不熟</strong>的一個，並猜測它為什麼會出現在這個位置：</p>
-    <div class="blank big"></div>
-    <div class="blank big"></div>
+    <div class="q-block" data-q="1">
+      <p style="font-size:14px;margin:14px 0 4px"><b>1.</b> 從這 10 個景點中，挑出你<strong>最不熟</strong>的一個，並猜測它為什麼會出現在這個位置：</p>
+      <div class="blank big"></div>
+      <div class="blank big"></div>
+    </div>
 
-    <p style="font-size:14px;margin:14px 0 4px"><b>2.</b> 這一局中，你覺得<strong>最有設計巧思</strong>的工程是哪一座？請從結構、機構或控制三個面向擇一說明：</p>
-    <div class="blank big"></div>
-    <div class="blank big"></div>
+    <div class="q-block" data-q="2">
+      <p style="font-size:14px;margin:14px 0 4px"><b>2.</b> 這一局中，你覺得<strong>最有設計巧思</strong>的工程是哪一座？請從結構、機構或控制三個面向擇一說明：</p>
+      <div class="blank big"></div>
+      <div class="blank big"></div>
+    </div>
 
-    <p style="font-size:14px;margin:14px 0 4px"><b>3.</b> 在四大主題中，你<strong>表現最弱</strong>的是哪一個（依得分判斷）？你覺得為什麼？</p>
-    <div class="blank big"></div>
+    <div class="q-block" data-q="3">
+      <p style="font-size:14px;margin:14px 0 4px"><b>3.</b> 在四大主題中，你<strong>表現最弱</strong>的是哪一個（依得分判斷）？你覺得為什麼？</p>
+      <div class="blank big"></div>
+    </div>
 
-    <p style="font-size:14px;margin:14px 0 4px"><b>4.</b> 工程的設計往往受到「地理條件」的限制。你能不能舉這次出現的兩座工程，說明地理如何影響了它的設計？</p>
-    <div class="blank big"></div>
-    <div class="blank big"></div>
+    <div class="q-block" data-q="4">
+      <p style="font-size:14px;margin:14px 0 4px"><b>4.</b> 工程的設計往往受到「地理條件」的限制。你能不能舉這次出現的兩座工程，說明地理如何影響了它的設計？</p>
+      <div class="blank big"></div>
+      <div class="blank big"></div>
+    </div>
 
     <h3>三、延伸探究（擇一深入）</h3>
     <p style="font-size:13.5px;color:var(--c-ink-soft);margin-bottom:8px">從這 10 個景點中挑一個你最有興趣的，回答下列三個問題（可上維基百科或政府網站查資料）：</p>
 
-    <table>
+    <table id="extTable">
       <thead>
-        <tr><th style="width:40%">問題</th><th>我的整理</th></tr>
+        <tr><th style="width:40%">問題</th><th id="extColHead">我的整理</th></tr>
       </thead>
       <tbody>
         <tr>
           <td><b>選定的工程地景</b><br>（請填名稱與位置）</td>
-          <td class="fill">&nbsp;<br>&nbsp;</td>
+          <td class="fill" data-ext="name">&nbsp;<br>&nbsp;</td>
         </tr>
         <tr>
           <td><b>關鍵工程概念</b><br>（如桁架、預力、TMD、PWM…）</td>
-          <td class="fill">&nbsp;<br>&nbsp;<br>&nbsp;</td>
+          <td class="fill" data-ext="concept">&nbsp;<br>&nbsp;<br>&nbsp;</td>
         </tr>
         <tr>
           <td><b>設計者面對的主要限制</b><br>（地理、氣候、人文…）</td>
-          <td class="fill">&nbsp;<br>&nbsp;<br>&nbsp;</td>
+          <td class="fill" data-ext="constraints">&nbsp;<br>&nbsp;<br>&nbsp;</td>
         </tr>
         <tr>
           <td><b>如果由你重新設計，<br>會做哪一項改動？為什麼？</b></td>
-          <td class="fill">&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+          <td class="fill" data-ext="redesign">&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
         </tr>
       </tbody>
     </table>
 
-    <h3>四、自我評量</h3>
-    <table>
+    <h3 id="hSelfAssess">四、自我評量</h3>
+    <table id="selfAssessTable">
       <thead>
         <tr><th style="width:60%">項目</th><th style="width:13%">優</th><th style="width:13%">可</th><th style="width:14%">待加強</th></tr>
       </thead>
@@ -153,6 +162,11 @@
         <tr><td>我能主動延伸探究有興趣的景點</td><td>☐</td><td>☐</td><td>☐</td></tr>
       </tbody>
     </table>
+    <div id="teacherCommentBlock" style="display:none">
+      <h3>四、教師評語</h3>
+      <div class="blank big" style="min-height:55px"></div>
+      <div class="blank big" style="min-height:55px"></div>
+    </div>
 
     <div class="ws-footer">
       <span>台灣工程地景探索 · 學習單 v1.0</span>
