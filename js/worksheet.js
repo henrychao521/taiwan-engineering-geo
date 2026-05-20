@@ -13,6 +13,11 @@ const THEMES_FOR_WS = (typeof ENG_THEMES !== 'undefined') ? ENG_THEMES : [
 const THEME_SHORT = ['結構/土木', '參數/建築', '機電/自動', '新科技/綠能'];
 
 function loadHistory() {
+  /* 優先讀登入帳號的紀錄；未登入則 fall back 到 legacy 全域紀錄 */
+  if (typeof TwegAuth !== 'undefined') {
+    const list = TwegAuth.getHistoryForCurrent();
+    if (list && list.length) return list;
+  }
   try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); }
   catch (e) { return []; }
 }
@@ -71,17 +76,21 @@ function escapeHtml(s) {
 
 function updateInfo(history, sessionIdx) {
   const info = $('wsInfo');
+  const u = (typeof TwegAuth !== 'undefined') ? TwegAuth.currentUser() : null;
+  const userPrefix = u ? `<b>👤 ${u.nick}</b>　·　` : '';
   if (!history.length) {
-    info.textContent = '尚未有探索紀錄。可先進入「開始探索」完成一局，或繼續使用空白版列印。';
+    info.innerHTML = userPrefix + '尚未有探索紀錄。可先進入「開始探索」完成一局，或繼續使用空白版列印。';
     info.style.color = 'var(--c-muted)';
     return;
   }
   const s = history[sessionIdx];
   if (!s) { info.textContent = '—'; return; }
-  const themeName = s.mode === 'engineering'
-    ? (s.theme ? `工程地景・${THEMES_FOR_WS[s.theme - 1]}` : '工程地景・全部主題')
+  const themeName = (s.mode === 'engineering' || s.mode === 'trial')
+    ? (s.mode === 'trial'
+        ? '試玩 20 題'
+        : (s.theme ? `工程地景・${THEMES_FOR_WS[s.theme - 1]}` : '工程地景・全部主題'))
     : (s.mode === 'curated' ? '精選地景' : 'Mapillary 即時');
-  info.innerHTML = `<b>已載入：</b>${fmtDateTime(s.date)}　·　${themeName}　·　總分 <b style="color:var(--c-primary)">${s.totalScore}</b>${s.deepMode ? '　·　深度模式' : ''}`;
+  info.innerHTML = userPrefix + `已載入：${fmtDateTime(s.date)}　·　${themeName}　·　總分 <b style="color:var(--c-primary)">${s.totalScore}</b>${s.deepMode ? '　·　深度模式' : ''}`;
   info.style.color = 'var(--c-ink-soft)';
 }
 
@@ -132,5 +141,11 @@ function applyCurrent() {
 $('versionSel').addEventListener('change', applyCurrent);
 $('sessionSel').addEventListener('change', applyCurrent);
 $('printBtn').addEventListener('click', () => window.print());
+
+/* 已登入時自動帶入暱稱到「姓名」欄 */
+if (typeof TwegAuth !== 'undefined') {
+  const u = TwegAuth.currentUser();
+  if (u && u.nick) $('metaName').textContent = u.nick;
+}
 
 applyCurrent();

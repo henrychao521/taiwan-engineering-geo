@@ -162,7 +162,12 @@ function renderStats(decoded) {
 
 function renderOwnHistory() {
   let h = [];
-  try { h = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch (e) {}
+  if (typeof TwegAuth !== 'undefined') {
+    h = TwegAuth.getHistoryForCurrent() || [];
+  }
+  if (!h.length) {
+    try { h = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch (e) {}
+  }
   const box = $('ownHistory');
   if (!h.length) {
     box.innerHTML = '<div class="tc-empty" style="padding:16px;font-size:13px">這台瀏覽器目前沒有探索紀錄。</div>';

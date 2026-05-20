@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的帳號 ｜ 台灣工程地景探索</title>
+<meta name="description" content="登入或註冊帳號，把探索紀錄保存到這個瀏覽器，可選擇備份到自己的 Google Drive。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E👤%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">
+      <div class="logo">🗺</div>
+      <div class="t">
+        <div class="t-1">台灣工程地景探索</div>
+        <div class="t-2">TAIWAN · ENGINEERING · GEO</div>
+      </div>
+    </a>
+    <nav class="topnav">
+      <a href="index.html">首頁</a>
+      <a href="intro.html">課前導讀</a>
+      <a href="explore.html">開始探索</a>
+      <a href="worksheet.html">學習單</a>
+      <a href="teacher.html">教師端</a>
+      <a href="about.html">關於</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap-narrow" style="padding-top:32px;padding-bottom:60px">
+
+  <!-- ===== 未登入：登入 / 註冊 ===== -->
+  <section id="authSec" style="display:none">
+    <span class="eyebrow">ACCOUNT · 我的帳號</span>
+    <h1 style="margin-top:12px">登入或建立帳號，<br>把<span class="grad">探索紀錄保存下來</span>。</h1>
+    <p class="lead" style="margin-top:14px">
+      帳號與紀錄都<strong>只存在這個瀏覽器</strong>，不會上傳到任何伺服器。<br>
+      想跨裝置帶著走？登入後可以一鍵備份到自己的 Google Drive。
+    </p>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login">登入</button>
+      <button class="auth-tab" data-tab="register">註冊</button>
+    </div>
+
+    <!-- 登入 -->
+    <form id="loginForm" class="auth-form on" autocomplete="off">
+      <label>email
+        <input type="email" id="loginEmail" required placeholder="you@example.com">
+      </label>
+      <label>密碼（4 個數字）
+        <input type="password" id="loginPin" required inputmode="numeric" pattern="\d{4}" maxlength="4" placeholder="••••">
+      </label>
+      <div class="auth-msg" id="loginMsg"></div>
+      <button type="submit" class="btn btn-primary">▶ 登入</button>
+    </form>
+
+    <!-- 註冊 -->
+    <form id="registerForm" class="auth-form" autocomplete="off">
+      <label>email
+        <input type="email" id="regEmail" required placeholder="你的 email（之後登入用）">
+      </label>
+      <label>暱稱 / 座號
+        <input type="text" id="regNick" required maxlength="16" placeholder="例：301 小明">
+      </label>
+      <div class="auth-row">
+        <label>密碼（4 數字）
+          <input type="password" id="regPin" required inputmode="numeric" pattern="\d{4}" maxlength="4" placeholder="••••">
+        </label>
+        <label>再次確認
+          <input type="password" id="regPin2" required inputmode="numeric" pattern="\d{4}" maxlength="4" placeholder="••••">
+        </label>
+      </div>
+      <div class="auth-row">
+        <label>年齡（選填）
+          <input type="number" id="regAge" min="6" max="120" placeholder="例：16">
+        </label>
+        <label>性別
+          <select id="regGender">
+            <option value="不提供" selected>不提供</option>
+            <option value="男">男</option>
+            <option value="女">女</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="callout amber" style="font-size:13px;line-height:1.7">
+        <strong>說明：</strong>4 碼密碼只是「同學共用電腦時的軟鎖」，並非真正加密保護。
+        所有資料只存在這個瀏覽器，不上傳；想跨裝置帶走可使用 Drive 備份。
+      </div>
+
+      <div class="auth-msg" id="regMsg"></div>
+      <button type="submit" class="btn btn-primary">📋 建立帳號</button>
+    </form>
+
+    <div style="margin-top:24px;text-align:center;font-size:13px;color:var(--c-muted)">
+      不想建帳號？也可以直接<a href="explore.html">試玩 20 題</a>（不需登入、不會保存）。
+    </div>
+  </section>
+
+  <!-- ===== 已登入：個人資料 / 紀錄 / 備份 ===== -->
+  <section id="profileSec" style="display:none">
+
+    <div class="profile-head">
+      <div class="profile-ic">👤</div>
+      <div>
+        <span class="eyebrow">PROFILE · 我的帳號</span>
+        <h1 id="hello" style="margin-top:6px">嗨！</h1>
+        <p class="muted" id="profMeta" style="font-size:13px;margin-top:4px"></p>
+      </div>
+      <div style="margin-left:auto">
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">登出</button>
+      </div>
+    </div>
+
+    <div class="tc-stats" style="margin-top:22px">
+      <div class="tc-stat"><div class="n" id="pfRounds">0</div><div class="l">完成局數</div></div>
+      <div class="tc-stat"><div class="n" id="pfTotal">0</div><div class="l">累積總分</div></div>
+      <div class="tc-stat"><div class="n" id="pfBest">—</div><div class="l">最佳一局</div></div>
+      <div class="tc-stat"><div class="n" id="pfQs">0</div><div class="l">累積題數</div></div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3>📅 探索紀錄</h3>
+      <div id="histList"><div class="tc-empty">尚無紀錄，去<a href="explore.html">開始探索</a>吧！</div></div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3>☁️ 跨裝置：Google Drive 備份</h3>
+      <p style="font-size:14px;color:var(--c-ink-soft);margin-bottom:14px">
+        把整本紀錄上傳到<strong>你自己的 Google Drive</strong>，換電腦後登入同一個 Google 帳號就能還原。
+        資料以 <code>taiwan-engineering-geo-record.json</code> 為檔名存到你的 Drive，本站<strong>只能讀寫這一個檔</strong>。
+      </p>
+      <div id="driveStatus" style="margin-bottom:12px;font-size:13px;color:var(--c-muted)"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-primary btn-sm" id="driveBackup">📤 備份到 Drive</button>
+        <button class="btn btn-ghost btn-sm" id="driveRestore">📥 從 Drive 還原</button>
+        <button class="btn btn-ghost btn-sm" id="driveDownload">⬇️ 純下載 JSON 檔</button>
+        <button class="btn btn-ghost btn-sm" id="driveUpload">⬆️ 從本機 JSON 還原</button>
+        <input type="file" id="fileInput" accept="application/json,.json" style="display:none">
+      </div>
+      <div id="driveMsg" style="margin-top:10px;font-size:13px"></div>
+    </div>
+
+    <div class="card" style="margin-top:18px;border-color:#FCA5A5;background:#FEF2F2">
+      <h3 style="color:#B91C1C">⚠ 危險區</h3>
+      <p style="font-size:14px;color:#7F1D1D;line-height:1.7">
+        改密碼或刪除帳號。刪除帳號會把這個瀏覽器內的紀錄一併清除（Drive 備份不受影響）。
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+        <button class="btn btn-ghost btn-sm" id="changePinBtn">🔑 變更密碼</button>
+        <button class="btn btn-ghost btn-sm" id="deleteAccBtn" style="border-color:#B91C1C;color:#B91C1C">🗑 刪除帳號</button>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h4>關於帳號儲存</h4>
+      <p style="font-size:13px">本站不開後端、不收個資；所有帳號與紀錄只存在學生使用的這個瀏覽器。要跨裝置就用「備份到 Drive」，檔案存到學生<strong>自己</strong>的 Drive，不會經過任何中介伺服器。</p>
+    </div>
+    <div>
+      <h4>快速連結</h4>
+      <ul>
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="explore.html">開始探索</a></li>
+        <li><a href="worksheet.html">學習單</a></li>
+        <li><a href="teacher.html">教師端</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>隱私</h4>
+      <ul style="font-size:13px">
+        <li>4 碼密碼經 SHA-256 雜湊後存在 localStorage</li>
+        <li>email / 年齡 / 性別 完全不離開瀏覽器</li>
+        <li>清除瀏覽資料 = 帳號消失（請先備份）</li>
+      </ul>
+    </div>
+    <div class="copy">
+      <span>© 趙珩宇老師製作 · 台灣工程地景探索</span>
+      <span class="mono">v1.1</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="js/auth.js"></script>
+<script src="js/drive.js"></script>
+<script src="js/account.js"></script>
+
+</body>
+</html>

@@ -32,9 +32,12 @@
 ## 教育設計要素
 
 - **課前導讀** — 四大主題與工程分類，附 200 個地景的縮覽地圖
+- **試玩 20 題** — 不需登入、跨全部 200 景點，給第一次來的訪客
+- **帳號系統** — email + 4 碼密碼，純 localStorage（不開後端、不收個資）
 - **深度模式** — 答題後追問「主題分類」與「設施類型」，每題答對 +300 分
 - **學習單** — 可列印的 A4 表格，自動帶入這一局的紀錄；含反思題與延伸探究欄位
 - **教師端** — 學生在結算頁複製成績碼，老師整批貼上解碼為班級統計（全在瀏覽器執行）
+- **Drive 一鍵備份**（選用）— 學生可一鍵把整本紀錄存到自己的 Google Drive，跨裝置還原
 
 ## 本地預覽
 
@@ -55,6 +58,30 @@ npx serve .
 1. 把整個資料夾推到 GitHub repo
 2. Settings → Pages → Source → 選 `main` 分支根目錄
 3. 等 Pages 部署完成即可
+
+## Google Drive 一鍵備份設定（選用）
+
+帳號系統預設純 localStorage，學生紀錄會永遠停在那一台瀏覽器。要讓學生能跨裝置帶著走，可以開啟「備份到 Google Drive / 從 Drive 還原」按鈕——這時學生紀錄會以 JSON 檔的形式存到他**自己**的 Google Drive，本站只能讀寫這一個檔。
+
+設定方式：
+
+1. 到 [Google Cloud Console](https://console.cloud.google.com/) 建立或選一個專案
+2. 在「API 程式庫」啟用 **Google Drive API**
+3. 到「憑證」→ 建立「OAuth 2.0 用戶端 ID」→ 選「網頁應用程式」
+4. 在 **Authorized JavaScript origins** 加入你的部署網域：
+   - `https://henrychao521.github.io`
+   - 本機開發時另加 `http://localhost:8766`
+5. 在「OAuth 同意畫面」設定 App 名稱、scope 加上 `auth/drive.file`
+6. 把生成的 Client ID 貼到 [`js/drive.js`](js/drive.js) 的 `DRIVE_CLIENT_ID` 常數
+7. 推上線後，帳號頁的「📤 備份到 Drive」就會啟用
+
+未設定時，「備份到 Drive」按鈕會自動禁用並顯示提示；學生仍可用「⬇️ 純下載 JSON 檔」/「⬆️ 從本機 JSON 還原」手動管理備份檔（自行存到 Drive / Dropbox / Email 都可以）。
+
+### 授權同意畫面注意事項
+
+- App 第一次提交時會顯示「Google 尚未驗證此應用程式」警告。校園用途可請學生點「進階」→ 繼續即可使用。
+- 若要消除警告，需向 Google 申請應用程式驗證（多週流程）。
+- `drive.file` 是限制最低的 Drive scope：本站只能存取自己建立的這一個檔，看不到使用者 Drive 的其他內容。
 
 ## 資料來源與授權
 

@@ -817,3 +817,140 @@ table.t tbody tr:hover { background: var(--c-line-soft); }
   border: 1px solid var(--c-line); border-radius: var(--r);
   background: var(--c-paper-2);
 }
+
+/* ---------- 帳號 ---------- */
+.topnav-account {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-left: 6px; padding: 6px 12px;
+  font-size: 13px; font-weight: 700;
+  background: var(--c-paper-2);
+  border: 1px solid var(--c-line);
+  border-radius: 999px;
+  color: var(--c-ink-soft);
+  transition: background .12s, border-color .12s;
+}
+.topnav-account:hover { background: var(--c-primary-l); border-color: var(--c-primary); color: var(--c-primary-d); }
+.topnav-account.active { background: var(--c-primary); border-color: var(--c-primary); color: #fff; }
+.topnav-account .ac-ic { font-size: 14px; }
+.topnav-account .ac-n { max-width: 9em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.auth-tabs {
+  display: flex; gap: 4px; margin: 26px 0 12px;
+  padding: 4px; background: var(--c-paper-2);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r);
+  width: fit-content;
+}
+.auth-tab {
+  padding: 8px 22px;
+  background: transparent; border: 0;
+  border-radius: var(--r-sm);
+  font-size: 14px; font-weight: 700;
+  color: var(--c-muted);
+}
+.auth-tab.active {
+  background: var(--c-card); color: var(--c-ink);
+  box-shadow: var(--sh-sm);
+}
+
+.auth-form {
+  display: none; flex-direction: column; gap: 14px;
+  max-width: 460px;
+}
+.auth-form.on { display: flex; }
+.auth-form label {
+  display: flex; flex-direction: column; gap: 5px;
+  font-size: 13px; font-weight: 700; color: var(--c-ink-soft);
+}
+.auth-form input, .auth-form select {
+  font-size: 15px; padding: 11px 14px;
+  background: #fff;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-sm);
+  color: var(--c-ink);
+  transition: border-color .12s, box-shadow .12s;
+}
+.auth-form input:focus, .auth-form select:focus {
+  outline: none; border-color: var(--c-primary);
+  box-shadow: 0 0 0 3px rgba(30,82,102,.12);
+}
+.auth-form input[type=password] { font-family: var(--f-mono); letter-spacing: .3em; }
+.auth-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+@media (max-width: 520px) { .auth-row { grid-template-columns: 1fr; } }
+.auth-form button[type=submit] { margin-top: 6px; }
+.auth-msg { font-size: 13px; min-height: 18px; }
+
+.profile-head {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding-bottom: 22px; border-bottom: 1px solid var(--c-line);
+}
+.profile-ic {
+  width: 60px; height: 60px; flex-shrink: 0;
+  display: grid; place-items: center;
+  background: var(--c-primary-l); color: var(--c-primary-d);
+  border-radius: 50%; font-size: 30px;
+}
+.profile-head h1 { font-size: 26px; line-height: 1.2; }
+
+.hist-list {
+  display: flex; flex-direction: column;
+}
+.hist-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 1.2fr 80px;
+  gap: 12px; align-items: center;
+  padding: 9px 4px;
+  border-bottom: 1px solid var(--c-line-soft);
+  font-size: 13.5px;
+}
+.hist-row:last-child { border-bottom: 0; }
+.hist-row .h-date { color: var(--c-muted); font-family: var(--f-mono); font-size: 12.5px; }
+.hist-row .h-mode { color: var(--c-ink-soft); }
+.hist-row .h-bar { height: 8px; background: var(--c-line-soft); border-radius: 99px; overflow: hidden; }
+.hist-row .h-bar > div { height: 100%; background: linear-gradient(90deg, var(--c-primary), var(--c-amber)); }
+.hist-row .h-score { text-align: right; font-family: var(--f-mono); font-weight: 800; color: var(--c-primary); }
+@media (max-width: 600px) {
+  .hist-row { grid-template-columns: 1fr 80px; grid-template-areas: "date score" "mode mode" "bar bar"; gap: 4px; }
+  .hist-row .h-date { grid-area: date; }
+  .hist-row .h-mode { grid-area: mode; }
+  .hist-row .h-bar  { grid-area: bar; }
+  .hist-row .h-score{ grid-area: score; }
+}
+
+/* explore 開始畫面：試玩 CTA + 已登入提示 */
+.ov-userline {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12.5px; color: var(--c-muted);
+  margin: 10px 0 6px;
+  padding: 7px 12px;
+  background: var(--c-paper-2);
+  border-radius: var(--r-sm);
+  text-align: left;
+}
+.ov-userline.logged-in {
+  color: var(--c-green); background: var(--c-green-l);
+}
+.ov-userline a { color: inherit; text-decoration: underline; }
+.ov-trial {
+  background: linear-gradient(135deg, var(--c-amber), #F59E0B);
+  color: #fff;
+  border: 0;
+  padding: 16px 18px;
+  border-radius: var(--r);
+  cursor: pointer;
+  display: flex; flex-direction: column; gap: 4px;
+  text-align: left;
+}
+.ov-trial:hover { background: linear-gradient(135deg, #B45309, var(--c-amber)); }
+.ov-trial .t1 { font-size: 15.5px; font-weight: 800; }
+.ov-trial .t2 { font-size: 12px; font-weight: 400; opacity: .95; }
+.ov-divider {
+  display: flex; align-items: center; gap: 10px;
+  margin: 12px 0 8px;
+  font-size: 11px; color: var(--c-muted); letter-spacing: .1em;
+}
+.ov-divider::before, .ov-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--c-line);
+}

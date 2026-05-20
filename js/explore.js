@@ -275,6 +275,13 @@ function startGame(m, theme) {
       + (engTheme ? '・' + ENG_THEMES[engTheme - 1] : '');
     rounds = pool.slice().sort(() => Math.random() - 0.5).slice(0, roundCount)
       .map(s => ({ name: s[0], lat: s[1], lon: s[2], ch: s[3], tip: s[4], idx: SITES.indexOf(s) }));
+  } else if (m === 'trial') {
+    /* 試玩 20 題：跨全部 200 景點，不要求登入、不保存到帳號紀錄 */
+    roundCount = 20;
+    engTheme = 0;
+    $('modeLabel').textContent = '🎮 試玩 20 題';
+    rounds = SITES.slice().sort(() => Math.random() - 0.5).slice(0, roundCount)
+      .map(s => ({ name: s[0], lat: s[1], lon: s[2], ch: s[3], tip: s[4], idx: SITES.indexOf(s) }));
   } else if (m === 'curated') {
     roundCount = 5;
     $('modeLabel').textContent = '📷 精選地景';
@@ -310,7 +317,7 @@ async function loadRound() {
     setPhoto(current.src, '📷 ' + loc.by + '・Wikimedia Commons');
     $('result').textContent = '點地圖選一個位置';
     state = 'guess';
-  } else if (mode === 'engineering') {
+  } else if ((mode === 'engineering' || mode === 'trial')) {
     const s = rounds[idx];
     current = { lat: s.lat, lon: s.lon, name: s.name, blurb: s.tip, ch: s.ch, idx: s.idx };
     $('photo').onerror = () => {
@@ -536,7 +543,7 @@ function confirmGuess() {
   sessionRounds.push(rec);
 
   let head;
-  if (mode === 'engineering') {
+  if ((mode === 'engineering' || mode === 'trial')) {
     if (current.imgType === 'sat') { zoomIdx = 1; applyZoom(); }
     const chTxt = current.ch ? `第${'一二三四五'[current.ch - 1]}章 ｜ ` : '';
     head = `正解：<span class="rn">${current.name}</span><br>` +
@@ -548,7 +555,7 @@ function confirmGuess() {
   }
   $('result').innerHTML = head +
     `距離 <b>${d < 1 ? '<1' : Math.round(d)}</b> 公里・本題 <b>${pts}</b> 分`;
-  if (mode === 'engineering') showRefs(current.idx);
+  if ((mode === 'engineering' || mode === 'trial')) showRefs(current.idx);
 
   actualMarker = L.marker([actual.lat, actual.lon], { icon: ACTUAL_ICON }).addTo(lmap);
   distLine = L.polyline([[guess.lat, guess.lon], [actual.lat, actual.lon]],
@@ -556,7 +563,7 @@ function confirmGuess() {
   lmap.fitBounds(distLine.getBounds(), { padding: [36, 36], maxZoom: 12 });
 
   /* 深度模式：渲染追問 */
-  if (deepMode && mode === 'engineering') {
+  if (deepMode && (mode === 'engineering' || mode === 'trial')) {
     activeFollowups = makeFollowups(current);
     fuIndex = 0;
     if (activeFollowups.length) renderFollowup(rec);
@@ -568,7 +575,7 @@ function confirmGuess() {
 
   /* 預載下一題的衛星瓦片：揭曉後到使用者按下一題之間，背景靜默暖快取，
    * 等真正切過去時瓦片多半已在瀏覽器快取裡 */
-  if (mode === 'engineering' && idx < roundCount - 1) {
+  if ((mode === 'engineering' || mode === 'trial') && idx < roundCount - 1) {
     const next = rounds[idx + 1];
     if (next) prefetchSatTiles(next.lat, next.lon, SAT_ZOOMS[3]);
   }
@@ -589,12 +596,22 @@ function endGame() {
     : '💪 再接再厲';
   const session = saveSession();
 
+  /* 不同儲存結果決定下方提示文字 */
+  let savedNote;
+  if (session._savedTo === 'trial') {
+    savedNote = `<p style="color:var(--c-amber);font-weight:700">⚠ 試玩模式不保存紀錄。<a href="account.html" style="color:var(--c-primary)">建立帳號</a>，下一局起就能存到你的紀錄。</p>`;
+  } else if (session._savedTo === 'user') {
+    savedNote = `<p>✅ 已存到你的帳號紀錄，可以到「<a href="account.html">我的帳號</a>」或「<a href="worksheet.html">學習單</a>」查看。</p>`;
+  } else {
+    savedNote = `<p>已存到這個瀏覽器（訪客模式）。<a href="account.html">建立帳號</a>後紀錄可保留更久、可備份到 Drive。</p>`;
+  }
+
   $('ovBox').innerHTML =
     `<h1>挑戰結束！</h1>` +
     `<div class="big mono">${total}</div>` +
     `<div class="max">/ 滿分 ${max}${deepMode ? ' +追問加分' : ''}</div>` +
     `<div class="rank-badge">${rank}</div>` +
-    `<p>已自動把這 ${roundCount} 題存到瀏覽器，可以到「學習單」整理紀錄、或把成績碼貼到「教師端」。</p>` +
+    savedNote +
     `<div style="margin:14px 0">
        <div class="mono" style="font-size:11px;color:var(--c-muted);margin-bottom:4px">成績碼（複製給老師）</div>
        <input id="codeOut" readonly value="${session.code}">
@@ -604,11 +621,10 @@ function endGame() {
   $('overlay').classList.remove('hidden');
   $('goWS').addEventListener('click', () => location.href = 'worksheet.html');
   $('againBtn').addEventListener('click', showStart);
-  /* 自動 focus 與全選成績碼，方便複製 */
   setTimeout(() => { const c = $('codeOut'); if (c) { c.focus(); c.select(); } }, 50);
 }
 
-/* ---------- 結果儲存（localStorage） ---------- */
+/* ---------- 結果儲存 ---------- */
 function saveSession() {
   const session = {
     date: new Date().toISOString(),
@@ -618,13 +634,24 @@ function saveSession() {
     maxScore: roundCount * 1000 + (deepMode ? roundCount * 2 * 300 : 0),
     rounds: sessionRounds,
   };
-  /* 簡短的成績碼：date + mode + theme + score + nick */
   session.code = encodeCode(session);
-  let arr = [];
-  try { arr = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch (e) {}
-  arr.unshift(session);
-  if (arr.length > MAX_HISTORY) arr.length = MAX_HISTORY;
-  localStorage.setItem(HISTORY_KEY, JSON.stringify(arr));
+
+  /* 試玩模式不寫入帳號紀錄；其他模式優先寫入登入者帳號，未登入則 fall back 到 legacy 全域陣列 */
+  if (mode !== 'trial' && typeof TwegAuth !== 'undefined') {
+    const r = TwegAuth.saveSessionForCurrent(session);
+    session._savedTo = r.saved;
+    session._savedEmail = r.email || null;
+  } else if (mode !== 'trial') {
+    /* TwegAuth 沒載入時的舊路徑（防呆） */
+    let arr = [];
+    try { arr = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch (e) {}
+    arr.unshift(session);
+    if (arr.length > MAX_HISTORY) arr.length = MAX_HISTORY;
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(arr));
+    session._savedTo = 'guest';
+  } else {
+    session._savedTo = 'trial';
+  }
   return session;
 }
 
@@ -632,7 +659,7 @@ function encodeCode(s) {
   /* 將整局成績打包成 base64（含每題索引 / 距離 / 追問結果），讓老師端可以還原統計 */
   const compact = {
     d: s.date.slice(0, 16).replace('T', ' '),
-    m: s.mode === 'engineering' ? 'E' : (s.mode === 'curated' ? 'C' : 'M'),
+    m: (s.mode === 'engineering' || s.mode === 'trial') ? 'E' : (s.mode === 'curated' ? 'C' : 'M'),
     t: s.theme, s: s.totalScore, k: s.deepMode ? 1 : 0,
     r: s.rounds.map(r => [
       r.idx,
@@ -663,10 +690,10 @@ $('actBtn').addEventListener('click', () => {
   else if (state === 'error') loadRound();
 });
 $('zoomOut').addEventListener('click', () => {
-  if (mode === 'engineering' && (state === 'guess' || state === 'reveal')) { zoomIdx++; applyZoom(); }
+  if ((mode === 'engineering' || mode === 'trial') && (state === 'guess' || state === 'reveal')) { zoomIdx++; applyZoom(); }
 });
 $('zoomIn').addEventListener('click', () => {
-  if (mode === 'engineering' && (state === 'guess' || state === 'reveal')) { zoomIdx--; applyZoom(); }
+  if ((mode === 'engineering' || mode === 'trial') && (state === 'guess' || state === 'reveal')) { zoomIdx--; applyZoom(); }
 });
 $('restartBtn').addEventListener('click', showStart);
 
@@ -701,22 +728,34 @@ function showStart() {
   $('overlay').classList.remove('hidden');
   const isDeep = localStorage.getItem(DEEP_KEY) === '1';
   const hasToken = !!localStorage.getItem(TOKEN_KEY);
+  const u = (typeof TwegAuth !== 'undefined') ? TwegAuth.currentUser() : null;
+  const userLine = u
+    ? `<div class="ov-userline logged-in">👤 已登入：<b>${u.nick}</b>，每局結束會自動存到你的紀錄。<a href="account.html">我的帳號</a></div>`
+    : `<div class="ov-userline">📋 訪客模式 — 紀錄只暫存在這個瀏覽器。<a href="account.html">登入 / 註冊</a> 後可長期保存。</div>`;
+
   $('ovBox').innerHTML =
     `<h1>準備出發</h1>` +
-    `<p>選一個模式開始。每局 5–10 題，看影像，在地圖上點出位置。</p>` +
+    `<p>看影像、在地圖上點出位置。可從 20 題試玩開始，或直接挑戰課程地景。</p>` +
+    userLine +
+    `<button id="mTrial" class="ov-trial">
+      <span class="t1">🎮 試玩 20 題</span>
+      <span class="t2">不需登入、跨全部 200 景點、不會保存（適合第一次來）</span>
+    </button>` +
     `<div class="ov-deep">
       <input type="checkbox" id="deepChk" ${isDeep ? 'checked' : ''}>
       <label for="deepChk"><b>啟用深度模式</b>
-        <small>揭曉後追問 2 題（主題分類、設施類型），答對每題 +300 分。建議第二局以上使用。</small></label>
+        <small>揭曉後追問 2 題（主題分類、設施類型），答對每題 +300 分。建議熟悉操作後啟用。</small></label>
     </div>` +
+    `<div class="ov-divider">完整模式（成績可記錄）</div>` +
     `<div class="ov-modes">
       <button id="mEng"><span class="t1">🏗 工程地景挑戰</span>
-        <span class="t2">200 個課程工程景點・每局隨機 10 題</span></button>
+        <span class="t2">200 個課程工程景點・四主題可選・每局 10 題</span></button>
       <button id="mCurated" class="alt"><span class="t1">📷 精選地景（暖身）</span>
         <span class="t2">10 個經典台灣地景照・每局 5 題</span></button>
       <button id="mMapi" class="alt"><span class="t1">🛰 Mapillary 即時街景</span>
         <span class="t2">${hasToken ? '已設定 token・台灣各地隨機街景' : '需要免費 token・點此設定'}</span></button>
     </div>`;
+  $('mTrial').addEventListener('click', () => startGame('trial'));
   $('deepChk').addEventListener('change', e => {
     localStorage.setItem(DEEP_KEY, e.target.checked ? '1' : '0');
   });
