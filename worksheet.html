@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>學習單 ｜ 台灣工程地景探索</title>
+<meta name="description" content="探索結束後產出的可列印學習單：本局 10 個工程地景的紀錄表、反思題、延伸探究。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📝%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="topbar no-print">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">
+      <div class="logo">🗺</div>
+      <div class="t">
+        <div class="t-1">台灣工程地景探索</div>
+        <div class="t-2">TAIWAN · ENGINEERING · GEO</div>
+      </div>
+    </a>
+    <nav class="topnav">
+      <a href="index.html">首頁</a>
+      <a href="intro.html">課前導讀</a>
+      <a href="explore.html">開始探索</a>
+      <a href="worksheet.html" class="active">學習單</a>
+      <a href="teacher.html">教師端</a>
+      <a href="about.html">關於</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:24px;padding-bottom:60px">
+
+  <div class="no-print" style="margin-bottom:18px">
+    <span class="eyebrow">WORKSHEET · 學習單</span>
+    <h1 style="margin-top:12px;font-size:30px">把這一局，留下一份紀錄。</h1>
+    <p class="lead" style="margin-top:8px;font-size:15px">
+      學習單會自動載入「最近一次探索的 10 題」。選擇上方按鈕可列印或下載 PDF，
+      也可以切到「空白版」由學生現場手寫填寫；老師可以指定哪一種版本繳交。
+    </p>
+  </div>
+
+  <div class="ws-actions no-print">
+    <select id="versionSel">
+      <option value="auto">📥 自動填入（最近一局）</option>
+      <option value="blank">📃 空白版（手寫填入）</option>
+    </select>
+    <select id="sessionSel" style="display:none"></select>
+    <div class="info" id="wsInfo">尚未載入任何紀錄</div>
+    <button class="btn btn-primary btn-sm" id="printBtn">🖨 列印 / 存 PDF</button>
+    <a class="btn btn-ghost btn-sm" href="explore.html">← 再去探索一局</a>
+  </div>
+
+  <div class="ws-sheet" id="sheet">
+    <h2>台灣工程地景探索 · 學習單</h2>
+    <div class="ws-sub">TAIWAN · ENGINEERING · GEO — STUDENT WORKSHEET</div>
+
+    <div class="ws-meta">
+      <div class="f">
+        <span class="lab">姓名 / 座號</span>
+        <div class="line" id="metaName">&nbsp;</div>
+      </div>
+      <div class="f">
+        <span class="lab">班級</span>
+        <div class="line" id="metaClass">&nbsp;</div>
+      </div>
+      <div class="f">
+        <span class="lab">日期</span>
+        <div class="line" id="metaDate">&nbsp;</div>
+      </div>
+    </div>
+
+    <h3>一、我這次遇到的 10 個工程地景</h3>
+    <div class="tw-scroll">
+      <table id="recTable">
+        <thead>
+          <tr>
+            <th style="width:32px">#</th>
+            <th>名稱</th>
+            <th style="width:88px">主題</th>
+            <th style="width:90px">設施類型</th>
+            <th style="width:48px">章節</th>
+            <th>教材知識點 / 觀察重點</th>
+            <th style="width:58px">距離(km)</th>
+            <th style="width:46px">得分</th>
+          </tr>
+        </thead>
+        <tbody id="recBody"></tbody>
+      </table>
+    </div>
+    <div style="font-size:12px;color:var(--c-muted);margin-top:6px">
+      註：本表自動帶入本局每題的計分結果。距離越接近正解、單題分數越高。
+    </div>
+
+    <h3>二、反思題</h3>
+    <p style="font-size:13.5px;color:var(--c-ink-soft);margin-bottom:8px">請用完整句子回答。</p>
+
+    <p style="font-size:14px;margin:14px 0 4px"><b>1.</b> 從這 10 個景點中，挑出你<strong>最不熟</strong>的一個，並猜測它為什麼會出現在這個位置：</p>
+    <div class="blank big"></div>
+    <div class="blank big"></div>
+
+    <p style="font-size:14px;margin:14px 0 4px"><b>2.</b> 這一局中，你覺得<strong>最有設計巧思</strong>的工程是哪一座？請從結構、機構或控制三個面向擇一說明：</p>
+    <div class="blank big"></div>
+    <div class="blank big"></div>
+
+    <p style="font-size:14px;margin:14px 0 4px"><b>3.</b> 在四大主題中，你<strong>表現最弱</strong>的是哪一個（依得分判斷）？你覺得為什麼？</p>
+    <div class="blank big"></div>
+
+    <p style="font-size:14px;margin:14px 0 4px"><b>4.</b> 工程的設計往往受到「地理條件」的限制。你能不能舉這次出現的兩座工程，說明地理如何影響了它的設計？</p>
+    <div class="blank big"></div>
+    <div class="blank big"></div>
+
+    <h3>三、延伸探究（擇一深入）</h3>
+    <p style="font-size:13.5px;color:var(--c-ink-soft);margin-bottom:8px">從這 10 個景點中挑一個你最有興趣的，回答下列三個問題（可上維基百科或政府網站查資料）：</p>
+
+    <table>
+      <thead>
+        <tr><th style="width:40%">問題</th><th>我的整理</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>選定的工程地景</b><br>（請填名稱與位置）</td>
+          <td class="fill">&nbsp;<br>&nbsp;</td>
+        </tr>
+        <tr>
+          <td><b>關鍵工程概念</b><br>（如桁架、預力、TMD、PWM…）</td>
+          <td class="fill">&nbsp;<br>&nbsp;<br>&nbsp;</td>
+        </tr>
+        <tr>
+          <td><b>設計者面對的主要限制</b><br>（地理、氣候、人文…）</td>
+          <td class="fill">&nbsp;<br>&nbsp;<br>&nbsp;</td>
+        </tr>
+        <tr>
+          <td><b>如果由你重新設計，<br>會做哪一項改動？為什麼？</b></td>
+          <td class="fill">&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>四、自我評量</h3>
+    <table>
+      <thead>
+        <tr><th style="width:60%">項目</th><th style="width:13%">優</th><th style="width:13%">可</th><th style="width:14%">待加強</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>我能說出四大工程主題的差異</td><td>☐</td><td>☐</td><td>☐</td></tr>
+        <tr><td>我能從照片或空照圖辨識工程地景</td><td>☐</td><td>☐</td><td>☐</td></tr>
+        <tr><td>我能說明地理條件如何影響工程設計</td><td>☐</td><td>☐</td><td>☐</td></tr>
+        <tr><td>我能主動延伸探究有興趣的景點</td><td>☐</td><td>☐</td><td>☐</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ws-footer">
+      <span>台灣工程地景探索 · 學習單 v1.0</span>
+      <span class="mono" id="codeStamp">CODE: —</span>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer no-print">
+  <div class="footer-inner">
+    <div>
+      <h4>學習單怎麼用？</h4>
+      <p style="font-size:13px">建議流程：①課前讀完導讀。②進入探索完成一局。③回到本頁，把本局 10 題自動帶入學習單，列印或存 PDF。④把成績碼貼到「教師端」。</p>
+    </div>
+    <div>
+      <h4>快速連結</h4>
+      <ul>
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="intro.html">課前導讀</a></li>
+        <li><a href="explore.html">開始探索</a></li>
+        <li><a href="teacher.html">教師端</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>列印小撇步</h4>
+      <ul style="font-size:13px">
+        <li>瀏覽器列印選「儲存為 PDF」可直接交檔案</li>
+        <li>建議使用 A4 直印、邊界「最小」</li>
+        <li>關閉「頁首頁尾」可獲得乾淨版面</li>
+      </ul>
+    </div>
+    <div class="copy">
+      <span>© 趙珩宇老師製作 · 台灣工程地景探索</span>
+      <span class="mono">v1.0</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/worksheet.js"></script>
+
+</body>
+</html>

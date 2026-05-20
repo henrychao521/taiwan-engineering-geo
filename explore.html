@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>開始探索 ｜ 台灣工程地景探索</title>
+<meta name="description" content="200 個台灣工程地景的地圖挑戰：看實景或衛星空照圖，點出它在台灣的位置；揭曉時了解設計重點，可選深度模式追問。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🧭%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">
+      <div class="logo">🗺</div>
+      <div class="t">
+        <div class="t-1">台灣工程地景探索</div>
+        <div class="t-2">TAIWAN · ENGINEERING · GEO</div>
+      </div>
+    </a>
+    <nav class="topnav">
+      <a href="index.html">首頁</a>
+      <a href="intro.html">課前導讀</a>
+      <a href="explore.html" class="active">開始探索</a>
+      <a href="worksheet.html">學習單</a>
+      <a href="teacher.html">教師端</a>
+      <a href="about.html">關於</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:24px;padding-bottom:40px">
+
+  <div class="exp-hud">
+    <span class="mode-tag" id="modeLabel">準備中</span>
+    <div class="item"><span class="l">第 X / Y 題</span><span class="v"><span id="round">1</span> / <span id="roundTotal">10</span></span></div>
+    <div class="item"><span class="l">總分</span><span class="v" id="score">0</span></div>
+    <div class="item" id="deepHud" style="display:none"><span class="l">深度模式</span><span class="v" style="color:var(--c-amber)">ON</span></div>
+    <div style="flex:1"></div>
+    <button class="btn btn-ghost btn-sm" id="restartBtn">↻ 重選模式</button>
+  </div>
+
+  <div class="exp-stage">
+
+    <div class="photo-panel">
+      <div class="panel-h">影像區・看景認位</div>
+      <div class="photo-box">
+        <img id="photo" alt="地點影像">
+        <canvas id="pano"></canvas>
+        <div class="pano-badge hidden" id="panoBadge">🔄 拖曳環視 360°</div>
+        <div class="photo-msg" id="photoMsg">準備中…</div>
+      </div>
+      <div class="zoombar" id="zoombar">
+        <button id="zoomOut" class="zbtn">➖ 拉遠</button>
+        <span class="zlabel" id="zoomLabel">視野</span>
+        <button id="zoomIn" class="zbtn">➕ 拉近</button>
+      </div>
+      <div class="photo-cap" id="photoCap">這是台灣的哪裡？在右側地圖上點出你的猜測。</div>
+      <div class="photo-clue" id="photoClue"></div>
+      <div class="refs" id="refs"></div>
+    </div>
+
+    <div class="map-panel">
+      <div class="panel-h">猜測地圖・點地圖選位置</div>
+      <div id="map"></div>
+      <div class="controls">
+        <div class="result" id="result">點地圖選一個位置</div>
+        <button id="actBtn" class="btn btn-primary" disabled>確認猜測</button>
+        <div id="followupBox"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:18px;font-size:13px;color:var(--c-muted);text-align:center">
+    每題依「猜測點與正解的距離」計分（最高 1000 分）。距離越近、分數越高。深度模式答對追問每題額外 +300 分。
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h4>影像來源</h4>
+      <p style="font-size:13px">本頁可能呈現 Mapillary 360° 環景／實景照、Esri World Imagery 衛星空照圖、或維基百科延伸圖。所有素材均在自由授權範圍內使用，作為非營利教育用途。</p>
+    </div>
+    <div>
+      <h4>快速連結</h4>
+      <ul>
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="intro.html">課前導讀</a></li>
+        <li><a href="worksheet.html">學習單</a></li>
+        <li><a href="teacher.html">教師端</a></li>
+        <li><a href="about.html">關於與授權</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>使用提示</h4>
+      <ul style="font-size:13px">
+        <li>沒有 Mapillary token 也能玩，自動以衛星空照圖呈現</li>
+        <li>學習單頁面會自動載入最近一次的 10 題</li>
+        <li>成績可貼到「教師端」做班級統計</li>
+      </ul>
+    </div>
+    <div class="copy">
+      <span>© 趙珩宇老師製作 · 台灣工程地景探索</span>
+      <span class="mono">v1.0</span>
+    </div>
+  </div>
+</footer>
+
+<!-- 開始畫面 / 結算 overlay -->
+<div class="overlay" id="overlay">
+  <div class="ov-box" id="ovBox"></div>
+</div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="js/data.js"></script>
+<script src="js/explore.js"></script>
+
+</body>
+</html>

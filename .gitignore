@@ -1,0 +1,15 @@
+.DS_Store
+._*
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Claude / agent meta
+.claude/
+.aider*

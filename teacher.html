@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教師端 ｜ 台灣工程地景探索</title>
+<meta name="description" content="把學生貼上的成績碼解碼後，看到全班分數分布、最弱主題、最常被猜錯的工程地景。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📊%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">
+      <div class="logo">🗺</div>
+      <div class="t">
+        <div class="t-1">台灣工程地景探索</div>
+        <div class="t-2">TAIWAN · ENGINEERING · GEO</div>
+      </div>
+    </a>
+    <nav class="topnav">
+      <a href="index.html">首頁</a>
+      <a href="intro.html">課前導讀</a>
+      <a href="explore.html">開始探索</a>
+      <a href="worksheet.html">學習單</a>
+      <a href="teacher.html" class="active">教師端</a>
+      <a href="about.html">關於</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:28px;padding-bottom:60px">
+
+  <span class="eyebrow">TEACHER · 班級統計</span>
+  <h1 style="margin-top:12px;font-size:30px">把全班的成績碼，<span class="grad">變成一張可讀的圖。</span></h1>
+  <p class="lead" style="margin-top:8px;font-size:15px;max-width:780px">
+    請學生在探索結束的成績畫面複製「成績碼」，再將每一行貼到下方輸入框。
+    本頁全在你的瀏覽器執行，<strong>不會上傳任何資料</strong>。
+  </p>
+
+  <div class="tc-grid" style="margin-top:24px">
+
+    <div class="card tc-card tc-paste">
+      <h3>① 貼上學生成績碼</h3>
+      <p style="font-size:13px;color:var(--c-muted);margin-bottom:8px">
+        每行一筆，格式：<code>姓名: TWEG:xxxx</code>（冒號前的姓名可省略，省略時編號為「學生N」）。
+      </p>
+      <textarea id="codeInput" placeholder="小明: TWEG:eyJkIjoiMjAyNi0wNS0yMC..."></textarea>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-primary btn-sm" id="parseBtn">📥 解碼並統計</button>
+        <button class="btn btn-ghost btn-sm" id="clearBtn">清空</button>
+        <button class="btn btn-ghost btn-sm" id="demoBtn">載入示例</button>
+      </div>
+      <div id="parseMsg" style="margin-top:10px;font-size:13px"></div>
+    </div>
+
+    <div class="card tc-card">
+      <h3>② 我自己的本機紀錄</h3>
+      <p style="font-size:13px;color:var(--c-muted);margin-bottom:10px">老師也可以先自己玩幾局看看，下方會顯示這個瀏覽器最近的紀錄：</p>
+      <div id="ownHistory"></div>
+    </div>
+
+  </div>
+
+  <h2 style="margin-top:36px;font-size:24px">③ 班級總覽</h2>
+
+  <div class="tc-stats">
+    <div class="tc-stat"><div class="n" id="stN">0</div><div class="l">提交人數</div></div>
+    <div class="tc-stat"><div class="n" id="stAvg">—</div><div class="l">平均得分</div></div>
+    <div class="tc-stat"><div class="n" id="stMax">—</div><div class="l">最高分</div></div>
+    <div class="tc-stat"><div class="n" id="stMin">—</div><div class="l">最低分</div></div>
+  </div>
+
+  <div class="tc-grid">
+
+    <div class="card tc-card">
+      <h3>📊 全班分數分布</h3>
+      <div id="scoreBars"><div class="tc-empty">貼上成績碼後顯示</div></div>
+    </div>
+
+    <div class="card tc-card">
+      <h3>🎯 主題表現（平均得分率）</h3>
+      <div id="themeBars"><div class="tc-empty">貼上成績碼後顯示</div></div>
+    </div>
+
+    <div class="card tc-card">
+      <h3>📍 最常被猜錯的工程地景（Top 10）</h3>
+      <div id="hardSites"><div class="tc-empty">貼上成績碼後顯示</div></div>
+    </div>
+
+    <div class="card tc-card">
+      <h3>🌟 表現最好的學生（Top 10）</h3>
+      <div id="topPlayers"><div class="tc-empty">貼上成績碼後顯示</div></div>
+    </div>
+
+  </div>
+
+  <div class="callout amber" style="margin-top:30px">
+    <strong>隱私說明：</strong>本頁所有解碼與統計都在你的瀏覽器執行，伺服器不會收到任何學生資料。
+    若需保留紀錄，請另存為 CSV 或螢幕截圖；關閉本頁分頁後，輸入的成績碼即會消失。
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h4>怎麼讓學生貼成績碼？</h4>
+      <p style="font-size:13px">學生完成一局後，結算畫面上有一個「成績碼」輸入框，按一下會自動全選。請學生複製整段（含 <code>TWEG:</code>），用 Google 表單或 Classroom 收齊後，整批貼到本頁。</p>
+    </div>
+    <div>
+      <h4>快速連結</h4>
+      <ul>
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="intro.html">課前導讀</a></li>
+        <li><a href="explore.html">開始探索</a></li>
+        <li><a href="worksheet.html">學習單</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>能不能匯出？</h4>
+      <ul style="font-size:13px">
+        <li>本頁目前無自動匯出 CSV；老師可截圖、或複製貼上即用</li>
+        <li>離開頁面後輸入的內容會自動清空（不持久化）</li>
+      </ul>
+    </div>
+    <div class="copy">
+      <span>© 趙珩宇老師製作 · 台灣工程地景探索</span>
+      <span class="mono">v1.0</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/teacher.js"></script>
+
+</body>
+</html>

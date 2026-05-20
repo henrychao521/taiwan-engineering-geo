@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>課前導讀 ｜ 台灣工程地景探索</title>
+<meta name="description" content="進入探索前的 5 分鐘導讀：四大工程主題、200 個地景如何分布、學習活動如何進行、教師可以怎麼用。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📖%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">
+      <div class="logo">🗺</div>
+      <div class="t">
+        <div class="t-1">台灣工程地景探索</div>
+        <div class="t-2">TAIWAN · ENGINEERING · GEO</div>
+      </div>
+    </a>
+    <nav class="topnav">
+      <a href="index.html">首頁</a>
+      <a href="intro.html" class="active">課前導讀</a>
+      <a href="explore.html">開始探索</a>
+      <a href="worksheet.html">學習單</a>
+      <a href="teacher.html">教師端</a>
+      <a href="about.html">關於</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero wrap-narrow">
+  <span class="eyebrow">PRE-READING · 5 分鐘導讀</span>
+  <h1 style="margin-top:14px">在開始探索之前，<br>先<span class="grad">看懂這張地圖</span>。</h1>
+  <p class="lead" style="margin-top:16px">
+    這個活動的核心不是「猜得快、猜得準」，而是把工程設計的觀念，放回它真實存在的位置上——
+    為什麼這座橋出現在這條河上？為什麼這座風場長在彰化外海？為什麼半導體廠群聚在新竹與台南？
+    讀完這一頁，你會對接下來會看到的 200 個地景有一個清楚的座標。
+  </p>
+</section>
+
+<section class="section wrap-narrow">
+  <div class="h-sec">
+    <span class="eyebrow">PART 1</span>
+    <h2>為什麼是「工程地景」？</h2>
+  </div>
+  <p class="lead">
+    在課本上看到「桁架」「斜張橋」「離岸風場」的時候，它們往往只是一個抽象名詞。
+    但它們其實都是真實存在的、具體的、巨大的東西——而且它們<strong>選擇了</strong>它存在的位置。
+  </p>
+  <ul class="bullet" style="margin-top:14px">
+    <li>西螺大橋之所以橫跨濁水溪，是因為日治末期需要打通南北縱貫公路。</li>
+    <li>離岸風場之所以聚集在彰化、苗栗外海，是因為台灣海峽強勁的東北季風。</li>
+    <li>半導體廠之所以選在竹科、中科、南科，是因為地質穩定、水電充沛、人才匯流。</li>
+    <li>大港橋之所以是「水平旋轉」而不是「升降」，是因為港區船隻通航高度的限制。</li>
+  </ul>
+  <div class="callout" style="margin-top:18px">
+    <strong>地理不是背景，而是工程設計的初始條件之一。</strong>
+    讀完這頁、進入挑戰之後，請試著從每個景點的位置去反推設計者面對的限制條件。
+  </div>
+</section>
+
+<section class="section wrap-narrow">
+  <div class="h-sec">
+    <span class="eyebrow eyebrow-amber">PART 2</span>
+    <h2>四大主題、四張表</h2>
+    <span class="sub">每張表 50 筆景點，組成挑戰中的四大主題模組</span>
+  </div>
+
+  <div class="card" style="border-left:5px solid #1E5266;margin-bottom:14px">
+    <div class="mono" style="font-size:11px;color:var(--c-muted);letter-spacing:.1em">THEME 01</div>
+    <h3 style="margin:4px 0 8px">結構力學與土木工程</h3>
+    <p class="lead" style="font-size:14.5px">
+      橋梁、水庫、隧道、高樓。重點在於<strong>力如何在材料與幾何之間傳遞</strong>——拉力、壓力、彎矩、剪力，
+      還有材料的降伏強度、疲勞分析、地震反應。
+    </p>
+    <p style="font-size:13px;color:var(--c-muted);margin-top:10px">
+      <span class="chip chip-primary">桁架</span>
+      <span class="chip chip-primary">拱橋</span>
+      <span class="chip chip-primary">斜張橋</span>
+      <span class="chip chip-primary">壩體</span>
+      <span class="chip chip-primary">隧道工法</span>
+      <span class="chip chip-primary">耐震設計</span>
+    </p>
+  </div>
+
+  <div class="card" style="border-left:5px solid #7C3AED;margin-bottom:14px">
+    <div class="mono" style="font-size:11px;color:var(--c-muted);letter-spacing:.1em">THEME 02</div>
+    <h3 style="margin:4px 0 8px">參數化設計與現代建築</h3>
+    <p class="lead" style="font-size:14.5px">
+      自由曲面、雙曲拋物面、折板、蜂巢——這些都不是手繪能完成的形狀。從 CAID 到 CAE 的數位流程，
+      讓建築師可以用<strong>幾何運算當作設計語言</strong>，再交給 CNC 與機器人施工。
+    </p>
+    <p style="font-size:13px;color:var(--c-muted);margin-top:10px">
+      <span class="chip">曲面殼體</span>
+      <span class="chip">折板</span>
+      <span class="chip">張拉膜</span>
+      <span class="chip">參數化</span>
+      <span class="chip">數位加工</span>
+      <span class="chip">BIM</span>
+    </p>
+  </div>
+
+  <div class="card" style="border-left:5px solid #D97706;margin-bottom:14px">
+    <div class="mono" style="font-size:11px;color:var(--c-muted);letter-spacing:.1em">THEME 03</div>
+    <h3 style="margin:4px 0 8px">機電整合與自動化機構</h3>
+    <p class="lead" style="font-size:14.5px">
+      旋轉橋、纜車、月台幕門、ETC 門架、無人搬運車。當結構需要會<strong>動</strong>的時候，
+      就要進入機構學（連桿、齒輪、凸輪、螺旋）與感測／控制（光電、雷達、PLC、PWM）的世界。
+    </p>
+    <p style="font-size:13px;color:var(--c-muted);margin-top:10px">
+      <span class="chip chip-amber">機構學</span>
+      <span class="chip chip-amber">伺服馬達</span>
+      <span class="chip chip-amber">感測器</span>
+      <span class="chip chip-amber">PLC</span>
+      <span class="chip chip-amber">機電連鎖</span>
+      <span class="chip chip-amber">自動化</span>
+    </p>
+  </div>
+
+  <div class="card" style="border-left:5px solid #15803D;margin-bottom:14px">
+    <div class="mono" style="font-size:11px;color:var(--c-muted);letter-spacing:.1em">THEME 04</div>
+    <h3 style="margin:4px 0 8px">新興科技與綠色能源</h3>
+    <p class="lead" style="font-size:14.5px">
+      離岸風場、太陽光電、地熱、抽蓄水力、晶圓廠、量子電腦中心。這些景點代表台灣下一個十年的技術投資，
+      也代表工程從「克服自然」走向「<strong>與環境共存</strong>」的價值轉向。
+    </p>
+    <p style="font-size:13px;color:var(--c-muted);margin-top:10px">
+      <span class="chip chip-green">再生能源</span>
+      <span class="chip chip-green">儲能</span>
+      <span class="chip chip-green">半導體</span>
+      <span class="chip chip-green">智慧電網</span>
+      <span class="chip chip-green">CCUS</span>
+      <span class="chip chip-green">碳中和</span>
+    </p>
+  </div>
+</section>
+
+<section class="section wrap-narrow">
+  <div class="h-sec">
+    <span class="eyebrow">PART 3</span>
+    <h2>200 個地景，這樣分布</h2>
+    <span class="sub">下方地圖即時載入全部 200 個地點，依四大主題上色</span>
+  </div>
+  <p class="lead">
+    可以注意：北部聚集了多數的建築與機電；中部分布著高鐵站與半導體；南部與東部有許多水利與大型發電；
+    離島與外海則是綠能、軍事與防護工程。地理塑形了工程的樣貌。
+  </p>
+  <div id="introMap" class="mini-leaf" style="margin-top:16px"></div>
+  <div style="margin-top:10px;font-size:12px;color:var(--c-muted);display:flex;gap:14px;flex-wrap:wrap">
+    <span><span style="display:inline-block;width:10px;height:10px;background:#1E5266;border-radius:50%;vertical-align:middle"></span> 結構與土木</span>
+    <span><span style="display:inline-block;width:10px;height:10px;background:#7C3AED;border-radius:50%;vertical-align:middle"></span> 參數化建築</span>
+    <span><span style="display:inline-block;width:10px;height:10px;background:#D97706;border-radius:50%;vertical-align:middle"></span> 機電與自動化</span>
+    <span><span style="display:inline-block;width:10px;height:10px;background:#15803D;border-radius:50%;vertical-align:middle"></span> 綠能與新科技</span>
+  </div>
+</section>
+
+<section class="section wrap-narrow">
+  <div class="h-sec">
+    <span class="eyebrow">PART 4</span>
+    <h2>三層影像來源：你會看到什麼？</h2>
+  </div>
+  <p class="lead">每一題會自動以下列順序嘗試取得最佳影像：</p>
+  <div class="split" style="margin-top:14px">
+    <div class="card">
+      <div class="mono" style="font-size:11px;color:var(--c-muted);letter-spacing:.1em">LAYER 01</div>
+      <h4 style="margin:6px 0 8px">🔄 360° 環景</h4>
+      <p style="font-size:13.5px;color:var(--c-ink-soft);line-height:1.7">
+        當該座標有 Mapillary 環景照片時，可以拖曳畫面環視四周、滾輪縮放——
+        近似 GeoGuessr 的街景體驗。
+      </p>
+    </div>
+    <div class="card">
+      <div class="mono" style="font-size:11px;color:var(--c-muted);letter-spacing:.1em">LAYER 02</div>
+      <h4 style="margin:6px 0 8px">📷 平面實景照</h4>
+      <p style="font-size:13.5px;color:var(--c-ink-soft);line-height:1.7">
+        沒有環景但有一般街景照時，會顯示該座標附近的 Mapillary 影像（CC BY-SA）。
+      </p>
+    </div>
+    <div class="card">
+      <div class="mono" style="font-size:11px;color:var(--c-muted);letter-spacing:.1em">LAYER 03</div>
+      <h4 style="margin:6px 0 8px">🛰 衛星空照圖</h4>
+      <p style="font-size:13.5px;color:var(--c-ink-soft);line-height:1.7">
+        水庫、離岸風場、晶圓廠無街景覆蓋時退回 Esri 衛星空照圖，可拉遠拉近 5 段視野。
+      </p>
+    </div>
+    <div class="card">
+      <div class="mono" style="font-size:11px;color:var(--c-muted);letter-spacing:.1em">LAYER 04</div>
+      <h4 style="margin:6px 0 8px">📚 揭曉延伸學習</h4>
+      <p style="font-size:13.5px;color:var(--c-ink-soft);line-height:1.7">
+        答題後若有對應條目，會出現可點擊的維基百科卡片，方便老師延伸成補充教材。
+      </p>
+    </div>
+  </div>
+  <div class="callout amber" style="margin-top:20px">
+    <strong>需要 Mapillary token 嗎？</strong>
+    不一定。沒有 token 時，所有題目都以衛星空照圖呈現，照樣可玩；
+    要看到實景與環景，老師可以申請一組免費的個人 token（只存在你的瀏覽器，不上傳）。
+    細節在<a href="explore.html">探索頁</a>的設定中。
+  </div>
+</section>
+
+<section class="section wrap-narrow">
+  <div class="h-sec">
+    <span class="eyebrow">PART 5</span>
+    <h2>怎麼玩才有教學效果？</h2>
+  </div>
+  <div class="card">
+    <h4 style="margin-bottom:10px">🎯 學生個人模式</h4>
+    <ol style="margin-left:22px;font-size:14.5px;color:var(--c-ink-soft);line-height:1.85">
+      <li>先讀本頁的四大主題，建立概念。</li>
+      <li>進入「開始探索」，先試「全部主題」一局熱身。</li>
+      <li>找出自己最不熟的主題，挑該主題重打一局。</li>
+      <li>進入「學習單」把這 10 題整理成可列印的學習紀錄。</li>
+    </ol>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h4 style="margin-bottom:10px">🧑‍🏫 教師課堂模式</h4>
+    <ol style="margin-left:22px;font-size:14.5px;color:var(--c-ink-soft);line-height:1.85">
+      <li>用本頁四大主題 PART 2 當作課堂前 5 分鐘的破冰。</li>
+      <li>全班共玩一局（投影到大螢幕、由不同學生輪流上來點圖），每題揭曉時引導討論「設計者面對的限制」。</li>
+      <li>請學生開啟「深度模式」於課後自行重打，並用學習單記錄。</li>
+      <li>學生把成績碼貼到「教師端」，老師即可看到全班分佈與最弱主題。</li>
+    </ol>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h4 style="margin-bottom:10px">🧪 PBL 延伸專題</h4>
+    <ol style="margin-left:22px;font-size:14.5px;color:var(--c-ink-soft);line-height:1.85">
+      <li>由探索結果，請學生挑 3–5 個最感興趣的景點。</li>
+      <li>以延伸學習的維基連結為起點，做更深入的工程分析。</li>
+      <li>產出口頭報告或書面研究，建議結合工程設計流程（CDIO）。</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section wrap-narrow">
+  <div class="card" style="text-align:center;padding:36px;background:linear-gradient(135deg,var(--c-primary-l),#fff)">
+    <h2 style="margin-bottom:10px">準備好了嗎？</h2>
+    <p class="lead" style="margin-bottom:20px">建議第一局選「全部主題（200 景點）」熱身，每局 10 題，約 15 分鐘。</p>
+    <a class="btn btn-primary btn-lg" href="explore.html">▶ 進入探索</a>
+    <a class="btn btn-ghost btn-lg" href="worksheet.html" style="margin-left:8px">📝 預覽學習單</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h4>關於本站</h4>
+      <p>「台灣工程地景探索」是為高中生活科技／工程設計課程設計的獨立教育活動。把工程結構與機構放回它真實存在的位置上。</p>
+    </div>
+    <div>
+      <h4>快速連結</h4>
+      <ul>
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="explore.html">開始探索</a></li>
+        <li><a href="worksheet.html">學習單</a></li>
+        <li><a href="teacher.html">教師端</a></li>
+        <li><a href="about.html">關於與授權</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>影像與資料</h4>
+      <ul>
+        <li>Esri World Imagery</li>
+        <li>Mapillary・CC BY-SA</li>
+        <li>Wikimedia Commons・CC</li>
+        <li>OpenStreetMap・CARTO</li>
+      </ul>
+    </div>
+    <div class="copy">
+      <span>© 趙珩宇老師製作 · 台灣工程地景探索</span>
+      <span class="mono">v1.0</span>
+    </div>
+  </div>
+</footer>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="js/data.js"></script>
+<script src="js/intro.js"></script>
+
+</body>
+</html>
