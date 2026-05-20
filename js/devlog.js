@@ -178,6 +178,24 @@ const PHASES = [
       '記憶檔加註本專案的紀錄維護規則',
     ],
   },
+  {
+    tag: '段落 9',
+    date: '2026-05-20',
+    title: '手機版響應式優化',
+    verbatim: '手機頁面有進行優化嗎？',
+    context: '在 375px iPhone 寬度逐頁實測，發現 6 處需要調整：① 頂部 nav 6 連結 + 帳號 chip 擠成 2 行；② 帳號頁 4 欄統計卡每欄寬不到 50px 導致 label「完成局／數」垂直斷字；③ 學習單 8 欄表格在手機完全擠死、文字斷字嚴重；④ 探索頁 HUD 雖換行但顯得擁擠；⑤ explore 起始畫面「目前玩家：小明，每局結束會自動存到你的紀錄。我的檔案」一行用 flex gap 佈局，導致每個內容被當 flex item 異常斷字；⑥ 個人檔案頁「✏️ 編輯」按鈕被擠成「編／輯」直書。新增 4 個 mobile breakpoint（760 / 600 / 480 / 420 px），統計卡 4 欄 → 2×2，學習單表格 min-width: 680px 配合 -webkit-overflow-scrolling:touch 與「→ 左右滑動」提示。ov-userline 從 flex 改回 block。',
+    decisions: [
+      '加 4 個媒體查詢斷點（760 / 600 / 480 / 420）',
+      'tc-stats / dl-meta 等 4 欄統計在小螢幕變 2×2',
+      '學習單表格 min-width: 680px 強制橫向捲動，附「左右滑動」提示',
+      'ov-userline 改用 block + line-height，避免 flex gap 異常斷字',
+      'topbar logo / brand 字級在小螢幕同步縮小',
+    ],
+    outputs: [
+      'css/style.css 增添各斷點處理（約 80 行 mobile-only 規則）',
+      '375px 視口下所有頁面實測通過：首頁 / 探索三狀態 / 帳號 / 學習單 / 教師端',
+    ],
+  },
 ];
 
 /* ---- 渲染時間軸 ---- */

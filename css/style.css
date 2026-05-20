@@ -96,6 +96,15 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   font-size: 15px; font-weight: 600;
   padding: 8px 14px; border-radius: 999px;
   color: var(--c-ink-soft);
+  white-space: nowrap;
+}
+@media (max-width: 760px) {
+  .topbar-inner { padding: 10px 16px; gap: 10px; }
+  .brand .logo { width: 32px; height: 32px; font-size: 17px; }
+  .brand .t-1 { font-size: 14px; }
+  .brand .t-2 { font-size: 9.5px; }
+  .topnav a { font-size: 13px; padding: 5px 10px; }
+  .topnav-account { padding: 5px 10px; font-size: 13px; margin-left: 2px; }
 }
 .topnav a:hover { background: var(--c-line-soft); color: var(--c-primary); }
 .topnav a.active { background: var(--c-primary-l); color: var(--c-primary-d); }
@@ -169,6 +178,13 @@ h4 { font-size: 18px; line-height: 1.4; }
   h1 { font-size: 36px; }
   h2 { font-size: 28px; }
 }
+@media (max-width: 420px) {
+  body { font-size: 16px; }
+  h1 { font-size: 30px; line-height: 1.25; }
+  h2 { font-size: 24px; }
+  h3 { font-size: 20px; }
+  .lead { font-size: 16.5px; }
+}
 
 /* ---------- 按鈕 ---------- */
 .btn {
@@ -241,6 +257,14 @@ h4 { font-size: 18px; line-height: 1.4; }
   font-size: 26px; font-weight: 800; color: var(--c-primary);
 }
 .hero-stat .l { font-size: 12px; color: var(--c-muted); font-weight: 600; }
+@media (max-width: 480px) {
+  .hero { padding: 36px 0 24px; }
+  .hero-stat { gap: 18px; margin-top: 22px; padding-top: 14px; }
+  .hero-stat .n { font-size: 20px; }
+  .hero-stat .l { font-size: 11px; }
+  .hero-cta { gap: 8px; }
+  .hero-cta .btn { padding: 11px 16px; font-size: 14px; }
+}
 
 .hero-art {
   position: relative; aspect-ratio: 4/5; max-width: 380px; margin-left: auto;
@@ -406,10 +430,23 @@ ul.bullet li::before {
 }
 .callout strong { font-weight: 800; }
 
-/* 可滾動表格 */
-.tw-scroll { overflow-x: auto; }
+/* 可滾動表格（內含足以容納所有欄位的 min-width，讓窄螢幕橫向捲動） */
+.tw-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.tw-scroll::-webkit-scrollbar { height: 6px; }
+.tw-scroll::-webkit-scrollbar-thumb { background: var(--c-line); border-radius: 3px; }
 table.t {
   width: 100%; border-collapse: collapse; font-size: 13.5px;
+}
+.ws-sheet .tw-scroll table { min-width: 680px; }
+@media (max-width: 700px) {
+  .ws-sheet .tw-scroll::after {
+    content: '→ 左右滑動可看完整欄位';
+    display: block; font-size: 11px; color: var(--c-muted);
+    text-align: center; padding: 6px;
+  }
 }
 table.t th, table.t td {
   text-align: left; padding: 10px 12px;
@@ -443,6 +480,14 @@ table.t tbody tr:hover { background: var(--c-line-soft); }
   background: var(--c-primary); color: #fff;
   padding: 6px 14px; border-radius: 999px;
   font-size: 14px; font-weight: 700;
+}
+@media (max-width: 600px) {
+  .exp-hud { padding: 10px 12px; gap: 10px; }
+  .exp-hud .item { padding-right: 10px; }
+  .exp-hud .item .v { font-size: 17px; }
+  .exp-hud .item .l { font-size: 11px; }
+  .exp-hud .mode-tag { padding: 4px 10px; font-size: 12.5px; }
+  #restartBtn { font-size: 12px; padding: 6px 10px; }
 }
 
 /* 探索佈局：左影像、右地圖 */
@@ -693,8 +738,13 @@ table.t tbody tr:hover { background: var(--c-line-soft); }
   border-radius: var(--r);
 }
 .ws-actions .info {
-  flex: 1; font-size: 13px; color: var(--c-ink-soft);
+  flex: 1; min-width: 100%; font-size: 13px; color: var(--c-ink-soft);
+  order: 99;
 }
+@media (min-width: 680px) {
+  .ws-actions .info { min-width: 0; order: 0; }
+}
+.ws-actions .btn, .ws-actions select { white-space: nowrap; }
 .ws-sheet {
   background: #fff;
   border: 1px solid var(--c-line);
@@ -702,6 +752,12 @@ table.t tbody tr:hover { background: var(--c-line-soft); }
   padding: 36px 40px;
   box-shadow: var(--sh-sm);
   margin-bottom: 20px;
+}
+@media (max-width: 600px) {
+  .ws-sheet { padding: 22px 18px; }
+  .ws-sheet h2 { font-size: 19px; }
+  .ws-sheet h3 { font-size: 14px; margin: 18px 0 8px; }
+  .ws-meta { grid-template-columns: 1fr; gap: 8px; }
 }
 .ws-sheet h2 {
   text-align: center; font-size: 22px; margin-bottom: 6px;
@@ -815,6 +871,12 @@ table.t tbody tr:hover { background: var(--c-line-soft); }
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
   margin: 12px 0 18px;
 }
+@media (max-width: 600px) {
+  .tc-stats { grid-template-columns: repeat(2, 1fr); }
+  .tc-stat { padding: 10px; }
+  .tc-stat .n { font-size: 19px; }
+  .tc-stat .l { font-size: 11px; line-height: 1.4; }
+}
 .tc-stat {
   background: var(--c-paper-2);
   border: 1px solid var(--c-line);
@@ -924,6 +986,7 @@ table.t tbody tr:hover { background: var(--c-line-soft); }
 .profile-head {
   display: flex; align-items: flex-start; gap: 16px;
   padding-bottom: 22px; border-bottom: 1px solid var(--c-line);
+  flex-wrap: wrap;
 }
 .profile-ic {
   width: 60px; height: 60px; flex-shrink: 0;
@@ -932,6 +995,11 @@ table.t tbody tr:hover { background: var(--c-line-soft); }
   border-radius: 50%; font-size: 30px;
 }
 .profile-head h1 { font-size: 26px; line-height: 1.2; }
+.profile-head .btn { white-space: nowrap; }
+@media (max-width: 480px) {
+  .profile-ic { width: 44px; height: 44px; font-size: 22px; }
+  .profile-head h1 { font-size: 22px; }
+}
 
 .hist-list {
   display: flex; flex-direction: column;
@@ -960,10 +1028,11 @@ table.t tbody tr:hover { background: var(--c-line-soft); }
 
 /* explore 開始畫面：試玩 CTA + 已登入提示 */
 .ov-userline {
-  display: flex; align-items: center; gap: 8px;
+  display: block;
   font-size: 12.5px; color: var(--c-muted);
+  line-height: 1.65;
   margin: 10px 0 6px;
-  padding: 7px 12px;
+  padding: 8px 12px;
   background: var(--c-paper-2);
   border-radius: var(--r-sm);
   text-align: left;
