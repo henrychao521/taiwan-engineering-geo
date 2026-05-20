@@ -880,3 +880,39 @@ function showTokenSetup() {
 }
 
 showStart();
+
+/* ---------- 截圖／教學用 demo 模式
+ * URL ?demo=start|ingame|reveal|endgame 時自動推進到對應狀態。
+ * 對一般使用者沒影響——沒有 demo 參數時整段不執行。 */
+(async function setupDemo() {
+  const m = new URLSearchParams(location.search).get('demo');
+  if (!m) return;
+  if (typeof TwegAuth !== 'undefined' && !TwegAuth.currentUser()) {
+    TwegAuth.create({ nick: '小明', age: 16, gender: '男' });
+  }
+  localStorage.setItem(LEADERBOARD_KEY, JSON.stringify([
+    { nick: '阿凱', score: 7200, rounds: 10, mode: 'engineering', theme: 0, deepMode: false, date: '2026-05-20T10:00:00.000Z' },
+    { nick: '雅婷', score: 6500, rounds: 10, mode: 'engineering', theme: 0, deepMode: false, date: '2026-05-20T10:10:00.000Z' },
+    { nick: '建宏', score: 4200, rounds: 10, mode: 'engineering', theme: 0, deepMode: false, date: '2026-05-20T10:20:00.000Z' },
+  ]));
+  showStart();
+  await new Promise(r => setTimeout(r, 300));
+  if (m === 'start') return;
+  $('mEng').click(); await new Promise(r => setTimeout(r, 120));
+  $('thAll').click(); await new Promise(r => setTimeout(r, 2200));
+  if (m === 'ingame') return;
+  lmap.fire('click', { latlng: L.latLng(24.0, 121.0) });
+  await new Promise(r => setTimeout(r, 120));
+  $('actBtn').click();
+  await new Promise(r => setTimeout(r, 700));
+  if (m === 'reveal') return;
+  for (let i = 0; i < 12 && state !== 'over'; i++) {
+    if (state === 'reveal') { fuIndex = activeFollowups.length; $('actBtn').click(); await new Promise(r => setTimeout(r, 80)); }
+    if (state === 'guess') {
+      lmap.fire('click', { latlng: L.latLng(24, 121) });
+      await new Promise(r => setTimeout(r, 50));
+      $('actBtn').click();
+      await new Promise(r => setTimeout(r, 80));
+    }
+  }
+})();

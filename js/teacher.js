@@ -314,3 +314,8 @@ $('parseBtn').onclick = parseInput;
 
 renderEmpty();
 renderOwnHistory();
+
+/* 截圖／教學 demo：?demo=1 時自動載入示範班級成績 */
+if (new URLSearchParams(location.search).get('demo')) {
+  setTimeout(() => $('demoBtn').click(), 50);
+}

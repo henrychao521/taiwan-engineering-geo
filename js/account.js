@@ -160,4 +160,24 @@ async function driveRestoreClick() {
   }
 }
 
+/* 截圖／教學 demo：?demo=1 時自動建立示範檔案 + 紀錄 */
+(function () {
+  if (new URLSearchParams(location.search).get('demo') && !TwegAuth.currentUser()) {
+    TwegAuth.create({ nick: '小明', age: 16, gender: '男' });
+    const p = TwegAuth.currentUser();
+    p.createdAt = '2026-05-19T08:00:00.000Z';
+    p.history = [
+      { date: '2026-05-20T14:21:00.000Z', mode: 'engineering', theme: 0, deepMode: false,
+        totalScore: 6850, maxScore: 10000, rounds: new Array(10).fill(0).map((_, i) => ({
+          idx: i, name: '示範景點 ' + (i + 1), lat: 24, lon: 121, ch: 0, tip: '',
+          type: '橋樑', distance: 5, score: 685,
+        })) },
+      { date: '2026-05-19T18:35:00.000Z', mode: 'engineering', theme: 1, deepMode: true,
+        totalScore: 5210, maxScore: 16000,
+        rounds: new Array(10).fill(0).map(() => ({ idx: 0, name: '', distance: 8, score: 521 })) },
+    ];
+    localStorage.setItem('tweg_profile', JSON.stringify(p));
+  }
+})();
+
 refreshUI();
