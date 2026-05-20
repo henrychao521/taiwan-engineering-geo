@@ -63,7 +63,11 @@ function renderRecords(session) {
     tr.innerHTML = `<td>${i + 1}</td>` + `<td>&nbsp;</td>`.repeat(7);
     body.appendChild(tr);
   }
-  $('codeStamp').textContent = 'CODE: ' + (session.code || '—');
+  /* 只顯示短指紋（前 12 碼），完整成績碼仍在結算頁可複製 */
+  const shortCode = session.code
+    ? session.code.replace(/^TWEG:/, '').slice(0, 12)
+    : '—';
+  $('codeStamp').textContent = '紀錄 #' + shortCode;
   /* 日期欄位 */
   $('metaDate').textContent = fmtDateTime(session.date);
 }
