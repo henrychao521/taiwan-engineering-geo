@@ -104,21 +104,20 @@
     </div>
 
     <div class="card" style="margin-top:18px">
-      <h3>☁️ 跨裝置：備份與還原</h3>
+      <h3>☁️ 跨裝置：Google Drive 備份</h3>
       <p style="font-size:14px;color:var(--c-ink-soft);margin-bottom:14px">
-        想換電腦繼續用？把紀錄存成檔案帶走、之後再載回來就好。
-        最簡單的方式：<strong>下載 JSON 檔自己保管</strong>（存到 Drive / Email / USB 都可）。
-        若站長已設定 Google Drive 整合，也可以一鍵存到自己的 Drive。
+        想換電腦繼續用？登入同一個 Google 帳號，按一下就能把紀錄存到<strong>自己的 Drive</strong>，
+        之後在任何裝置上「從 Drive 還原」就能拿回來。
       </p>
       <div id="driveStatus" style="margin-bottom:12px;font-size:13px;color:var(--c-muted)"></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn btn-primary btn-sm" id="driveDownload">⬇️ 下載 JSON 檔</button>
-        <button class="btn btn-ghost btn-sm" id="driveUpload">⬆️ 從本機 JSON 還原</button>
-        <input type="file" id="fileInput" accept="application/json,.json" style="display:none">
-        <button class="btn btn-ghost btn-sm" id="driveBackup">📤 備份到 Drive</button>
+        <button class="btn btn-primary btn-sm" id="driveBackup">📤 備份到 Drive</button>
         <button class="btn btn-ghost btn-sm" id="driveRestore">📥 從 Drive 還原</button>
       </div>
       <div id="driveMsg" style="margin-top:10px;font-size:13px"></div>
+      <p style="margin-top:14px;font-size:12.5px;color:var(--c-muted);line-height:1.6">
+        想用 JSON 檔手動備份？請到「<a href="teacher.html">教師端</a>」的「資料匯出 / 匯入」區。
+      </p>
     </div>
 
     <div class="card" style="margin-top:18px;border-color:#FCA5A5;background:#FEF2F2">

@@ -99,6 +99,25 @@
 
   </div>
 
+  <h2 style="margin-top:36px;font-size:24px">④ 資料匯出 / 匯入（JSON）</h2>
+  <div class="card">
+    <p style="font-size:14px;color:var(--c-ink-soft);line-height:1.7;margin-bottom:12px">
+      把本機的個人檔案＋紀錄＋本次解碼的成績一起打包成 JSON 檔，方便：
+      （a）站長換電腦時把資料一起帶走、
+      （b）保留某一次課堂的完整成績備查、
+      （c）作為個人 Drive 備份的替代方案。
+    </p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+      <button class="btn btn-primary btn-sm" id="jsonDownload">⬇️ 下載 JSON 檔</button>
+      <button class="btn btn-ghost btn-sm" id="jsonUpload">⬆️ 從本機 JSON 還原</button>
+      <input type="file" id="jsonFileInput" accept="application/json,.json" style="display:none">
+      <label style="font-size:13px;color:var(--c-ink-soft);display:flex;align-items:center;gap:6px;margin-left:8px">
+        <input type="checkbox" id="includeClass">含本次貼上的班級成績資料
+      </label>
+    </div>
+    <div id="jsonMsg" style="margin-top:10px;font-size:13px"></div>
+  </div>
+
   <div class="callout amber" style="margin-top:30px">
     <strong>隱私說明：</strong>本頁所有解碼與統計都在你的瀏覽器執行，伺服器不會收到任何學生資料。
     若需保留紀錄，請另存為 CSV 或螢幕截圖；關閉本頁分頁後，輸入的成績碼即會消失。

@@ -89,9 +89,6 @@ function showProfile(u) {
 
   /* Drive 區塊 */
   initDriveSection();
-  $('driveDownload').onclick = downloadJson;
-  $('driveUpload').onclick = () => $('fileInput').click();
-  $('fileInput').onchange = uploadJson;
 }
 
 function handleEdit() {
@@ -112,41 +109,6 @@ function handleReset() {
   if (!confirm('確定要清除目前的檔案與所有紀錄嗎？\n（已備份的 Drive / JSON 檔不受影響）')) return;
   TwegAuth.clearProfile();
   refreshUI();
-}
-
-/* ---------- 純檔案版備份 / 還原 ---------- */
-function downloadJson() {
-  const data = TwegAuth.exportAllData();
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  const u = TwegAuth.currentUser();
-  const safeName = (u?.nick || 'profile').replace(/[^\w一-龥-]+/g, '_');
-  const date = new Date().toISOString().slice(0, 10);
-  a.href = url;
-  a.download = `tweg-${safeName}-${date}.json`;
-  document.body.appendChild(a); a.click(); a.remove();
-  URL.revokeObjectURL(url);
-  $('driveMsg').innerHTML = '<span style="color:var(--c-green)">✅ 已下載到本機。請自行存到 Drive / Dropbox / Email 帶到下一台電腦。</span>';
-}
-
-function uploadJson(e) {
-  const f = e.target.files[0];
-  if (!f) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    try {
-      const data = JSON.parse(reader.result);
-      if (!data.profile && !data.accounts) throw new Error('檔案格式錯誤（找不到 profile 欄位）');
-      TwegAuth.importAllData(data, 'merge');
-      $('driveMsg').innerHTML = '<span style="color:var(--c-green)">✅ 已從本機 JSON 還原</span>';
-      setTimeout(refreshUI, 500);
-    } catch (err) {
-      $('driveMsg').innerHTML = `<span style="color:var(--c-red)">⚠ 還原失敗：${escapeHtml(err.message)}</span>`;
-    }
-    e.target.value = '';
-  };
-  reader.readAsText(f);
 }
 
 /* ---------- Drive 整合 ---------- */

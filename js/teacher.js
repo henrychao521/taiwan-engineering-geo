@@ -228,5 +228,89 @@ function makeDemoCodes() {
   return lines.join('\n');
 }
 
+/* ---------- JSON 匯出 / 匯入 ---------- */
+let lastParsedDecoded = [];   /* 解碼後的班級成績，含個別學生紀錄 */
+
+function buildExportPayload(includeClass) {
+  const payload = (typeof TwegAuth !== 'undefined')
+    ? TwegAuth.exportAllData()
+    : { version: 2, exportedAt: new Date().toISOString(), profile: null };
+  if (includeClass && lastParsedDecoded.length) {
+    payload.classCodes = lastParsedDecoded.map(d => ({ nick: d.nick, raw: d.raw }));
+  }
+  return payload;
+}
+
+function downloadJsonHandler() {
+  const include = $('includeClass').checked;
+  const data = buildExportPayload(include);
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const tag = include ? 'with-class' : 'profile';
+  const date = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = `tweg-${tag}-${date}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+  $('jsonMsg').innerHTML = '<span style="color:var(--c-green)">✅ 已下載 JSON 到本機。可存到 Drive / Email / USB 帶走。</span>';
+}
+
+function uploadJsonHandler(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      if (typeof TwegAuth !== 'undefined' && (data.profile || data.accounts)) {
+        TwegAuth.importAllData(data, 'merge');
+      }
+      /* 若檔內含 classCodes，把它放回 codeInput 重新解碼統計 */
+      if (data.classCodes && data.classCodes.length) {
+        const codes = data.classCodes.map(c =>
+          `${c.nick}: TWEG:${btoa(unescape(encodeURIComponent(JSON.stringify(c.raw))))}`
+        ).join('\n');
+        $('codeInput').value = codes;
+        parseInput();
+      }
+      renderOwnHistory();
+      $('jsonMsg').innerHTML = '<span style="color:var(--c-green)">✅ 已從本機 JSON 還原</span>';
+    } catch (err) {
+      $('jsonMsg').innerHTML = `<span style="color:var(--c-red)">⚠ 還原失敗：${err.message}</span>`;
+    }
+    e.target.value = '';
+  };
+  reader.readAsText(f);
+}
+
+$('jsonDownload')?.addEventListener('click', downloadJsonHandler);
+$('jsonUpload')?.addEventListener('click', () => $('jsonFileInput').click());
+$('jsonFileInput')?.addEventListener('change', uploadJsonHandler);
+
+/* 修改 parseInput / renderStats 讓 lastParsedDecoded 可被 JSON 匯出記住 */
+const _origParseInput = parseInput;
+parseInput = function () {
+  const raw = $('codeInput').value;
+  const lines = raw.split(/\n/).map(s => s.trim()).filter(s => s);
+  lastParsedDecoded = [];
+  let invalid = 0;
+  lines.forEach((l) => {
+    const d = decodeOne(l);
+    if (!d) { invalid++; return; }
+    if (!d.nick) d.nick = '學生' + (lastParsedDecoded.length + 1);
+    lastParsedDecoded.push(d);
+  });
+  const msg = $('parseMsg');
+  if (!lastParsedDecoded.length) {
+    msg.innerHTML = '<span style="color:var(--c-red)">⚠ 未解析到有效的成績碼。請確認每一行包含「TWEG:」開頭的整段碼。</span>';
+    renderEmpty();
+    return;
+  }
+  msg.innerHTML = `<span style="color:var(--c-green)">✅ 成功解析 <b>${lastParsedDecoded.length}</b> 筆${invalid ? `（其中 ${invalid} 行無法解碼）` : ''}。</span>`;
+  renderStats(lastParsedDecoded);
+};
+$('parseBtn').onclick = parseInput;
+
 renderEmpty();
 renderOwnHistory();

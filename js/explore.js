@@ -8,7 +8,9 @@
 const TOKEN_KEY = 'tweg_mapillary_token';
 const HISTORY_KEY = 'tweg_history';
 const DEEP_KEY = 'tweg_deep_mode';
+const LEADERBOARD_KEY = 'tweg_leaderboard';
 const MAX_HISTORY = 20;
+const MAX_LEADERBOARD = 100;
 
 const $ = id => document.getElementById(id);
 
@@ -606,12 +608,15 @@ function endGame() {
     savedNote = `<p>已存到這個瀏覽器。<a href="account.html">建立個人檔案</a>後可記下暱稱、年齡與性別，並備份到 Drive。</p>`;
   }
 
+  const leaderboardHtml = renderLeaderboard(session._lbEntry);
+
   $('ovBox').innerHTML =
     `<h1>挑戰結束！</h1>` +
     `<div class="big mono">${total}</div>` +
     `<div class="max">/ 滿分 ${max}${deepMode ? ' +追問加分' : ''}</div>` +
     `<div class="rank-badge">${rank}</div>` +
     savedNote +
+    leaderboardHtml +
     `<div style="margin:14px 0">
        <div class="mono" style="font-size:11px;color:var(--c-muted);margin-bottom:4px">成績碼（複製給老師）</div>
        <input id="codeOut" readonly value="${session.code}">
@@ -636,13 +641,12 @@ function saveSession() {
   };
   session.code = encodeCode(session);
 
-  /* 試玩模式不寫入帳號紀錄；其他模式優先寫入登入者帳號，未登入則 fall back 到 legacy 全域陣列 */
+  /* 試玩模式不寫入個人紀錄；其他模式優先寫入個人檔案，未建檔則 fall back */
   if (mode !== 'trial' && typeof TwegAuth !== 'undefined') {
     const r = TwegAuth.saveSessionForCurrent(session);
     session._savedTo = r.saved;
-    session._savedEmail = r.email || null;
+    session._savedEmail = r.nick || null;
   } else if (mode !== 'trial') {
-    /* TwegAuth 沒載入時的舊路徑（防呆） */
     let arr = [];
     try { arr = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch (e) {}
     arr.unshift(session);
@@ -652,7 +656,81 @@ function saveSession() {
   } else {
     session._savedTo = 'trial';
   }
+
+  /* 排行榜：所有局都登錄（含試玩），跨個人檔案保留，按題數分組 */
+  const u = (typeof TwegAuth !== 'undefined') ? TwegAuth.currentUser() : null;
+  const lbEntry = {
+    nick: u?.nick || (mode === 'trial' ? '訪客（試玩）' : '訪客'),
+    score: total,
+    rounds: roundCount,
+    mode,
+    theme: engTheme || 0,
+    deepMode,
+    date: session.date,
+  };
+  pushLeaderboard(lbEntry);
+  session._lbEntry = lbEntry;
   return session;
+}
+
+/* ---------- 排行榜：跨個人檔案保留所有玩過的紀錄 ---------- */
+function loadLeaderboard() {
+  try { return JSON.parse(localStorage.getItem(LEADERBOARD_KEY) || '[]'); }
+  catch (e) { return []; }
+}
+function pushLeaderboard(entry) {
+  const arr = loadLeaderboard();
+  arr.unshift(entry);
+  if (arr.length > MAX_LEADERBOARD) arr.length = MAX_LEADERBOARD;
+  localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(arr));
+  return arr;
+}
+
+function renderLeaderboard(currentEntry) {
+  /* 依「相同題數」對手才公平比較：取出與當局相同 roundCount 的紀錄 */
+  const all = loadLeaderboard();
+  const peers = all.filter(e => e.rounds === currentEntry.rounds);
+  /* 排序：分數高 → 日期新 */
+  peers.sort((a, b) => b.score - a.score || (b.date || '').localeCompare(a.date || ''));
+  /* 找出 currentEntry 在 peers 中的索引（用 date 比對） */
+  const myRank = peers.findIndex(e => e.date === currentEntry.date);
+
+  const modeTag = (m) => m === 'trial' ? '20題' : m === 'engineering' ? '10題'
+    : m === 'curated' ? '5題暖身' : 'Mapillary';
+
+  let html = '';
+  html += `<div class="lb-h"><span>🏆 同題型排行榜</span><span class="total">共 ${peers.length} 筆紀錄</span></div>`;
+  if (peers.length === 1) {
+    html += `<div style="font-size:13.5px;color:var(--c-muted);text-align:center;padding:8px">這是這台瀏覽器第一筆同題型的紀錄，下次有人完成就能看到對手了！</div>`;
+  } else {
+    const top10 = peers.slice(0, 10);
+    top10.forEach((e, i) => {
+      const isMe = e.date === currentEntry.date;
+      const rankClass = `r${i + 1}` + (isMe ? ' me' : '');
+      const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : String(i + 1);
+      html += `<div class="lb-row ${rankClass}">
+        <div class="lb-rank">${medal}</div>
+        <div class="lb-nick">${escapeHtml(e.nick || '(訪客)')}${isMe ? ' <span class="lb-tag" style="background:var(--c-amber);color:#fff">你</span>' : ''}${e.mode !== currentEntry.mode ? ` <span class="lb-tag">${modeTag(e.mode)}</span>` : ''}</div>
+        <div class="lb-score">${e.score}</div>
+      </div>`;
+    });
+    /* 若自己沒進 top10，補一行顯示 */
+    if (myRank >= 10) {
+      html += `<div style="height:1px;background:var(--c-line);margin:6px 0"></div>`;
+      html += `<div class="lb-row me">
+        <div class="lb-rank">${myRank + 1}</div>
+        <div class="lb-nick">${escapeHtml(currentEntry.nick || '(訪客)')} <span class="lb-tag" style="background:var(--c-amber);color:#fff">你</span></div>
+        <div class="lb-score">${currentEntry.score}</div>
+      </div>`;
+    }
+  }
+  return `<div class="lb-wrap">${html}</div>`;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[c]));
 }
 
 function encodeCode(s) {
