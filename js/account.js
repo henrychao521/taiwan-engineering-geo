@@ -73,7 +73,7 @@ function showProfile(u) {
         : (s.mode === 'trial' ? '試玩 20 題'
         : s.mode === 'curated' ? '精選地景' : 'Mapillary');
       const max = (s.rounds?.length || 0) * 1000;
-      const pct = max ? Math.round((s.totalScore / max) * 100) : 0;
+      const pct = max ? Math.min(100, Math.round((s.totalScore / max) * 100)) : 0;
       return `<div class="hist-row">
         <div class="h-date">${ds}</div>
         <div class="h-mode">${escapeHtml(themeName)}${s.deepMode ? ' · 深度' : ''}</div>
@@ -100,7 +100,7 @@ function handleEdit() {
   const gender = prompt('性別（請輸入：男 / 女 / 不提供）：', u.gender);
   if (gender == null) return;
   try {
-    TwegAuth.update({ nick, age: ageStr, gender: gender.trim() || '不提供' });
+    TwegAuth.update({ nick, age: ageStr, gender: ['男','女'].includes(gender.trim()) ? gender.trim() : '不提供' });
     refreshUI();
   } catch (err) { alert('⚠ ' + err.message); }
 }

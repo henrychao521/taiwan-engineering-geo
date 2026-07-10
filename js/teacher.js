@@ -95,7 +95,7 @@ function renderStats(decoded) {
   const sorted = decoded.slice().sort((a, b) => (b.raw.s || 0) - (a.raw.s || 0));
   $('scoreBars').innerHTML =
     '<div class="bar-list">' +
-    sorted.map(d => makeBar(d.nick, d.raw.s || 0, 13000)).join('') +
+    sorted.map(d => makeBar(d.nick, d.raw.s || 0, Math.max(10000, ...sorted.map(x => x.raw.s || 0)))).join('') +
     '</div>';
 
   /* ② 主題表現（平均得分率） */
@@ -179,17 +179,17 @@ function renderOwnHistory() {
       const ds = `${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
       const themeName = s.mode === 'engineering'
         ? (s.theme ? THEMES[s.theme - 1] : '全部主題')
-        : (s.mode === 'curated' ? '精選地景' : 'Mapillary');
-      const max = (s.rounds.length || 0) * 1000;
+        : (s.mode === 'trial' ? '試玩 20 題'
+        : (s.mode === 'curated' ? '精選地景' : 'Mapillary'));
+      const max = (s.rounds?.length || 0) * 1000;
       return `<div class="bar-row">
         <div class="name">${escapeHtml(ds)} · ${escapeHtml(themeName)}</div>
-        <div class="bar"><div style="width:${max ? Math.round((s.totalScore / max) * 100) : 0}%"></div></div>
+        <div class="bar"><div style="width:${max ? Math.min(100, Math.round((s.totalScore / max) * 100)) : 0}%"></div></div>
         <div class="v">${s.totalScore} 分</div>
       </div>`;
     }).join('') + '</div>';
 }
 
-$('parseBtn').addEventListener('click', parseInput);
 $('clearBtn').addEventListener('click', () => {
   $('codeInput').value = ''; $('parseMsg').textContent = ''; renderEmpty();
 });
@@ -277,7 +277,7 @@ function uploadJsonHandler(e) {
       renderOwnHistory();
       $('jsonMsg').innerHTML = '<span style="color:var(--c-green)">✅ 已從本機 JSON 還原</span>';
     } catch (err) {
-      $('jsonMsg').innerHTML = `<span style="color:var(--c-red)">⚠ 還原失敗：${err.message}</span>`;
+      $('jsonMsg').innerHTML = `<span style="color:var(--c-red)">⚠ 還原失敗：${escapeHtml(err.message)}</span>`;
     }
     e.target.value = '';
   };

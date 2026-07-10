@@ -81,7 +81,7 @@ function escapeHtml(s) {
 function updateInfo(history, sessionIdx) {
   const info = $('wsInfo');
   const u = (typeof TwegAuth !== 'undefined') ? TwegAuth.currentUser() : null;
-  const userPrefix = u ? `<b>👤 ${u.nick}</b>　·　` : '';
+  const userPrefix = u ? `<b>👤 ${escapeHtml(u.nick)}</b>　·　` : '';
   if (!history.length) {
     info.innerHTML = userPrefix + '尚未有探索紀錄。可先進入「開始探索」完成一局，或繼續使用空白版列印。';
     info.style.color = 'var(--c-muted)';
@@ -104,7 +104,8 @@ function renderSessionSelect(history) {
   history.forEach((s, i) => {
     const themeName = s.mode === 'engineering'
       ? (s.theme ? THEMES_FOR_WS[s.theme - 1] : '全部主題')
-      : (s.mode === 'curated' ? '精選地景' : 'Mapillary');
+      : (s.mode === 'trial' ? '試玩 20 題'
+      : (s.mode === 'curated' ? '精選地景' : 'Mapillary'));
     const opt = document.createElement('option');
     opt.value = i;
     opt.textContent = `${fmtDateTime(s.date)}・${themeName}・${s.totalScore} 分`;
@@ -143,9 +144,11 @@ function applyCurrent() {
     return;
   }
   if (history.length > 1) {
-    renderSessionSelect(history);
+    // 記住目前選取再重建下拉——否則使用者每選一筆舊紀錄都會被重設回最新一局
+    const keep = sel.value;
+    if (sel.options.length !== history.length) renderSessionSelect(history);
     sel.style.display = '';
-    sel.value = sel.value || '0';
+    sel.value = (keep !== '' && parseInt(keep, 10) < history.length) ? keep : '0';
   } else {
     sel.style.display = 'none';
   }

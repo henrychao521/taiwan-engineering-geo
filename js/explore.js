@@ -601,7 +601,7 @@ function endGame() {
   /* 不同儲存結果決定下方提示文字 */
   let savedNote;
   if (session._savedTo === 'trial') {
-    savedNote = `<p style="color:var(--c-amber);font-weight:700">⚠ 試玩模式不保存紀錄。<a href="account.html" style="color:var(--c-primary)">建立個人檔案</a>，下一局起就能存到你的紀錄。</p>`;
+    savedNote = `<p style="color:var(--c-amber);font-weight:700">⚠ 試玩模式不存入個人紀錄（分數仍會列入本機排行榜）。<a href="account.html" style="color:var(--c-primary)">建立個人檔案</a>，下一局起就能存到你的紀錄。</p>`;
   } else if (session._savedTo === 'user') {
     savedNote = `<p>✅ 已存到你的紀錄，可以到「<a href="account.html">我的檔案</a>」或「<a href="worksheet.html">學習單</a>」查看。</p>`;
   } else {
@@ -808,7 +808,7 @@ function showStart() {
   const hasToken = !!localStorage.getItem(TOKEN_KEY);
   const u = (typeof TwegAuth !== 'undefined') ? TwegAuth.currentUser() : null;
   const userLine = u
-    ? `<div class="ov-userline logged-in">👤 目前玩家：<b>${u.nick}</b>，每局結束會自動存到你的紀錄。<a href="account.html">我的檔案</a></div>`
+    ? `<div class="ov-userline logged-in">👤 目前玩家：<b>${escapeHtml(u.nick)}</b>，每局結束會自動存到你的紀錄。<a href="account.html">我的檔案</a></div>`
     : `<div class="ov-userline">📋 尚未建立檔案 — 紀錄只暫存在這個瀏覽器。<a href="account.html">建立個人檔案</a> 後可長期保存。</div>`;
 
   $('ovBox').innerHTML =
@@ -817,7 +817,7 @@ function showStart() {
     userLine +
     `<button id="mTrial" class="ov-trial">
       <span class="t1">🎮 試玩 20 題</span>
-      <span class="t2">不需登入、跨全部 200 景點、不會保存（適合第一次來）</span>
+      <span class="t2">不需登入、跨全部 200 景點、不存入個人紀錄（適合第一次來）</span>
     </button>` +
     `<div class="ov-deep">
       <input type="checkbox" id="deepChk" ${isDeep ? 'checked' : ''}>
@@ -890,7 +890,7 @@ showStart();
   if (typeof TwegAuth !== 'undefined' && !TwegAuth.currentUser()) {
     TwegAuth.create({ nick: '小明', age: 16, gender: '男' });
   }
-  localStorage.setItem(LEADERBOARD_KEY, JSON.stringify([
+  if (!localStorage.getItem(LEADERBOARD_KEY)) localStorage.setItem(LEADERBOARD_KEY, JSON.stringify([
     { nick: '阿凱', score: 7200, rounds: 10, mode: 'engineering', theme: 0, deepMode: false, date: '2026-05-20T10:00:00.000Z' },
     { nick: '雅婷', score: 6500, rounds: 10, mode: 'engineering', theme: 0, deepMode: false, date: '2026-05-20T10:10:00.000Z' },
     { nick: '建宏', score: 4200, rounds: 10, mode: 'engineering', theme: 0, deepMode: false, date: '2026-05-20T10:20:00.000Z' },

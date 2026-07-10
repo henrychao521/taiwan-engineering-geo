@@ -34,6 +34,18 @@ const TwegAuth = (function () {
         localStorage.removeItem(TWEG_LEGACY_CURRENT_KEY);
         return;
       }
+      /* 有帳號但沒有 current(舊資料異常):取第一個帳號,避免紀錄永久殘留 */
+      const keys = Object.keys(accs);
+      if (keys.length) {
+        const a = accs[keys[0]];
+        localStorage.setItem(TWEG_PROFILE_KEY, JSON.stringify({
+          nick: a.nick || '玩家', age: a.age || null, gender: a.gender || '不提供',
+          createdAt: a.createdAt || new Date().toISOString(), history: a.history || [],
+        }));
+        localStorage.removeItem(TWEG_LEGACY_ACCOUNTS_KEY);
+        localStorage.removeItem(TWEG_LEGACY_CURRENT_KEY);
+        return;
+      }
     } catch (e) {}
   }
   migrateLegacy();
@@ -123,6 +135,9 @@ const TwegAuth = (function () {
       }
     }
     if (!incoming) throw new Error('資料格式錯誤');
+    /* 匯入資料淨化:nick 截斷、gender 白名單(防惡意備份檔注入) */
+    incoming.nick = String(incoming.nick || '玩家').slice(0, 20);
+    if (!['男', '女'].includes(incoming.gender)) incoming.gender = '不提供';
 
     if (mode === 'replace' || !getProfile()) {
       setProfile(incoming);
