@@ -214,6 +214,18 @@ const PHASES = [
       '7 頁 console 零錯誤,探索流程/學習單/教師端真瀏覽器實測',
     ],
   },
+  {
+    tag: '段落 11',
+    date: '2026-07-17',
+    title: '跨站台體檢複查:資料全數通過,修一處開局破圖',
+    verbatim: '幫我搜尋這台電腦的專案、github上的專案、page等內容進行優化,並確認page上的每個分頁文章、內容都是正確的。',
+    context: '納入 16 個 GitHub Pages 站台的全面體檢。本站複查結果:200 筆景點與首頁宣稱一致、欄位完整無重名;抽 10 筆與 OSM/Nominatim 交叉比對名稱座標描述皆相符;金門 2 筆(金門大橋、塔山發電廠)經度雖在台灣本島範圍外,確認 maxBounds 涵蓋且程式有金門專屬判斷,非資料錯誤;dev-log 與 git 同步、線上與本機一致、console 零錯誤。唯一修正:explore.html 的 #photo 影像元素初始無 src 又未隱藏,開局前左上角會出現瀏覽器破圖小圖示——加上 display:none,由 setPhoto 載入真實影像時再顯示。',
+    decisions: ['初始隱藏交給 HTML 靜態屬性,不動 JS 邏輯(setPhoto/showMsg 原本就會切換 display)'],
+    outputs: [
+      'explore.html 開局破圖修正一處',
+      '資料層/功能層/部署層複檢全數通過,無其他修改',
+    ],
+  },
 ];
 
 /* ---- 渲染時間軸 ---- */
