@@ -226,6 +226,24 @@ const PHASES = [
       '資料層/功能層/部署層複檢全數通過,無其他修改',
     ],
   },
+  {
+    tag: '段落 12',
+    commit: 'ec870b4',
+    date: '2026-09-07',
+    title: '首頁改版「工程圖紙」風：跨站台去除 AI 模板感',
+    verbatim: '我今天在研習分享的時候，很多老師反應我的 https://henrychao521.github.io/ 以及他往下層的網站看起來都很像claude的模板網站，覺得了無新意。可以和Antigravity共同討論看看，要如何修正嗎？',
+    verbatim2: '都開始執行，三種方案分別依據不同的網站主題內容進行套用，讓網站增加多樣性。',
+    context: '研習回饋指出所有站台共用同一套 AI 模板骨架。與 Antigravity 交叉診斷後定出三個承重系統，本站是地圖與測繪主題，採 A「工程圖紙」：紙白底＋方格線（SVG pattern，不用漸層）、1px 實線分格、零圓角、等寬字標註、唯一強調色雷射紅；頂端圖框列（AUTHOR／UNIT／SHEET 01／200 SITES）、首屏右欄放 img/geo-taroko.jpg 轉灰階高對比並疊座標標註框、三入口改成表格式索引（NO. 01–03 → 進入）、四大主題改四欄圖紙分格。首頁保留載入 css/style.css 與 js/auth.js，導覽列保留 .topnav 與 .topnav-account 掛勾供登入狀態插入。改版由 Antigravity 產出、機器探針一回合驗收通過（id/href/script 回歸、禁用 regex、圓角 0、無大陰影）。其他頁面未動。',
+    decisions: [
+      '方格線用 SVG data URI 而非 linear-gradient，讓「禁用漸層」的自動檢查能一體適用',
+      '照片只用 img/ 裡既有的 CC 授權地景照，不虛構圖片',
+      '只改 index.html，其餘頁面與資料層不動',
+    ],
+    outputs: [
+      'index.html 重寫（內嵌 <style> 覆蓋首頁）',
+      '本機實測 console 零錯誤、auth.js 掛勾存在',
+    ],
+  },
 ];
 
 /* ---- 渲染時間軸 ---- */

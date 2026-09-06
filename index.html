@@ -9,205 +9,585 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🗺️%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M10 10h80v80H10z' fill='none' stroke='%2317171a' stroke-width='10'/%3E%3Cpath d='M50 0v100M0 50h100' stroke='%23e8412c' stroke-width='10'/%3E%3C/svg%3E">
+<style>
+/* Blueprint / Engineering Drawing Override */
+:root {
+  --paper: #f6f4ee;
+  --ink: #17171a;
+  --accent: #e8412c;
+}
+
+body {
+  background-color: var(--paper);
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0H0v40' fill='none' stroke='%2317171a' stroke-width='1' stroke-opacity='0.1'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: 'Noto Sans TC', sans-serif;
+  margin: 0;
+  padding: 40px 20px;
+  line-height: 1.6;
+}
+
+* {
+  box-sizing: border-box;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.bp-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 1px solid var(--ink);
+  background: transparent;
+}
+
+/* Header Frame */
+.bp-header {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--ink);
+  background: var(--paper);
+}
+.bp-header > div {
+  padding: 12px 16px;
+  border-right: 1px solid var(--ink);
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+.bp-header > div:last-child {
+  border-right: none;
+  flex-grow: 1;
+  padding: 0;
+}
+.title-cell {
+  font-weight: 700;
+}
+.topnav {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.topnav a, .topnav-account {
+  padding: 12px 16px;
+  border-right: 1px solid var(--ink);
+  text-decoration: none;
+  color: var(--ink);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  font-size: 14px;
+}
+.topnav a:hover, .topnav a.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+.topnav-account {
+  border-right: none;
+}
+
+/* Hero Section */
+.bp-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--ink);
+  background: var(--paper);
+}
+.hero-left {
+  padding: 40px;
+  border-right: 1px solid var(--ink);
+  text-align: left;
+}
+.hero-eyebrow {
+  font-size: 14px;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+.hero-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1.3;
+  margin: 0 0 24px 0;
+  letter-spacing: -0.02em;
+}
+.hero-lead {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+}
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.bp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 24px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.bp-btn.bp-primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+.bp-btn.bp-primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.bp-btn.bp-ghost {
+  background: transparent;
+  color: var(--ink);
+}
+.bp-btn.bp-ghost:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.hero-right {
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.02);
+}
+.img-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  border: 1px solid var(--ink);
+  padding: 12px;
+  background: var(--paper);
+}
+.img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(140%);
+  border: 1px solid var(--ink);
+}
+.dim-box {
+  position: absolute;
+  background: var(--paper);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 4px 8px;
+  font-size: 12px;
+  z-index: 10;
+}
+.dim-x { top: 12px; left: 32px; transform: translateY(-50%); }
+.dim-y { bottom: 32px; right: 12px; transform: translateX(50%); }
+.cross {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+}
+.cross::before { content: ''; position: absolute; top: 7px; left: 0; width: 16px; height: 1px; background: var(--accent); }
+.cross::after { content: ''; position: absolute; top: 0; left: 7px; width: 1px; height: 16px; background: var(--accent); }
+.c1 { top: 35%; left: 25%; }
+.c2 { bottom: 45%; right: 35%; }
+
+/* Sections */
+.bp-section {
+  border-bottom: 1px solid var(--ink);
+  background: var(--paper);
+}
+.bp-section-head {
+  padding: 40px;
+  border-bottom: 1px solid var(--ink);
+  text-align: left;
+}
+.bp-section-head h2 {
+  font-size: 1.5rem;
+  margin: 0 0 12px 0;
+}
+.bp-section-head p {
+  margin: 0;
+  color: #333;
+}
+
+/* Tabular Index */
+.bp-table {
+  display: flex;
+  flex-direction: column;
+}
+.t-row {
+  display: flex;
+  border-bottom: 1px solid var(--ink);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.2s;
+  min-height: 44px;
+}
+.t-row:last-child {
+  border-bottom: none;
+}
+a.t-row:hover {
+  background: rgba(232, 65, 44, 0.05);
+}
+.t-cell {
+  padding: 16px;
+  border-right: 1px solid var(--ink);
+  display: flex;
+  align-items: center;
+}
+.t-cell:last-child {
+  border-right: none;
+}
+.t-head {
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 700;
+}
+.w-num { width: 80px; flex-shrink: 0; }
+.w-title { flex-grow: 1; font-weight: 700; font-size: 1.1rem; font-family: 'Noto Sans TC', sans-serif; }
+.w-desc { width: 30%; font-size: 14px; }
+.w-link { width: 120px; flex-shrink: 0; justify-content: flex-end; }
+
+/* Themes Grid */
+.bp-themes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.theme-col {
+  padding: 32px 24px;
+  border-right: 1px solid var(--ink);
+  text-align: left;
+}
+.theme-col:last-child {
+  border-right: none;
+}
+.theme-no {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.theme-col h3 {
+  font-size: 1.2rem;
+  margin: 0 0 12px 0;
+}
+.theme-col p {
+  font-size: 15px;
+  margin: 0 0 24px 0;
+  color: #333;
+}
+.theme-ex {
+  font-size: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ink);
+}
+
+/* Callout */
+.callout-section {
+  display: flex;
+  align-items: stretch;
+}
+.callout-label {
+  width: 120px;
+  flex-shrink: 0;
+  padding: 24px;
+  border-right: 1px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  text-align: center;
+}
+.callout-body {
+  flex-grow: 1;
+  padding: 24px;
+  border-right: 1px solid var(--ink);
+  display: flex;
+  align-items: center;
+}
+.callout-action {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Footer */
+.bp-footer {
+  display: block;
+  background: var(--paper);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  border-bottom: 1px solid var(--ink);
+}
+.f-col {
+  padding: 32px 24px;
+  border-right: 1px solid var(--ink);
+  text-align: left;
+}
+.f-col:last-child {
+  border-right: none;
+}
+.f-col h4 {
+  margin: 0 0 16px 0;
+}
+.f-col p {
+  margin: 0;
+  font-size: 14px;
+}
+.f-nav, .f-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  font-size: 13px;
+}
+.f-nav a, .f-list li {
+  color: var(--ink);
+  text-decoration: none;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+.f-nav a:hover {
+  color: var(--accent);
+}
+.f-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-copy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 24px;
+  font-size: 12px;
+  text-transform: uppercase;
+  gap: 16px;
+}
+.footer-copy a { color: inherit; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.footer-copy a:hover { color: var(--accent); }
+
+/* Responsive Overrides */
+@media (max-width: 900px) {
+  .bp-themes { grid-template-columns: 1fr 1fr; }
+  .theme-col:nth-child(2) { border-right: none; }
+  .theme-col:nth-child(1), .theme-col:nth-child(2) { border-bottom: 1px solid var(--ink); }
+  .footer-grid { grid-template-columns: 1fr; }
+  .f-col { border-right: none; border-bottom: 1px solid var(--ink); }
+  .f-col:last-child { border-bottom: none; }
+}
+
+@media (max-width: 640px) {
+  body { padding: 10px; }
+  .bp-header { flex-direction: column; }
+  .bp-header > div { width: 100%; border-right: none; border-bottom: 1px solid var(--ink); }
+  .topnav a { border-bottom: 1px solid var(--ink); flex: 1 1 50%; border-right: 1px solid var(--ink); justify-content: center; }
+  .topnav a:nth-child(even) { border-right: none; }
+  .topnav-account { width: 100%; border-right: none; }
+  
+  .bp-hero { grid-template-columns: 1fr; }
+  .hero-left { border-right: none; border-bottom: 1px solid var(--ink); padding: 24px; }
+  .hero-right { padding: 24px; }
+  
+  .bp-themes { grid-template-columns: 1fr; }
+  .theme-col { border-right: none !important; border-bottom: 1px solid var(--ink) !important; padding: 24px; }
+  .theme-col:last-child { border-bottom: none !important; }
+  
+  .t-row { flex-wrap: wrap; }
+  .w-num { width: 60px; border-bottom: 1px solid var(--ink); }
+  .w-title { width: calc(100% - 60px); border-right: none; border-bottom: 1px solid var(--ink); }
+  .w-desc { width: 100%; border-right: none; border-bottom: 1px solid var(--ink); }
+  .w-link { width: 100%; border-right: none; justify-content: flex-start; }
+  
+  .callout-section { flex-direction: column; }
+  .callout-label, .callout-body { border-right: none; border-bottom: 1px solid var(--ink); width: 100%; }
+}
+
+@media (max-width: 640px) {
+  .t-head { display: none; }
+  .t-row { flex-wrap: wrap; padding: 10px 0; }
+  .t-cell { border-right: none; padding: 6px 12px; }
+  .w-num { width: 56px; }
+  .w-title { width: calc(100% - 56px); flex-grow: 0; }
+  .w-desc, .w-link { width: auto; justify-content: flex-start; padding-left: 68px; }
+}
+</style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="topbar-inner">
-    <a class="brand" href="index.html">
-      <div class="logo">🗺</div>
-      <div class="t">
-        <div class="t-1">台灣工程地景探索</div>
-        <div class="t-2">TAIWAN · ENGINEERING · GEO</div>
-      </div>
-    </a>
-    <nav class="topnav">
-      <a href="index.html" class="active">首頁</a>
-      <a href="intro.html">課前導讀</a>
-      <a href="explore.html">開始探索</a>
-      <a href="worksheet.html">學習單</a>
-      <a href="teacher.html">教師端</a>
-      <a href="about.html">關於</a>
-    </nav>
-  </div>
-</header>
-<script src="js/auth.js"></script>
+<div class="bp-wrapper">
 
-<main>
-
-<section class="hero wrap">
-  <div class="hero-grid">
+  <header class="bp-header">
+    <div class="mono">AUTHOR: 趙珩宇 / UNIT: 建國中學</div>
+    <div class="mono">SHEET 01</div>
+    <div class="mono title-cell">TAIWAN ENGINEERING GEO · 200 SITES</div>
     <div>
-      <span class="eyebrow">FOR 高中工程設計課程・獨立教育活動</span>
-      <h1>用地圖<span class="grad">看見台灣的工程</span>，<br>理解設計背後的決策。</h1>
-      <p class="lead">
-        200 個跨越橋梁、水庫、半導體廠、風場、車站與美術館的台灣工程地景；
-        從衛星空照圖或實景街景開始辨識位置，再認識它的結構、機構與所屬工程主題——
-        把「地理」與「工程設計」放回同一張地圖。
-      </p>
-      <div class="hero-cta">
-        <a class="btn btn-primary btn-lg" href="explore.html">▶ 開始探索</a>
-        <a class="btn btn-ghost btn-lg" href="intro.html">先讀課前導讀</a>
+      <nav class="topnav">
+        <a href="index.html" class="active">首頁</a>
+        <a href="intro.html">課前導讀</a>
+        <a href="explore.html">開始探索</a>
+        <a href="worksheet.html">學習單</a>
+        <a href="teacher.html">教師端</a>
+        <a href="about.html">關於</a>
+        <span class="topnav-account"></span>
+      </nav>
+    </div>
+  </header>
+  <script src="js/auth.js"></script>
+
+  <main>
+    <section class="bp-hero">
+      <div class="hero-left">
+        <div class="hero-eyebrow mono accent">FOR 高中工程設計課程・獨立教育活動</div>
+        <h1 class="hero-title">用地圖看見台灣的工程，<br>理解設計背後的決策。</h1>
+        <p class="hero-lead">
+          200 個跨越橋梁、水庫、半導體廠、風場、車站與美術館的台灣工程地景；
+          從衛星空照圖或實景街景開始辨識位置，再認識它的結構、機構與所屬工程主題——
+          把「地理」與「工程設計」放回同一張地圖。
+        </p>
+        <div class="hero-actions">
+          <a class="bp-btn bp-primary mono" href="explore.html">▶ 開始探索</a>
+          <a class="bp-btn bp-ghost mono" href="intro.html">先讀課前導讀</a>
+        </div>
       </div>
-      <div class="hero-stat">
-        <div><span class="n">200</span><span class="l">工程地景</span></div>
-        <div><span class="n">4</span><span class="l">主題模組</span></div>
-        <div><span class="n">151</span><span class="l">維基延伸條目</span></div>
-        <div><span class="n">3</span><span class="l">影像層級</span></div>
+      <div class="hero-right">
+        <div class="img-frame">
+          <img src="img/geo-taroko.jpg" alt="太魯閣工程地景">
+          <div class="dim-box dim-x mono accent">W: 121.62E</div>
+          <div class="dim-box dim-y mono accent">N: 24.16N</div>
+          <div class="cross c1"></div>
+          <div class="cross c2"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bp-section">
+      <div class="bp-section-head">
+        <h2 class="mono">SECTION 01 — 學習流程</h2>
+        <p>三個步驟，走完一次完整的探索。建議依序進行：先導讀、再探索、最後完成學習單。</p>
+      </div>
+      <div class="bp-table">
+        <div class="t-row t-head mono">
+          <div class="t-cell w-num">NO.</div>
+          <div class="t-cell w-title">項目</div>
+          <div class="t-cell w-desc">類型</div>
+          <div class="t-cell w-link">連結</div>
+        </div>
+        <a class="t-row" href="intro.html">
+          <div class="t-cell w-num mono accent">01</div>
+          <div class="t-cell w-title">課前導讀</div>
+          <div class="t-cell w-desc mono">5 MIN / 4 THEMES</div>
+          <div class="t-cell w-link mono accent">→ 進入</div>
+        </a>
+        <a class="t-row" href="explore.html">
+          <div class="t-cell w-num mono accent">02</div>
+          <div class="t-cell w-title">開始探索</div>
+          <div class="t-cell w-desc mono">15–20 MIN / 1000 PTS</div>
+          <div class="t-cell w-link mono accent">→ 進入</div>
+        </a>
+        <a class="t-row" href="worksheet.html">
+          <div class="t-cell w-num mono accent">03</div>
+          <div class="t-cell w-title">學習單</div>
+          <div class="t-cell w-desc mono">列印 / PDF</div>
+          <div class="t-cell w-link mono accent">→ 進入</div>
+        </a>
+      </div>
+    </section>
+
+    <section class="bp-section">
+      <div class="bp-section-head">
+        <h2 class="mono">SECTION 02 — 四大主題</h2>
+        <p>200 個工程地景，分四張表。資料底層按教科書研究報告的四張表整理，每張 50 筆，可獨立或合併使用。</p>
+      </div>
+      <div class="bp-themes">
+        <div class="theme-col">
+          <div class="theme-no mono accent">THEME 01</div>
+          <h3>結構力學與土木工程</h3>
+          <p>橋梁、水庫、隧道、高樓——力如何在材料與幾何中傳遞。</p>
+          <div class="theme-ex mono">西螺大橋 / 翡翠水庫 / 雪山隧道</div>
+        </div>
+        <div class="theme-col">
+          <div class="theme-no mono accent">THEME 02</div>
+          <h3>參數化設計與現代建築</h3>
+          <p>從 CAID 到無梁曲面，數位幾何如何重塑公共建築。</p>
+          <div class="theme-ex mono">台中歌劇院 / 衛武營 / 北流</div>
+        </div>
+        <div class="theme-col">
+          <div class="theme-no mono accent">THEME 03</div>
+          <h3>機電整合與自動化機構</h3>
+          <p>軌道、纜車、開合橋、機械手臂——把馬達與感測接上世界。</p>
+          <div class="theme-ex mono">大港橋 / 月台幕門 / 林鐵螺旋</div>
+        </div>
+        <div class="theme-col">
+          <div class="theme-no mono accent">THEME 04</div>
+          <h3>新興科技與綠色能源</h3>
+          <p>離岸風場、太陽光電、半導體廠、量子電腦——台灣的下一個十年。</p>
+          <div class="theme-ex mono">竹南離岸風場 / 台積電 / 太空中心</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bp-section callout-section">
+      <div class="callout-label mono accent">TARGET</div>
+      <div class="callout-body">
+        <div>
+          <strong>適合誰用？</strong>　高中生活科技／工程設計課程、跨域 STEAM 活動；單堂課可導讀＋一局探索，雙堂課則加上學習單整理與小組分享。
+        </div>
+      </div>
+      <div class="callout-action">
+        <a href="intro.html" class="bp-btn bp-ghost mono">查看完整教學使用建議 →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bp-footer">
+    <div class="footer-grid">
+      <div class="f-col">
+        <h4 class="mono">關於本站</h4>
+        <p>「台灣工程地景探索」是為高中生活科技／工程設計課程設計的獨立教育活動。以一張可探索的地圖、200 個工程地景與三層影像來源（360°環景・實景照・衛星空照），把工程結構與機構放回它真實存在的位置上。</p>
+      </div>
+      <div class="f-col">
+        <h4 class="mono">快速連結</h4>
+        <nav class="f-nav mono">
+          <a href="intro.html">課前導讀</a>
+          <a href="explore.html">開始探索</a>
+          <a href="worksheet.html">學習單</a>
+          <a href="teacher.html">教師端</a>
+          <a href="about.html">關於與授權</a>
+        </nav>
+      </div>
+      <div class="f-col">
+        <h4 class="mono">影像與資料</h4>
+        <ul class="f-list mono">
+          <li>Esri World Imagery</li>
+          <li>Mapillary・CC BY-SA</li>
+          <li>Wikimedia Commons・CC</li>
+          <li>OpenStreetMap・CARTO</li>
+        </ul>
       </div>
     </div>
-    <div class="hero-art">
-      <div class="badge-row">
-        <span>EXPLORE · 探索</span>
-        <span>v1.2</span>
-      </div>
-      <div class="map-mini" aria-hidden="true">
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <!-- 台灣輪廓抽象示意 -->
-          <path fill="#1E5266" opacity=".82" d="M118 22 Q126 30 130 46 Q140 60 138 78 Q146 92 142 110 Q150 130 138 150 Q132 170 116 178 Q102 184 92 172 Q80 158 76 138 Q66 124 70 106 Q60 90 70 74 Q72 58 86 46 Q98 30 118 22Z"/>
-          <!-- 點：四大主題色 -->
-          <circle cx="108" cy="60" r="3" fill="#D97706"/>
-          <circle cx="120" cy="80" r="3" fill="#D97706"/>
-          <circle cx="100" cy="92" r="3" fill="#7C3AED"/>
-          <circle cx="128" cy="110" r="3" fill="#7C3AED"/>
-          <circle cx="92" cy="120" r="3" fill="#15803D"/>
-          <circle cx="118" cy="138" r="3" fill="#15803D"/>
-          <circle cx="106" cy="158" r="3" fill="#1E5266"/>
-          <circle cx="124" cy="170" r="3" fill="#1E5266"/>
-          <!-- 經緯網格 -->
-          <g stroke="#fff" stroke-width=".4" opacity=".35">
-            <line x1="60" y1="40" x2="160" y2="40"/>
-            <line x1="60" y1="100" x2="160" y2="100"/>
-            <line x1="60" y1="160" x2="160" y2="160"/>
-            <line x1="80" y1="20" x2="80" y2="190"/>
-            <line x1="120" y1="20" x2="120" y2="190"/>
-          </g>
-        </svg>
-      </div>
-      <div class="map-cap">200 SITES · 4 THEMES · 1 MAP</div>
+    <div class="footer-copy mono">
+      <div>© 趙珩宇老師製作 · 台灣工程地景探索 · <a href="dev-log.html">開發紀錄</a></div>
+      <div>v1.2 · MIT (code) / CC BY-SA 4.0 (content)</div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<section class="section wrap">
-  <div class="h-sec">
-    <span class="eyebrow">學習流程</span>
-    <h2>三個步驟，走完一次完整的探索</h2>
-    <span class="sub">建議依序進行：先導讀、再探索、最後完成學習單。</span>
-  </div>
-  <div class="entries">
-
-    <a class="entry-card" href="intro.html">
-      <span class="step">01</span>
-      <div class="ic">📖</div>
-      <h3>課前導讀</h3>
-      <p>5 分鐘讀懂台灣工程的四大主題：結構、建築、機電、能源；以及為什麼這些地景值得放進教室。</p>
-      <div class="meta">
-        <span>5 min</span><span>·</span><span>4 themes</span>
-      </div>
-      <span class="go">進入導讀 →</span>
-    </a>
-
-    <a class="entry-card amber" href="explore.html">
-      <span class="step">02</span>
-      <div class="ic">🧭</div>
-      <h3>開始探索</h3>
-      <p>每局 10 題：看實景或衛星空照圖，在地圖上點出它在台灣的位置；揭曉時了解這座工程的設計重點。可選「深度模式」追問。</p>
-      <div class="meta">
-        <span>15–20 min/局</span><span>·</span><span>每題 1000 分</span>
-      </div>
-      <span class="go">開始挑戰 →</span>
-    </a>
-
-    <a class="entry-card green" href="worksheet.html">
-      <span class="step">03</span>
-      <div class="ic">📝</div>
-      <h3>學習單</h3>
-      <p>探索結束後，把這一局遇到的 10 個景點整理成可列印的學習單，配合課堂簡報、作業繳交或檔案存查。</p>
-      <div class="meta">
-        <span>列印 / PDF</span><span>·</span><span>可選空白版</span>
-      </div>
-      <span class="go">查看學習單 →</span>
-    </a>
-
-  </div>
-</section>
-
-<section class="section wrap">
-  <div class="h-sec">
-    <span class="eyebrow eyebrow-amber">四大主題</span>
-    <h2>200 個工程地景，分四張表</h2>
-    <span class="sub">資料底層按教科書研究報告的四張表整理，每張 50 筆，可獨立或合併使用。</span>
-  </div>
-  <div class="themes">
-    <div class="theme-card">
-      <div class="num">THEME 01</div>
-      <h4>結構力學與土木工程</h4>
-      <p>橋梁、水庫、隧道、高樓——力如何在材料與幾何中傳遞。</p>
-      <div class="ex">西螺大橋 · 翡翠水庫 · 雪山隧道</div>
-    </div>
-    <div class="theme-card">
-      <div class="num">THEME 02</div>
-      <h4>參數化設計與現代建築</h4>
-      <p>從 CAID 到無梁曲面，數位幾何如何重塑公共建築。</p>
-      <div class="ex">台中歌劇院 · 衛武營 · 北流</div>
-    </div>
-    <div class="theme-card">
-      <div class="num">THEME 03</div>
-      <h4>機電整合與自動化機構</h4>
-      <p>軌道、纜車、開合橋、機械手臂——把馬達與感測接上世界。</p>
-      <div class="ex">大港橋 · 月台幕門 · 林鐵螺旋</div>
-    </div>
-    <div class="theme-card">
-      <div class="num">THEME 04</div>
-      <h4>新興科技與綠色能源</h4>
-      <p>離岸風場、太陽光電、半導體廠、量子電腦——台灣的下一個十年。</p>
-      <div class="ex">竹南離岸風場 · 台積電 · 太空中心</div>
-    </div>
-  </div>
-</section>
-
-<section class="section wrap">
-  <div class="callout">
-    <strong>適合誰用？</strong>　高中生活科技/工程設計課程、跨域 STEAM 活動；單堂課可導讀＋一局探索，雙堂課則加上學習單整理與小組分享。
-    <a href="intro.html">查看完整教學使用建議 →</a>
-  </div>
-</section>
-
-</main>
-
-<footer class="footer">
-  <div class="footer-inner">
-    <div>
-      <h4>關於本站</h4>
-      <p>「台灣工程地景探索」是為高中生活科技／工程設計課程設計的獨立教育活動。以一張可探索的地圖、200 個工程地景與三層影像來源（360°環景・實景照・衛星空照），把工程結構與機構放回它真實存在的位置上。</p>
-    </div>
-    <div>
-      <h4>快速連結</h4>
-      <ul>
-        <li><a href="intro.html">課前導讀</a></li>
-        <li><a href="explore.html">開始探索</a></li>
-        <li><a href="worksheet.html">學習單</a></li>
-        <li><a href="teacher.html">教師端</a></li>
-        <li><a href="about.html">關於與授權</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>影像與資料</h4>
-      <ul>
-        <li>Esri World Imagery（衛星空照）</li>
-        <li>Mapillary・CC BY-SA（實景／環景）</li>
-        <li>Wikimedia Commons・CC（延伸圖）</li>
-        <li>OpenStreetMap・CARTO（猜測地圖）</li>
-      </ul>
-    </div>
-    <div class="copy">
-      <span>© 趙珩宇老師製作 · 台灣工程地景探索　·　<a href="dev-log.html" style="color:inherit">開發紀錄</a></span>
-      <span class="mono">v1.2 · MIT (code) / CC BY-SA 4.0 (content)</span>
-    </div>
-  </div>
-</footer>
+</div>
 
 </body>
 </html>
