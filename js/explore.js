@@ -258,6 +258,27 @@ function typeHint(name) {
 }
 
 /* ---------- 主流程 ---------- */
+/* 同一局避免抽到位置重疊的題目：資料裡有多組「主體 + 其附屬設施」共用同一座標
+   （台北 101 與 101 阻尼器、大巨蛋與其空調、核三廠與展示館…），同時出現會變成
+   兩題答案落在同一個點，學生只會覺得系統出錯。抽題時把太近的候選跳過。 */
+const MIN_SEP_KM = 0.3;
+function farEnough(chosen, s) {
+  const lat = s[1], lon = s[2];
+  return chosen.every(c => {
+    const dLat = (c[1] - lat) * 111.32;
+    const dLon = (c[2] - lon) * 111.32 * Math.cos(lat * Math.PI / 180);
+    return Math.hypot(dLat, dLon) >= MIN_SEP_KM;
+  });
+}
+function pickSpread(pool, n) {
+  const shuffled = pool.slice().sort(() => Math.random() - 0.5);
+  const out = [];
+  for (const s of shuffled) { if (out.length >= n) break; if (farEnough(out, s)) out.push(s); }
+  /* 候選不足時（主題池很小）才放寬，寧可重複也不要少題 */
+  for (const s of shuffled) { if (out.length >= n) break; if (!out.includes(s)) out.push(s); }
+  return out;
+}
+
 function startGame(m, theme) {
   mode = m;
   idx = 0; total = 0;
@@ -275,14 +296,14 @@ function startGame(m, theme) {
       : SITES;
     $('modeLabel').textContent = '🏗 工程地景'
       + (engTheme ? '・' + ENG_THEMES[engTheme - 1] : '');
-    rounds = pool.slice().sort(() => Math.random() - 0.5).slice(0, roundCount)
+    rounds = pickSpread(pool, roundCount)
       .map(s => ({ name: s[0], lat: s[1], lon: s[2], ch: s[3], tip: s[4], idx: SITES.indexOf(s) }));
   } else if (m === 'trial') {
     /* 試玩 20 題：跨全部 200 景點，不要求登入、不保存到帳號紀錄 */
     roundCount = 20;
     engTheme = 0;
     $('modeLabel').textContent = '🎮 試玩 20 題';
-    rounds = SITES.slice().sort(() => Math.random() - 0.5).slice(0, roundCount)
+    rounds = pickSpread(SITES, roundCount)
       .map(s => ({ name: s[0], lat: s[1], lon: s[2], ch: s[3], tip: s[4], idx: SITES.indexOf(s) }));
   } else if (m === 'curated') {
     roundCount = 5;

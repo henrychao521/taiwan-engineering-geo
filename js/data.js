@@ -252,7 +252,7 @@ const WIKI_REFS = {
   32: "https://zh.wikipedia.org/wiki/%E6%96%B0%E5%8C%97%E5%A4%A7%E6%A9%8B",
   35: "https://zh.wikipedia.org/wiki/%E6%96%B0%E6%9D%B1%E5%A4%A7%E6%A9%8B_(%E8%8B%97%E6%A0%97%E7%B8%A3)",
   36: "https://zh.wikipedia.org/wiki/%E5%90%91%E5%B1%B1%E8%A1%8C%E6%94%BF%E6%9A%A8%E9%81%8A%E5%AE%A2%E4%B8%AD%E5%BF%83",
-  37: "https://zh.wikipedia.org/wiki/%E4%B8%8B%E6%B7%A1%E6%B0%B4%E6%BA%AA%E9%90%B5%E6%A9%8B",
+  37: "https://zh.wikipedia.org/wiki/%E5%93%A1%E5%B1%B1%E5%AD%90%E5%88%86%E6%B4%AA%E9%81%93",
   40: "https://zh.wikipedia.org/wiki/%E9%98%BF%E5%85%AC%E5%BA%97%E6%B0%B4%E5%BA%AB",
   41: "https://zh.wikipedia.org/wiki/%E9%AB%98%E9%9B%84%E6%B8%AF%E9%81%8E%E6%B8%AF%E9%9A%A7%E9%81%93",
   42: "https://zh.wikipedia.org/wiki/%E9%87%91%E9%96%80%E5%A4%A7%E6%A9%8B_%28%E9%87%91%E9%96%80%E7%B8%A3%29",

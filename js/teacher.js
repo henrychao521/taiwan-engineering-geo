@@ -17,6 +17,18 @@ function escapeHtml(s) {
   }[c]));
 }
 
+function scoreMatches(obj) {
+  if (!obj || !Array.isArray(obj.r)) return true;   // 沒有逐題資料就無從對帳
+  let sum = 0;
+  for (const row of obj.r) {
+    if (!Array.isArray(row)) return true;
+    sum += Number(row[2]) || 0;                     // 該題距離得分
+    const bits = Number(row[3]) || 0;               // bit0 = 主題答對、bit1 = 類型答對
+    sum += ((bits & 1) + ((bits >> 1) & 1)) * 300;
+  }
+  return Math.abs(sum - (Number(obj.s) || 0)) <= 1;
+}
+
 function decodeOne(raw) {
   /* 容許「姓名: TWEG:xxxx」格式 */
   let nick = null, code = raw.trim();
@@ -27,6 +39,10 @@ function decodeOne(raw) {
   try {
     const json = decodeURIComponent(escape(atob(b64)));
     const obj = JSON.parse(json);
+    // 驗證碼是 base64 JSON、沒有簽章，改一個數字就能灌分。
+    // 但總分本來就能從逐題資料重算：每題得分 + 每題追問答對 300 分。
+    // 兩者不符就標記出來，讓老師看得到，而不是照單全收。
+    obj.__tampered = !scoreMatches(obj);
     return { nick, raw: obj };
   } catch (e) { return null; }
 }
@@ -95,7 +111,8 @@ function renderStats(decoded) {
   const sorted = decoded.slice().sort((a, b) => (b.raw.s || 0) - (a.raw.s || 0));
   $('scoreBars').innerHTML =
     '<div class="bar-list">' +
-    sorted.map(d => makeBar(d.nick, d.raw.s || 0, Math.max(10000, ...sorted.map(x => x.raw.s || 0)))).join('') +
+    sorted.map(d => makeBar((d.raw.__tampered ? '⚠ ' : '') + d.nick, d.raw.s || 0,
+      Math.max(10000, ...sorted.map(x => x.raw.s || 0)))).join('') +
     '</div>';
 
   /* ② 主題表現（平均得分率） */
@@ -153,7 +170,7 @@ function renderStats(decoded) {
     '<div class="bar-list">' +
     sorted.slice(0, 10).map((d, i) =>
       `<div class="bar-row">
-        <div class="name"><b style="color:var(--c-amber);margin-right:4px">${i + 1}</b>${escapeHtml(d.nick)}</div>
+        <div class="name"><b style="color:var(--c-amber);margin-right:4px">${i + 1}</b>${d.raw.__tampered ? '⚠ ' : ''}${escapeHtml(d.nick)}</div>
         <div class="bar"><div style="width:${Math.round((d.raw.s || 0) / Math.max(max, 1) * 100)}%"></div></div>
         <div class="v">${d.raw.s || 0} 分</div>
       </div>`).join('') +
