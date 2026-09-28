@@ -264,6 +264,23 @@ const PHASES = [
       '分支 fix/mesh-2026-09-28，每主題一個 commit，未 push',
     ],
   },
+  {
+    tag: '段落 14',
+    date: '2026-09-28',
+    title: '動態體檢：我的檔案頁載入位移修正、地圖裁切判定為誤報',
+    verbatim: '任務：修正三個教學平台「動畫跑起來後」才出現的版面問題。……twgeo：/Volumes/Work/taiwan-engineering-geo。explore.html、intro.html 桌機＋手機 clipped；account.html CLS 0.178（footer、nav 位移）。dev-log.html 要加一段紀錄。',
+    context: '動態體檢（motion_qc：0.5s／3s／8s／捲到底／點按鈕後各量一次）在線上版標出兩類問題。① account.html 的 CLS 0.178：兩個區塊（建立檔案／個人資料）預設 display:none，要等 auth.js、account.js 載入才顯示其中一區；線上網路延遲時頁面先以空白 main 繪出，頁尾貼在上方，JS 到了才被推下去；導覽列右端的「建立檔案」chip 也是 JS 事後插入，其他連結跟著移位。本機把 JS／CSS 人為延遲 1 秒可重現同樣的 0.178。② explore.html、intro.html 的 clipped：被標的是 Leaflet 地圖容器，它本來就是 overflow:hidden、裡面的瓦片層寬度達數萬像素，scrollWidth 必然大於 clientWidth；實測縮放鈕與版權列都完整落在地圖框內，沒有文字被切，判定為誤報。',
+    decisions: [
+      'account.html 在 main 結尾加一小段內嵌 script，解析當下就依 localStorage 有無檔案顯示對應區塊，account.js 之後照常接手',
+      '導覽列先放同尺寸的「建立檔案」佔位 chip，auth.js 的 renderTopnavChip 會移除後重建，不改 auth.js',
+      'Leaflet 地圖裁切屬元件本身設計，不改（誤報）',
+    ],
+    outputs: [
+      'account.html：內嵌區塊顯示 script＋導覽列佔位 chip',
+      '延遲載入模擬：桌機 CLS 0.178 → 0；手機同一次頁尾位移（0.62，瀏覽器標為輸入後、不計入 CLS）也消失；本機 motion_qc 重跑 account 零警示、三頁零 console 錯誤',
+      '判定紀錄：/Volumes/Work/mesh-review-2026-09-28/fixes/layout_twgeo.json',
+    ],
+  },
 ];
 
 /* ---- 渲染時間軸 ---- */

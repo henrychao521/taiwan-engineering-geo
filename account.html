@@ -29,6 +29,8 @@
       <a href="worksheet.html">學習單</a>
       <a href="teacher.html">教師端</a>
       <a href="about.html">關於</a>
+      <!-- 先放同尺寸的佔位 chip，auth.js 晚到時整個換掉，導覽列不會跳動 -->
+      <a href="account.html" class="topnav-account active" title="建立個人檔案後紀錄可保存"><span class="ac-ic">📋</span><span class="ac-n">建立檔案</span></a>
     </nav>
   </div>
 </header>
@@ -131,6 +133,16 @@
     </div>
 
   </section>
+
+  <script>
+  /* 外部 JS（auth/account）晚到時兩區都還是 display:none，頁尾會先貼在頂部再被推下（動態體檢 CLS 0.178）。
+     這裡在解析當下先依本機有無檔案顯示對應的一區，account.js 之後照常接手。 */
+  (function () {
+    var has = false;
+    try { has = !!JSON.parse(localStorage.getItem('tweg_profile') || 'null'); } catch (e) {}
+    document.getElementById(has ? 'profileSec' : 'createSec').style.display = '';
+  })();
+  </script>
 
 </main>
 
