@@ -144,7 +144,9 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 /* ---------- 容器與排版 ---------- */
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
 .wrap-narrow { max-width: 820px; margin: 0 auto; padding: 0 28px; }
-.section { padding: 56px 0; }
+.section { padding-top: 56px; padding-bottom: 56px; } /* 只設上下，保留 .wrap／.wrap-narrow 的左右留白 */
+/* 同一元素兼掛 .wrap-narrow 時（intro.html），左右 28px 留白改算在 max-width 外，桌機內文欄仍是 820px、位置不變 */
+.section.wrap-narrow, .hero.wrap-narrow { max-width: calc(820px + 56px); }
 .section + .section { padding-top: 0; }
 
 .eyebrow {
@@ -234,7 +236,7 @@ h4 { font-size: 18px; line-height: 1.4; }
 
 /* ---------- 首頁專屬 ---------- */
 .hero {
-  padding: 80px 0 60px;
+  padding-top: 80px; padding-bottom: 60px; /* 只設上下，保留 .wrap-narrow 的左右留白 */
   position: relative;
 }
 .hero-grid {
@@ -242,7 +244,7 @@ h4 { font-size: 18px; line-height: 1.4; }
 }
 @media (max-width: 880px) {
   .hero-grid { grid-template-columns: 1fr; gap: 32px; }
-  .hero { padding: 50px 0 30px; }
+  .hero { padding-top: 50px; padding-bottom: 30px; }
 }
 .hero h1 { margin-top: 12px; }
 .hero .lead { margin-top: 16px; max-width: 540px; }
@@ -258,7 +260,7 @@ h4 { font-size: 18px; line-height: 1.4; }
 }
 .hero-stat .l { font-size: 12px; color: var(--c-muted); font-weight: 600; }
 @media (max-width: 480px) {
-  .hero { padding: 36px 0 24px; }
+  .hero { padding-top: 36px; padding-bottom: 24px; }
   .hero-stat { gap: 18px; margin-top: 22px; padding-top: 14px; }
   .hero-stat .n { font-size: 20px; }
   .hero-stat .l { font-size: 11px; }
@@ -453,6 +455,8 @@ table.t th, table.t td {
   border-bottom: 1px solid var(--c-line);
   vertical-align: top;
 }
+/* 窄螢幕：長英文授權字串可斷行，避免表格撐出畫面（只在手機寬度生效，桌機欄寬不變） */
+@media (max-width: 480px) { table.t td { overflow-wrap: anywhere; } }
 table.t th {
   background: var(--c-paper-2);
   font-weight: 800; color: var(--c-ink);
@@ -854,7 +858,7 @@ table.t tbody tr:hover { background: var(--c-line-soft); }
   body { background: #fff; }
   .topbar, .footer, .ws-actions, .topnav, .no-print { display: none !important; }
   .ws-sheet { box-shadow: none; border: 0; padding: 0; margin: 0; }
-  .wrap, .wrap-narrow { padding: 0; max-width: none; }
+  .wrap, .wrap-narrow, .section.wrap-narrow, .hero.wrap-narrow { padding: 0; max-width: none; }
   .section { padding: 0; }
   h1, h2, h3 { page-break-after: avoid; }
   table, .ws-sheet table { page-break-inside: avoid; }
