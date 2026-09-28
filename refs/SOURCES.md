@@ -53,7 +53,7 @@
 | 49 | 中橫公路九曲洞明隧道 | [中橫公路](https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%A9%AB%E5%85%AC%E8%B7%AF) | wiki-49.jpg |
 | 50 | 台中國家歌劇院 | [臺中國家歌劇院](https://zh.wikipedia.org/wiki/%E8%87%BA%E4%B8%AD%E5%9C%8B%E5%AE%B6%E6%AD%8C%E5%8A%87%E9%99%A2) | wiki-50.jpg |
 | 51 | 台北表演藝術中心 | [臺北表演藝術中心](https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8C%97%E8%A1%A8%E6%BC%94%E8%97%9D%E8%A1%93%E4%B8%AD%E5%BF%83) | wiki-51.jpg |
-| 52 | 淡江大橋（建設中） | [淡江大橋](https://zh.wikipedia.org/wiki/%E6%B7%A1%E6%B1%9F%E5%A4%A7%E6%A9%8B) | wiki-52.jpg |
+| 52 | 淡江大橋 | [淡江大橋](https://zh.wikipedia.org/wiki/%E6%B7%A1%E6%B1%9F%E5%A4%A7%E6%A9%8B) | wiki-52.jpg |
 | 53 | 衛武營國家藝術文化中心 | [衛武營國家藝術文化中心](https://zh.wikipedia.org/wiki/%E8%A1%9B%E6%AD%A6%E7%87%9F%E5%9C%8B%E5%AE%B6%E8%97%9D%E8%A1%93%E6%96%87%E5%8C%96%E4%B8%AD%E5%BF%83) | wiki-53.jpg |
 | 54 | 高雄流行音樂中心 | [高雄流行音樂中心](https://zh.wikipedia.org/wiki/%E9%AB%98%E9%9B%84%E6%B5%81%E8%A1%8C%E9%9F%B3%E6%A8%82%E4%B8%AD%E5%BF%83) | wiki-54.jpg |
 | 55 | 蘭陽博物館 | [蘭陽博物館](https://zh.wikipedia.org/wiki/%E8%98%AD%E9%99%BD%E5%8D%9A%E7%89%A9%E9%A4%A8) | wiki-55.jpg |
