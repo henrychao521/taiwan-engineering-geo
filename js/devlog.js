@@ -281,6 +281,25 @@ const PHASES = [
       '判定紀錄：/Volumes/Work/mesh-review-2026-09-28/fixes/layout_twgeo.json',
     ],
   },
+  {
+    tag: '段落 15',
+    date: '2026-09-28',
+    title: '手機版側邊留白修正；第 37 筆員山子分洪道補上維基截圖與出處',
+    verbatim: '1. 手機版內文左右沒留白、貼著螢幕邊：css/style.css 裡 .section 與 .hero 的 padding 寫法蓋掉了 .wrap-narrow 的左右留白。修成每個寬度都至少 16px 側邊留白，且不影響桌機版面。……2. 第 37 筆景點已由下淡水溪鐵橋（重複收錄）換成員山子分洪道，但第 37 張維基截圖與 refs/SOURCES.md 第 37 列還是舊的下淡水溪鐵橋。',
+    context: '① intro.html 的 hero 與各段落寫成 class="section wrap-narrow"／"hero wrap-narrow"。.section { padding: 56px 0 } 與 .hero { padding: 80px 0 60px } 是簡寫，排在 .wrap-narrow 之後、權重相同，於是把左右 28px 一併歸零；桌機因為 max-width 820px 置中看不出來，寬度一低於 876px 內文就貼齊螢幕邊（實測 375 寬左 0、右 3.8 px）。順便用逐字量測（每個文字節點的左右邊界）掃全站 320／375／768／1440 四種寬度，另外揪出三處窄螢幕問題：about.html 授權表在 320 寬被長英文字串撐出 10 px 橫向捲動、dev-log.html 在 320 寬被長路徑撐出 4 px、首頁藍圖尺寸標籤 N: 24.16N 往外凸到離螢幕邊 15 px。worksheet.html 的紀錄表本來就放在可左右滑動的 .tw-scroll 裡，不算。② 第 37 筆資料（js/data.js 與 WIKI_REFS）早已改為員山子分洪道，但截圖與 SOURCES 還是舊的下淡水溪鐵橋（與第 16 筆重複）。姊妹平台 PC13110 在 commit 74e28c2 已重拍，直接取用。',
+    decisions: [
+      '.section、.hero（含 880／480 兩個斷點）改只設 padding-top／padding-bottom，左右留白交還給 .wrap／.wrap-narrow（28px）',
+      '同一元素兼掛 .wrap-narrow 時 max-width 改為 820＋56 px，讓 28px 留白落在原本 820px 內文欄之外——桌機內文欄寬與位置和修正前完全相同；列印樣式同步歸零',
+      'table.t 儲存格只在 ≤480px 加 overflow-wrap: anywhere（全寬度加會改到桌機欄寬，已實測排除）；dev-log 卡片同樣可斷行；首頁手機斷點讓 .dim-y 不再 translateX(50%) 外凸',
+      '截圖直接沿用 PC13110 重拍檔（兩邊舊檔逐位元相同、規格一致：520×355、RGB 基線 JPEG、72 dpi、同樣的 Exif 結構），不自己重拍以免兩站不一致',
+    ],
+    outputs: [
+      'css/style.css：.section／.hero 只設上下 padding；table.t 儲存格可斷行',
+      'index.html、dev-log.html：窄螢幕外凸／溢出修正',
+      'refs/wiki/wiki-37.jpg 換成員山子分洪道條目截圖；refs/SOURCES.md 第 37 列改為員山子分洪道與其維基網址',
+      '驗證：全 8 頁 × 320／375／768／1440 文字側邊留白皆 ≥ 16 px（學習單紀錄表在 .tw-scroll 內可滑動，不計）、無橫向捲動、零 console 錯誤；桌機 900／1024／1280／1440 逐元素比對座標，除 intro.html 七個 section 外框外全部相同；motion_qc 桌機＋手機 16 組零 console 錯誤、零橫向溢出，僅 Leaflet 地圖 clipped（段落 14 已判定誤報）',
+    ],
+  },
 ];
 
 /* ---- 渲染時間軸 ---- */
