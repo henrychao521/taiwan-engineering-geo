@@ -102,6 +102,23 @@ function renderStats(decoded) {
   const avg = scores.reduce((a, b) => a + b, 0) / n;
   const max = Math.max(...scores), min = Math.min(...scores);
 
+  /* 題數或深度模式不同的成績碼，總分不能直接比較（20 題試玩 vs 10 題、深度模式有追問加分）→ 提醒老師 */
+  const groups = new Map();
+  decoded.forEach(d => {
+    const key = `${(d.raw.r || []).length} 題${d.raw.k ? '・深度模式' : ''}`;
+    groups.set(key, (groups.get(key) || 0) + 1);
+  });
+  const oldWarn = document.getElementById('mixWarn');
+  if (oldWarn) oldWarn.remove();
+  if (groups.size > 1) {
+    const w = document.createElement('div');
+    w.id = 'mixWarn';
+    w.style.cssText = 'margin-top:6px;color:var(--c-amber);font-weight:600';
+    w.textContent = '⚠ 這批成績碼的題數或模式不一致（' + [...groups].map(([k, v]) => `${k} ${v} 筆`).join('、') +
+      '），平均、最高、最低與排名是直接比總分，請分開貼上同一種題型再比較。';
+    $('parseMsg').appendChild(w);
+  }
+
   $('stN').textContent = n;
   $('stAvg').textContent = Math.round(avg);
   $('stMax').textContent = max;
@@ -198,7 +215,7 @@ function renderOwnHistory() {
         ? (s.theme ? THEMES[s.theme - 1] : '全部主題')
         : (s.mode === 'trial' ? '試玩 20 題'
         : (s.mode === 'curated' ? '精選地景' : 'Mapillary'));
-      const max = (s.rounds?.length || 0) * 1000;
+      const max = s.maxScore || (s.rounds?.length || 0) * 1000;   // 深度模式滿分含追問加分
       return `<div class="bar-row">
         <div class="name">${escapeHtml(ds)} · ${escapeHtml(themeName)}</div>
         <div class="bar"><div style="width:${max ? Math.min(100, Math.round((s.totalScore / max) * 100)) : 0}%"></div></div>

@@ -72,7 +72,7 @@ function showProfile(u) {
         ? (s.theme ? THEMES_AC[s.theme - 1] : '全部主題')
         : (s.mode === 'trial' ? '試玩 20 題'
         : s.mode === 'curated' ? '精選地景' : 'Mapillary');
-      const max = (s.rounds?.length || 0) * 1000;
+      const max = s.maxScore || (s.rounds?.length || 0) * 1000;   // 深度模式滿分含追問加分
       const pct = max ? Math.min(100, Math.round((s.totalScore / max) * 100)) : 0;
       return `<div class="hist-row">
         <div class="h-date">${ds}</div>

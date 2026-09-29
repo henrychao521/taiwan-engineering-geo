@@ -588,6 +588,7 @@ function confirmGuess() {
   /* 深度模式：渲染追問 */
   if (deepMode && (mode === 'engineering' || mode === 'trial')) {
     activeFollowups = makeFollowups(current);
+    rec.fuMax = activeFollowups.length;   // 這題實際有幾題追問（Q2 只在名稱可辨識時出題），供 maxScore 計算
     fuIndex = 0;
     if (activeFollowups.length) renderFollowup(rec);
   } else {
@@ -657,7 +658,8 @@ function saveSession() {
     mode, theme: engTheme || 0,
     deepMode,
     totalScore: total,
-    maxScore: roundCount * 1000 + (deepMode ? roundCount * 2 * 300 : 0),
+    /* 深度模式滿分：依每題實際出的追問題數累加（不是固定每題 2 題） */
+    maxScore: roundCount * 1000 + (deepMode ? sessionRounds.reduce((a, r) => a + (r.fuMax || 0), 0) * 300 : 0),
     rounds: sessionRounds,
   };
   session.code = encodeCode(session);
@@ -708,9 +710,9 @@ function pushLeaderboard(entry) {
 }
 
 function renderLeaderboard(currentEntry) {
-  /* 依「相同題數」對手才公平比較：取出與當局相同 roundCount 的紀錄 */
+  /* 依「相同題數、相同是否深度模式」對手才公平比較（深度模式每題另有追問加分） */
   const all = loadLeaderboard();
-  const peers = all.filter(e => e.rounds === currentEntry.rounds);
+  const peers = all.filter(e => e.rounds === currentEntry.rounds && !!e.deepMode === !!currentEntry.deepMode);
   /* 排序：分數高 → 日期新 */
   peers.sort((a, b) => b.score - a.score || (b.date || '').localeCompare(a.date || ''));
   /* 找出 currentEntry 在 peers 中的索引（用 date 比對） */
