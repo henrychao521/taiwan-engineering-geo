@@ -117,7 +117,7 @@
 | 138 | 臺北大巨蛋活動屋頂機房 | [臺北大巨蛋](https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8C%97%E5%A4%A7%E5%B7%A8%E8%9B%8B) | wiki-138.jpg |
 | 139 | 彰化王功漁港景觀橋 | [王功漁港](https://zh.wikipedia.org/wiki/%E7%8E%8B%E5%8A%9F%E6%BC%81%E6%B8%AF) | wiki-139.jpg |
 | 140 | 竹科旺宏電子總部 | [旺宏電子](https://zh.wikipedia.org/wiki/%E6%97%BA%E5%AE%8F%E9%9B%BB%E5%AD%90) | wiki-140.jpg |
-| 141 | 林口三井 Outlet 摩天輪 | [MITSUI OUTLET PARK 林口](https://zh.wikipedia.org/wiki/MITSUI_OUTLET_PARK_%E6%9E%97%E5%8F%A3) | wiki-141.jpg |
+| 141 | 台中港三井摩天輪(台中之星) | [MITSUI OUTLET PARK 台中港](https://zh.wikipedia.org/wiki/MITSUI_OUTLET_PARK_%E5%8F%B0%E4%B8%AD%E6%B8%AF) | wiki-141.jpg |
 | 142 | 花蓮海洋公園纜車 | [遠雄海洋公園](https://zh.wikipedia.org/wiki/%E9%81%A0%E9%9B%84%E6%B5%B7%E6%B4%8B%E5%85%AC%E5%9C%92) | wiki-142.jpg |
 | 143 | 高屏溪攔河堰閘門 | [高屏溪攔河堰](https://zh.wikipedia.org/wiki/%E9%AB%98%E5%B1%8F%E6%BA%AA%E6%94%94%E6%B2%B3%E5%A0%B0) | wiki-143.jpg |
 | 144 | 台江國家公園遊客中心 | [台江國家公園](https://zh.wikipedia.org/wiki/%E5%8F%B0%E6%B1%9F%E5%9C%8B%E5%AE%B6%E5%85%AC%E5%9C%92) | wiki-144.jpg |

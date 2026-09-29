@@ -325,7 +325,7 @@ const WIKI_REFS = {
   138: "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8C%97%E5%A4%A7%E5%B7%A8%E8%9B%8B",
   139: "https://zh.wikipedia.org/wiki/%E7%8E%8B%E5%8A%9F%E6%BC%81%E6%B8%AF",
   140: "https://zh.wikipedia.org/wiki/%E6%97%BA%E5%AE%8F%E9%9B%BB%E5%AD%90",
-  141: "https://zh.wikipedia.org/wiki/MITSUI_OUTLET_PARK_%E6%9E%97%E5%8F%A3",
+  141: "https://zh.wikipedia.org/wiki/MITSUI_OUTLET_PARK_%E5%8F%B0%E4%B8%AD%E6%B8%AF",
   142: "https://zh.wikipedia.org/wiki/%E9%81%A0%E9%9B%84%E6%B5%B7%E6%B4%8B%E5%85%AC%E5%9C%92",
   143: "https://zh.wikipedia.org/wiki/%E9%AB%98%E5%B1%8F%E6%BA%AA%E6%94%94%E6%B2%B3%E5%A0%B0",
   144: "https://zh.wikipedia.org/wiki/%E5%8F%B0%E6%B1%9F%E5%9C%8B%E5%AE%B6%E5%85%AC%E5%9C%92",
