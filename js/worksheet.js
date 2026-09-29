@@ -198,8 +198,9 @@ function regionHintWS(lat, lon) {
   if (lon < 119.0) return '金門';
   if (lon < 120.0 && lat < 24.0) return '澎湖群島';
   if (lon > 121.4 && lat < 22.85) return '台東外海離島';
-  if (lat >= 24.5) return '北台灣';
-  if (lon >= 121.0) return '東台灣';
+  /* 與 explore.js regionHint 同一套界線 */
+  if (lat >= 24.5 || (lat >= 24.33 && lon >= 121.4)) return '北台灣';
+  if (lon >= 121.35 || (lat < 23.6 && lon >= 121.0)) return '東台灣';
   if (lat >= 23.6) return '中台灣';
   return '南台灣';
 }
