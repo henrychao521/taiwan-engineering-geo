@@ -319,6 +319,29 @@ const PHASES = [
       '驗證：本機 http.server 開 explore.html、intro.html 零 console 錯誤',
     ],
   },
+  {
+    tag: '段落 17',
+    date: '2026-09-29',
+    title: 'Gemini 第二輪審查：四處工程敘述、計分與排行榜、地區提示、學習單教師版與用語',
+    verbatim: 'Gemini 審查（9/28 修正前的原始碼快照）30 條：先比對是否已處理，新問題自己查證後修正、駁回或列待決定；fix/round2-gemini，每主題一個 commit，不 push。',
+    context: '30 條中 1 條已在段落 13 修掉（核三廠與展示館座標），3 條駁回（360° 環景 three.js 是 explore.js 動態 import vendor 檔；劍潭站台北市捷運局監測報告寫明兩座龍門架、2 條主吊索，「兩側塔柱」沒錯；學習單「四、自我評量」與「四、教師評語」互斥顯示不會同時出現），2 條待決定，其餘 24 條修正。',
+    decisions: [
+      '工程敘述只寫查得到出處的內容：開閉所依經濟部新聞稿（併網基地、開關設備），超臨界依水的臨界點 22.1 MPa／374 °C',
+      '地區提示用經緯度折線而非縣市界圖資：對 200 筆全跑，只改變原本判錯的 6 筆',
+      '教師端題型混雜只加提醒、不改統計口徑（平均仍是總分），避免老師看到的數字單位改變',
+      '王功生態景觀橋歸在機電主題、深度模式追問洩題兩件牽涉選點與題目設計，列待決定不動手',
+    ],
+    outputs: [
+      'js/data.js：再生煞車（馬達轉向不變）、五分車（曲柄滑塊）、林口 USC（超臨界流體）、彰一開閉所（不含升壓變壓器）；月台幕門→月台門；第 141 筆維基改台中港',
+      'refs/wiki/wiki-141.jpg 重拍（MITSUI OUTLET PARK 台中港，520×355、RGB 基線 JPEG、72 dpi）；refs/SOURCES.md 第 141 列同步',
+      'js/explore.js：深度模式 maxScore 依實際追問數、排行榜分深度模式、地區提示界線；js/account.js、js/teacher.js 得分率用 maxScore；教師端題型混雜提醒',
+      'js/auth.js：合併匯入套用暱稱等欄位、history 防呆；account：未設 Drive 時指向教師端 JSON 匯出入口、未建檔可直接還原的說明',
+      'js/worksheet.js：切入面向先看主題、重新設計示範分四主題、光電與地熱線索分開、?demo=1 示範資料不重複且分數與總分一致',
+      'about、intro、index：資料欄位四欄、維基範例、三層影像＋揭曉延伸學習、座標標籤 LON／LAT；開合橋→活動橋、瓦片→圖磚',
+      '驗證：node --check；Playwright 實測學習單教師版、我的檔案得分率（深度 12000/16000 → 75%）、合併匯入、教師端提醒；motion_qc 7 頁桌機＋手機零 console 錯誤、clipped／textOverlap／offRight 皆 0（explore 桌機 CLS 0.095 與 main 相同）',
+      '判定紀錄：/Volumes/Work/mesh-review-2026-09-28/fixes/round2_twgeo.json',
+    ],
+  },
 ];
 
 /* ---- 渲染時間軸 ---- */
