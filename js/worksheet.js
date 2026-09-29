@@ -210,7 +210,8 @@ function geoCueOf(name) {
   if (/水庫|壩|堰/.test(name)) return { cue: '水文／集水區', why: '位置由集水區地形決定，壩高、壩型與洩洪量隨地勢、地質與下游城市需水量設計。' };
   if (/隧道/.test(name)) return { cue: '山地／地質', why: '山地阻隔下的最短路徑，岩層強度、湧水量、斷層帶決定鑽掘工法（TBM／NATM）與支撐方式。' };
   if (/風場|風力|風機/.test(name)) return { cue: '海岸／季風', why: '台灣海峽的東北季風與離岸風能，使彰化／苗栗外海成為離岸風機聚集處。' };
-  if (/光電|太陽能|地熱/.test(name)) return { cue: '日照／地熱', why: '依日照、土地與資源（如地熱井溫度）選址，鹽田、水庫水面、地熱噴氣孔附近最常見。' };
+  if (/地熱/.test(name)) return { cue: '地質／地熱', why: '要有淺層高溫地熱儲集層，多在火山或斷層帶附近（如宜蘭清水、大屯火山群），並考量熱水腐蝕、結垢與回注。' };
+  if (/光電|太陽能/.test(name)) return { cue: '日照／用地', why: '依日照量、遮蔽與可用土地選址，常利用鹽田、埤塘水面、屋頂等複合用地，並受饋線與併網容量限制。' };
   if (/港|碼頭|燈塔/.test(name)) return { cue: '海岸／港灣', why: '海岸線、水深、波浪方向影響港區布局與防波堤設計；鹽害與颱風決定材料選擇。' };
   if (/高鐵|捷運|車站|機廠|火車站/.test(name)) return { cue: '城市紋理／人口', why: '由人口密度、聯外動線與都市計畫決定站位；高架／地下化視市區條件而定。' };
   if (/機場|航廈|塔台/.test(name)) return { cue: '空域／用地', why: '需要大面積平坦土地、無高樓障礙物，並考量風向、噪音管制與聯外運輸。' };
@@ -232,8 +233,11 @@ function buildAnswers(session) {
 
   /* Q2：本局最高分景點 */
   const best = rounds.slice().sort((a, b) => (b.score || 0) - (a.score || 0))[0];
-  const facet = /橋|大樓|塔|建築|車站|歌劇院|球場|博物館|圖書館/.test(best.name) ? '結構'
-              : /旋轉|纜車|閘門|月台|捷運|鐵|軌|機廠|機台/.test(best.name) ? '機構'
+  /* 先看所屬主題模組（機電整合主題一律從機構／控制切入，例如大港橋是旋轉橋），再用名稱關鍵字判斷 */
+  const bestTheme = (best.idx >= 0 && best.idx < 200) ? Math.floor(best.idx / 50) : -1;
+  const facet = bestTheme === 2 ? '機構或控制'
+              : /旋轉|纜車|閘門|月台門|機廠|機台/.test(best.name) ? '機構'
+              : /橋|大樓|塔|建築|車站|歌劇院|球場|博物館|圖書館/.test(best.name) ? '結構'
               : '結構或控制';
   const q2 = `<p><b>示範挑選：</b>「${escapeHtml(best.name)}」（本局最高分 <b>${best.score}</b> 分）。建議從「<b>${facet}</b>」面向切入。</p>
 <p><b>設計巧思：</b>${escapeHtml(best.tip || '—')}</p>
@@ -289,6 +293,14 @@ ${picked.map((r, i) => `<p>${i + 1}. <b>${escapeHtml(r.name)}</b>（${escapeHtml
   return { q1, q2, q3, q4 };
 }
 
+/* 延伸探究「重新設計」示範：依景點所屬主題給對應的工程對策，不再所有景點共用土木模板 */
+const REDESIGN_BY_THEME = [
+  '示例：可採結構健康監測（SHM）感測器、低碳混凝土、加裝阻尼器或被動式抗震裝置，或改用模組化施工縮短工期、降低交通衝擊。',
+  '示例：以參數化設計調整外殼開口與遮陽，降低日射得熱；用 BIM 整合結構與機電、預製構件縮短工期；檢討大跨度屋頂的風載、排水與維護動線。',
+  '示例：驅動系統加備援馬達與煞車，定期檢查齒輪、鋼索的磨耗；加入安全連鎖（偵測到人或障礙物就停止）；改用變頻驅動降低耗能與起停衝擊。',
+  '示例：海岸與離岸設施加強防蝕塗裝與陰極防蝕；搭配儲能平衡發電起伏；精密廠房加防微振基礎與備援電力；同時評估對生態與景觀的影響。',
+];
+
 function renderTeacherAnswers(session) {
   const answers = buildAnswers(session);
   if (!answers) return;
@@ -310,7 +322,7 @@ function renderTeacherAnswers(session) {
     name: `${pick.name}（${regionHintWS(pick.lat, pick.lon)}・座標 ${pick.lat.toFixed(3)}, ${pick.lon.toFixed(3)}）`,
     concept: pick.tip || '—',
     constraints: `示例：${g.why} 此外可能受到颱風、地震、海鹽害、地層下陷、用地取得等限制。`,
-    redesign: '示例：可採結構健康監測（SHM）感測器、低碳混凝土、加裝阻尼器或被動式抗震裝置，或改用模組化施工縮短工期、降低交通衝擊。',
+    redesign: REDESIGN_BY_THEME[(pick.idx >= 0 && pick.idx < 200) ? Math.floor(pick.idx / 50) : 0],
   };
   document.querySelectorAll('#extTable [data-ext]').forEach(td => {
     const key = td.getAttribute('data-ext');
@@ -330,7 +342,7 @@ if (new URLSearchParams(location.search).get('demo') &&
   p.createdAt = '2026-05-19T08:00:00.000Z';
   p.history = [{
     date: '2026-05-20T14:21:00.000Z', mode: 'engineering', theme: 0, deepMode: false,
-    totalScore: 6850, maxScore: 10000,
+    totalScore: 8248, maxScore: 10000,   // 逐題得分 1000·e^(−距離/55) 加總
     rounds: [
       { idx: 0, name: '西螺大橋', lat: 23.8113, lon: 120.4606, ch: 3,
         tip: '桁架結構分析（Truss）、靜定與靜不定結構判斷、拉壓桿件受力與材料降伏強度分析。', type: '橋梁', distance: 2.4, score: 957 },
@@ -339,19 +351,19 @@ if (new URLSearchParams(location.search).get('demo') &&
       { idx: 50, name: '台中國家歌劇院', lat: 24.1624, lon: 120.6413, ch: 2,
         tip: '連續曲面殼體結構（Sound Cave）。', type: '文化／教育場館', distance: 0.6, score: 989 },
       { idx: 100, name: '高雄大港橋', lat: 22.6178, lon: 120.2838, ch: 3,
-        tip: '水平旋轉機構。馬達驅動大齒輪系。', type: '橋梁', distance: 18, score: 720 },
+        tip: '水平旋轉機構。馬達驅動大齒輪系。', type: '橋梁', distance: 18, score: 721 },
       { idx: 156, name: '苗栗海洋竹南離岸風場', lat: 24.6855, lon: 120.8011, ch: 0,
         tip: '海洋工程水下基礎。', type: '發電／能源設施', distance: 22, score: 670 },
       { idx: 4, name: '台北101大樓', lat: 25.0339, lon: 121.5644, ch: 0,
         tip: '巨型構架與調諧質量阻尼器（TMD）。', type: '高樓建築', distance: 1.2, score: 978 },
       { idx: 154, name: '台積電竹科 12 廠', lat: 24.7732, lon: 121.0125, ch: 0,
-        tip: '先進製程研發中心。', type: '產業園區／廠房', distance: 35, score: 530 },
+        tip: '先進製程研發中心。', type: '產業園區／廠房', distance: 35, score: 529 },
       { idx: 18, name: '蘇花改觀音隧道', lat: 24.3751, lon: 121.785, ch: 0,
-        tip: '長隧道開挖工程。', type: '隧道', distance: 6.8, score: 880 },
+        tip: '長隧道開挖工程。', type: '隧道', distance: 6.8, score: 884 },
       { idx: 32, name: '大漢溪新月橋', lat: 25.0298, lon: 121.4503, ch: 0,
-        tip: '雙跨不對稱鋼拱橋。', type: '橋梁', distance: 14, score: 770 },
-      { idx: 100, name: '高雄大港橋', lat: 22.6178, lon: 120.2838, ch: 3,
-        tip: '水平旋轉機構。', type: '橋梁', distance: 10, score: 445 },
+        tip: '雙跨不對稱鋼拱橋。', type: '橋梁', distance: 14, score: 775 },
+      { idx: 1, name: '德基水庫大壩', lat: 24.2586, lon: 121.1544, ch: 3,
+        tip: '雙曲線混凝土拱壩受力與靜水壓力。', type: '水利設施（水庫／攔河堰）', distance: 10, score: 834 },
     ],
   }];
   localStorage.setItem('tweg_profile', JSON.stringify(p));
