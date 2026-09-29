@@ -118,7 +118,7 @@ function initDriveSection() {
   const restoreBtn = $('driveRestore');
 
   if (typeof TwegDrive === 'undefined' || !TwegDrive.isConfigured()) {
-    status.innerHTML = 'ℹ️ Google Drive 一鍵備份尚未由站長設定。可以用上方「⬇️ 下載 JSON 檔」自行管理。';
+    status.innerHTML = 'ℹ️ Google Drive 一鍵備份尚未由站長設定。可以到「<a href="teacher.html">教師端</a>」的「資料匯出／匯入」下載 JSON 檔自行管理。';
     backupBtn.disabled = true; restoreBtn.disabled = true;
     backupBtn.style.opacity = restoreBtn.style.opacity = .5;
     backupBtn.style.cursor = restoreBtn.style.cursor = 'not-allowed';

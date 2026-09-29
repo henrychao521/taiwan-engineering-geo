@@ -138,6 +138,7 @@ const TwegAuth = (function () {
     /* 匯入資料淨化:nick 截斷、gender 白名單(防惡意備份檔注入) */
     incoming.nick = String(incoming.nick || '玩家').slice(0, 20);
     if (!['男', '女'].includes(incoming.gender)) incoming.gender = '不提供';
+    if (!Array.isArray(incoming.history)) incoming.history = [];
 
     if (mode === 'replace' || !getProfile()) {
       setProfile(incoming);
@@ -145,6 +146,10 @@ const TwegAuth = (function () {
     }
     /* merge：合併紀錄、其他欄位以匯入版為主 */
     const cur = getProfile();
+    if (!Array.isArray(cur.history)) cur.history = [];
+    cur.nick = incoming.nick;
+    if (incoming.age != null) cur.age = incoming.age;
+    cur.gender = incoming.gender;
     const seen = new Set(cur.history.map(s => s.date));
     incoming.history.forEach(s => { if (!seen.has(s.date)) cur.history.unshift(s); });
     cur.history.sort((x, y) => (y.date || '').localeCompare(x.date || ''));
