@@ -35,8 +35,8 @@ function clearMap() {
   lmap.invalidateSize();
 }
 
-/* ---------- 衛星空照：Esri World Imagery 瓦片
- * 改用瓦片端點（256x256 預渲染、CDN 快取、可重複使用），
+/* ---------- 衛星空照：Esri World Imagery 圖磚
+ * 改用圖磚端點（256x256 預渲染、CDN 快取、可重複使用），
  * 取代以往 export 端點（每次伺服器即時合成單張 JPEG，無快取） */
 const ZOOM_NAMES = ['街廓', '近', '中', '遠', '最遠'];
 const SAT_ZOOMS  = [17, 16, 15, 13, 12];   /* 對應五段視野的 Leaflet zoom */
@@ -67,8 +67,8 @@ function showSatMap() {
 }
 function hideSatMap() { $('satMap').classList.remove('on'); }
 
-/* 預載指定座標附近的瓦片（背景靜默載入，僅為了暖快取）
- * 範圍：以中心點為中心的 3x3 = 9 個瓦片，預設為「遠」視野 z=13 */
+/* 預載指定座標附近的圖磚（背景靜默載入，僅為了暖快取）
+ * 範圍：以中心點為中心的 3x3 = 9 個圖磚，預設為「遠」視野 z=13 */
 function prefetchSatTiles(lat, lon, z) {
   const n = Math.pow(2, z);
   const xc = (lon + 180) / 360 * n;
@@ -596,8 +596,8 @@ function confirmGuess() {
 
   $('actBtn').textContent = idx < roundCount - 1 ? '下一題 ▶' : '看成績';
 
-  /* 預載下一題的衛星瓦片：揭曉後到使用者按下一題之間，背景靜默暖快取，
-   * 等真正切過去時瓦片多半已在瀏覽器快取裡 */
+  /* 預載下一題的衛星圖磚：揭曉後到使用者按下一題之間，背景靜默暖快取，
+   * 等真正切過去時圖磚多半已在瀏覽器快取裡 */
   if ((mode === 'engineering' || mode === 'trial') && idx < roundCount - 1) {
     const next = rounds[idx + 1];
     if (next) prefetchSatTiles(next.lat, next.lon, SAT_ZOOMS[3]);

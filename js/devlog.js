@@ -32,17 +32,17 @@ const PHASES = [
     title: '衛星空照載入速度優化',
     commit: '40735c7',
     verbatim: '現在開啟空照畫面的速度都有點慢，有什麼辦法可以提升嗎？',
-    context: '原本使用 Esri World Imagery 的 export REST 端點——伺服器即時合成一張 1024×768 JPEG，每次切景或縮放都重新合成、無 CDN 快取，因此感覺很慢。改用同服務的瓦片端點 tile/{z}/{y}/{x}：256×256 預渲染瓦片、全球 CDN 快取、多瓦片並行載入。將 photo-box 內的 <img> 改為迷你 Leaflet 地圖呈現空照，保留原本的「拉遠／拉近」五段視野（街廓 / 近 / 中 / 遠 / 最遠），對應 Leaflet zoom [17,16,15,13,12]。並加入「揭曉到使用者按下一題之間」背景預載下一題附近 3×3=9 個瓦片的暖快取機制。',
+    context: '原本使用 Esri World Imagery 的 export REST 端點——伺服器即時合成一張 1024×768 JPEG，每次切景或縮放都重新合成、無 CDN 快取，因此感覺很慢。改用同服務的圖磚端點 tile/{z}/{y}/{x}：256×256 預渲染圖磚、全球 CDN 快取、多圖磚並行載入。將 photo-box 內的 <img> 改為迷你 Leaflet 地圖呈現空照，保留原本的「拉遠／拉近」五段視野（街廓 / 近 / 中 / 遠 / 最遠），對應 Leaflet zoom [17,16,15,13,12]。並加入「揭曉到使用者按下一題之間」背景預載下一題附近 3×3=9 個圖磚的暖快取機制。',
     decisions: [
       '空照從 export 端點改為 tile 端點（CDN 快取）',
       'photo-box 用迷你 Leaflet map 取代 <img>',
       '預設 zoom 13「遠」，揭曉時自動拉到 16「近」',
-      '揭曉同時背景 prefetch 下一題 9 個瓦片',
+      '揭曉同時背景 prefetch 下一題 9 個圖磚',
     ],
     outputs: [
       'css/style.css 新增 #satMap 樣式',
       'js/explore.js initSatMap / showSatMap / hideSatMap / prefetchSatTiles',
-      '實測切景明顯加速、邊緣瓦片重用、同地多次玩近乎瞬開',
+      '實測切景明顯加速、邊緣圖磚重用、同地多次玩近乎瞬開',
     ],
   },
   {
@@ -269,7 +269,7 @@ const PHASES = [
     date: '2026-09-28',
     title: '動態體檢：我的檔案頁載入位移修正、地圖裁切判定為誤報',
     verbatim: '任務：修正三個教學平台「動畫跑起來後」才出現的版面問題。……twgeo：/Volumes/Work/taiwan-engineering-geo。explore.html、intro.html 桌機＋手機 clipped；account.html CLS 0.178（footer、nav 位移）。dev-log.html 要加一段紀錄。',
-    context: '動態體檢（motion_qc：0.5s／3s／8s／捲到底／點按鈕後各量一次）在線上版標出兩類問題。① account.html 的 CLS 0.178：兩個區塊（建立檔案／個人資料）預設 display:none，要等 auth.js、account.js 載入才顯示其中一區；線上網路延遲時頁面先以空白 main 繪出，頁尾貼在上方，JS 到了才被推下去；導覽列右端的「建立檔案」chip 也是 JS 事後插入，其他連結跟著移位。本機把 JS／CSS 人為延遲 1 秒可重現同樣的 0.178。② explore.html、intro.html 的 clipped：被標的是 Leaflet 地圖容器，它本來就是 overflow:hidden、裡面的瓦片層寬度達數萬像素，scrollWidth 必然大於 clientWidth；實測縮放鈕與版權列都完整落在地圖框內，沒有文字被切，判定為誤報。',
+    context: '動態體檢（motion_qc：0.5s／3s／8s／捲到底／點按鈕後各量一次）在線上版標出兩類問題。① account.html 的 CLS 0.178：兩個區塊（建立檔案／個人資料）預設 display:none，要等 auth.js、account.js 載入才顯示其中一區；線上網路延遲時頁面先以空白 main 繪出，頁尾貼在上方，JS 到了才被推下去；導覽列右端的「建立檔案」chip 也是 JS 事後插入，其他連結跟著移位。本機把 JS／CSS 人為延遲 1 秒可重現同樣的 0.178。② explore.html、intro.html 的 clipped：被標的是 Leaflet 地圖容器，它本來就是 overflow:hidden、裡面的圖磚層寬度達數萬像素，scrollWidth 必然大於 clientWidth；實測縮放鈕與版權列都完整落在地圖框內，沒有文字被切，判定為誤報。',
     decisions: [
       'account.html 在 main 結尾加一小段內嵌 script，解析當下就依 localStorage 有無檔案顯示對應區塊，account.js 之後照常接手',
       '導覽列先放同尺寸的「建立檔案」佔位 chip，auth.js 的 renderTopnavChip 會移除後重建，不改 auth.js',
