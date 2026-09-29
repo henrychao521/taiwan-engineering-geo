@@ -342,8 +342,20 @@ const PHASES = [
       '判定紀錄：/Volumes/Work/mesh-review-2026-09-28/fixes/round2_twgeo.json',
     ],
   },
+  {
+    tag: '段落 18',
+    date: '2026-09-29',
+    title: '與 PC13110 猜地點遊戲反向同步：雲端智慧、橋式起重機的設施類型提示',
+    verbatim: 'PC13110 第二輪補驗同步 twgeo 景點資料時，發現 twgeo 這邊還有兩處要反向同步。',
+    context: '第 95 筆寫「雲端智能」（中國用語），PC13110 已改為「雲端智慧」；設施類型提示的規則以「橋」字判斷橋梁，「基隆港橋式起重機群」被提示成橋梁。',
+    decisions: ['起重機規則放在橋梁規則之前，歸入港灣設施；其他含「橋」的景點不受影響'],
+    outputs: [
+      'js/data.js：雲端智能→雲端智慧',
+      'js/explore.js：FACILITY_TYPES 新增 /起重機/ → 港灣設施（排在 /橋/ 之前）',
+      '驗證：node --check；typeHint(基隆港橋式起重機群)=港灣設施、typeHint(淡江大橋)=橋梁',
+    ],
+  },
 ];
-
 /* ---- 渲染時間軸 ---- */
 (function render() {
   const tl = document.getElementById('timeline');
