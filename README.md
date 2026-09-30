@@ -59,6 +59,15 @@ npx serve .
 2. Settings → Pages → Source → 選 `main` 分支根目錄
 3. 等 Pages 部署完成即可
 
+## 作答紀錄送到老師的 Google 試算表（選用）
+
+規格見 `classroom-sheets/SPEC.md`（四個教學平台共用）。預設**完全不送**：`js/sheet-config.js` 的 `endpoint` 是空字串時，頁面不顯示任何告知或班級座號元件。
+
+- 老師部署共用的 Apps Script（`Code.gs`，`CONFIG.PLATFORM = 'twgeo'`、`CONFIG.ITEMS_URL` 指到本站 `assets/sheet-items.json`）後，把網頁應用程式網址貼到 `endpoint`
+- 一局結束送一筆 `kind=game`：每個景點一題（`spot-<SITES 索引>`／精選地景 `loc-<圖檔名>`，得分 ≥ 600 算答對，約距離 28 km 內），深度模式的工程原理題另記一題（`q` = `js/principles.js` 的 `id`，選項代號換回原始順序）；`meta` 帶總分、滿分、秒數。Mapillary 即時街景不送
+- 不送暱稱或個人檔案；班級座號只在學生自己於開始畫面或右下角填寫時帶入（存 sessionStorage，關分頁就清掉）
+- 改了景點或原理題後重跑 `python3 tools/sheets/build_items.py` 更新題庫；測試 `python3 tools/sheets/test_sheet_log.py`（只用本機假 endpoint）
+
 ## Google Drive 一鍵備份設定（選用）
 
 帳號系統預設純 localStorage，學生紀錄會永遠停在那一台瀏覽器。要讓學生能跨裝置帶著走，可以開啟「備份到 Google Drive / 從 Drive 還原」按鈕——這時學生紀錄會以 JSON 檔的形式存到他**自己**的 Google Drive，本站只能讀寫這一個檔。

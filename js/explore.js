@@ -100,6 +100,7 @@ function distKm(a, b) {
 let mode, rounds, idx, total, guess, actual, state, current, roundCount, zoomIdx, engTheme;
 let deepMode = false;
 let sessionRounds = [];   /* 收集本局每題的紀錄 */
+let gameStart = 0;        /* 本局開始時間（作答紀錄的秒數） */
 
 /* 工程地景：依目前視野等級，把衛星迷你地圖切到對應 Leaflet zoom */
 function applyZoom() {
@@ -296,6 +297,7 @@ function startGame(m, theme) {
   mode = m;
   idx = 0; total = 0;
   sessionRounds = [];
+  gameStart = Date.now();
   $('score').textContent = 0;
   $('overlay').classList.add('hidden');
   deepMode = (localStorage.getItem(DEEP_KEY) === '1');
@@ -349,7 +351,8 @@ async function loadRound() {
 
   if (mode === 'curated') {
     const loc = rounds[idx];
-    current = { src: 'img/' + loc.img, lat: loc.lat, lon: loc.lon, name: loc.name, blurb: loc.blurb, by: loc.by };
+    current = { src: 'img/' + loc.img, lat: loc.lat, lon: loc.lon, name: loc.name, blurb: loc.blurb, by: loc.by,
+      loc: 'loc-' + loc.img.replace(/\.[a-z]+$/i, '') };
     setPhoto(current.src, '📷 ' + loc.by + '・Wikimedia Commons');
     $('result').textContent = '點地圖選一個位置';
     state = 'guess';
@@ -490,7 +493,8 @@ function makeFollowups(site) {
     const [srcName, srcUrl] = p.src;
     out.push({
       q: `🔧 【${typeLabel}】${p.q}`,
-      options: shuffle(p.options.map((label, i) => ({ label, ok: i === p.answer }))),
+      options: shuffle(p.options.map((label, i) => ({ label, ok: i === p.answer, i }))),   // i＝原始順序，作答紀錄換回 A–F 用
+      principle: p,
       explain: p.explain +
         `<div class="fu-src">出處：<a href="${srcUrl}" target="_blank" rel="noopener">${srcName}</a></div>`,
       kind: 'type',
@@ -539,6 +543,9 @@ function answerFollowup(round, fu, opt, btn) {
   /* 紀錄追問結果 */
   round.followups = round.followups || {};
   round.followups[fu.kind] = !!opt.ok;
+  /* 原理題作答（作答紀錄用）：不可列舉，不會跟著本局紀錄存進 localStorage／成績碼 */
+  if (fu.principle) Object.defineProperty(round, 'principle',
+    { value: { p: fu.principle, pick: opt.i, ok: !!opt.ok }, enumerable: false, configurable: true });
   if (opt.ok) {
     total += 300;
     $('score').textContent = total;
@@ -576,6 +583,7 @@ function confirmGuess() {
     distance: d, score: pts,
     imgType: current.imgType || 'photo',
   };
+  if (current.loc) Object.defineProperty(rec, 'loc', { value: current.loc, enumerable: false });   // 精選地景代號，只給作答紀錄用
   sessionRounds.push(rec);
 
   let head;
@@ -635,6 +643,7 @@ function endGame() {
     : total >= max * 0.36 ? '🙂 還不錯'
     : '💪 再接再厲';
   const session = saveSession();
+  sendSheetLog(session);
 
   /* 不同儲存結果決定下方提示文字 */
   let savedNote;
@@ -654,6 +663,7 @@ function endGame() {
     `<div class="max">/ 滿分 ${max}${deepMode ? ' +追問加分' : ''}</div>` +
     `<div class="rank-badge">${rank}</div>` +
     savedNote +
+    sheetNote() +
     leaderboardHtml +
     `<div style="margin:14px 0">
        <div class="mono" style="font-size:11px;color:var(--c-muted);margin-bottom:4px">成績碼（複製給老師）</div>
@@ -710,6 +720,46 @@ function saveSession() {
   pushLeaderboard(lbEntry);
   session._lbEntry = lbEntry;
   return session;
+}
+
+/* ---------- 作答紀錄 → 老師的 Google 試算表（js/sheet-log.js；sheet-config.js 的 endpoint 空就完全不送）
+ * 一局結束送一筆 kind=game：
+ *   - 每個景點一題：q = spot-<SITES 索引>（精選地景為 loc-<圖檔名>），t = game，a／k 留空；
+ *     ok = 本題得分 ≥ 600（得分 = 1000·e^(−距離/55 km)，600 分 ≈ 距離 28 km 內；
+ *     沿用結算「在地通」等級＝滿分 60% 的門檻，套到單題）。
+ *   - 深度模式的工程原理題（js/principles.js）另記一題：q = 題目 id，t = single，
+ *     a／k = 原始資料順序的選項代號 A–D（畫面洗牌後換回）。第 1 題主題分類不記（每局最多 40 題的上限留給原理題）。
+ *   - meta：score 本局總分、max 本局滿分（含追問）、sec 秒數。
+ * Mapillary 即時街景每次地點都不同、沒有穩定代號，不送；不送暱稱或個人檔案資料，班級座號只用學生自己在頁面右下角填的。 */
+function sheetNote() {
+  if (typeof SheetLog === 'undefined' || !SheetLog.enabled()) return '';
+  return `<div class="sl-ov-note" style="font-size:12.5px;color:var(--c-muted);margin:8px 0;text-align:left">📝 ${SheetLog.notice}（Mapillary 即時街景不送）</div>`;
+}
+function sheetPage(s) {
+  return 'explore.' + s.mode + (s.mode === 'engineering' ? '.t' + (s.theme || 0) : '') + (s.deepMode ? '.deep' : '');
+}
+function sendSheetLog(s) {
+  if (typeof SheetLog === 'undefined' || !SheetLog.enabled()) return;
+  if (s.mode !== 'engineering' && s.mode !== 'trial' && s.mode !== 'curated') return;
+  const sid = SheetLog.newSid();
+  const sec = Math.round((Date.now() - gameStart) / 1000);
+  const jobs = [];
+  s.rounds.forEach(r => {
+    const q = r.idx >= 0 ? 'spot-' + r.idx : r.loc;
+    if (!q) return;
+    jobs.push(SheetLog.hash({ type: 'game', stem: r.name, answer: r.lat + ',' + r.lon })
+      .then(h => ({ q, h, t: 'game', ok: r.score >= 600 ? 1 : 0, a: '', k: '' })));
+    if (r.principle) {
+      const p = r.principle.p;
+      const key = SheetLog.optCode(p.answer);
+      jobs.push(SheetLog.hash({ type: 'single', stem: p.q, options: p.options, answer: key })
+        .then(h => ({ q: p.id, h, t: 'single', ok: r.principle.ok ? 1 : 0, a: SheetLog.optCode(r.principle.pick), k: key })));
+    }
+  });
+  Promise.all(jobs).then(items => SheetLog.send({
+    sid, page: sheetPage(s), kind: 'game', items,
+    meta: { score: s.totalScore, max: s.maxScore, sec },
+  }));
 }
 
 /* ---------- 排行榜：跨個人檔案保留所有玩過的紀錄 ---------- */
@@ -854,6 +904,7 @@ function showStart() {
     `<h1>準備出發</h1>` +
     `<p>看影像、在地圖上點出位置。可從 20 題試玩開始，或直接挑戰課程地景。</p>` +
     userLine +
+    sheetNote() +
     `<button id="mTrial" class="ov-trial">
       <span class="t1">🎮 試玩 20 題</span>
       <span class="t2">不需登入、跨全部 200 景點、不存入個人紀錄（適合第一次來）</span>
@@ -872,6 +923,9 @@ function showStart() {
       <button id="mMapi" class="alt"><span class="t1">🛰 Mapillary 即時街景</span>
         <span class="t2">${hasToken ? '已設定 token・台灣各地隨機街景' : '需要免費 token・點此設定'}</span></button>
     </div>`;
+  /* 開始畫面裡放一份班級座號元件（選填；和右下角的同步），讓學生開局前就能填 */
+  const slNote = document.querySelector('#ovBox .sl-ov-note');
+  if (slNote) SheetLog.mountInline(slNote);
   $('mTrial').addEventListener('click', () => startGame('trial'));
   $('deepChk').addEventListener('change', e => {
     localStorage.setItem(DEEP_KEY, e.target.checked ? '1' : '0');

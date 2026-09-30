@@ -664,10 +664,12 @@ table.t tbody tr:hover { background: var(--c-line-soft); }
 /* 開始畫面 / 結算 overlay */
 .overlay {
   position: fixed; inset: 0; background: rgba(20,30,50,.55);
-  display: flex; align-items: center; justify-content: center; padding: 20px;
+  /* 用 margin:auto 置中（安全置中）：內容比視窗高時從頂端排、可捲動，不會上緣被切掉，字型載入後高度變化也不會整塊位移 */
+  display: flex; align-items: flex-start; justify-content: center; padding: 20px;
   z-index: 1000; overflow: auto;
 }
 .overlay.hidden { display: none; }
+.ov-box:empty { display: none; }   /* 腳本還沒填內容前不畫空框，避免填入後整塊位移（CLS） */
 .ov-box {
   background: #fff;
   border: 1px solid var(--c-line);
@@ -675,6 +677,7 @@ table.t tbody tr:hover { background: var(--c-line-soft); }
   padding: 30px 32px;
   text-align: center;
   max-width: 460px; width: 100%;
+  margin: auto;
   box-shadow: var(--sh-lg);
 }
 .ov-box h1 {
@@ -1126,3 +1129,8 @@ table.t tbody tr:hover { background: var(--c-line-soft); }
 .lb-row.me .lb-nick { color: #92400E; }
 .lb-row.me .lb-score { color: var(--c-amber); }
 .lb-row.r1 { background: linear-gradient(90deg, rgba(217,119,6,.15), transparent); }
+
+/* 開始畫面裡的班級座號元件（js/sheet-log.js，只在設定了作答紀錄網址時出現）：按鈕接在告知文字後面，展開時才換成整塊 */
+.sl-ov-note .sl-inline { display: inline-block; margin: 0 0 0 4px; vertical-align: baseline; }
+.sl-ov-note .sl-inline .sl-btn { margin: 0; }
+.sl-ov-note .sl-inline:has(.sl-panel:not([hidden])) { display: block; margin: 6px 0 0; }

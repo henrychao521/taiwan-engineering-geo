@@ -1,0 +1,2541 @@
+{
+ "platform": "twgeo",
+ "version": "2026-09-30",
+ "questions": [
+  {
+   "q": "spot-0",
+   "h": "03a7b42a",
+   "t": "game",
+   "page": "explore",
+   "stem": "西螺大橋",
+   "options": {},
+   "answer": "23.8113,120.4606",
+   "items": []
+  },
+  {
+   "q": "spot-1",
+   "h": "f08acfaa",
+   "t": "game",
+   "page": "explore",
+   "stem": "德基水庫大壩",
+   "options": {},
+   "answer": "24.2586,121.1544",
+   "items": []
+  },
+  {
+   "q": "spot-2",
+   "h": "0f16c84a",
+   "t": "game",
+   "page": "explore",
+   "stem": "高屏溪斜張橋",
+   "options": {},
+   "answer": "22.644,120.435",
+   "items": []
+  },
+  {
+   "q": "spot-3",
+   "h": "62410df3",
+   "t": "game",
+   "page": "explore",
+   "stem": "關渡大橋",
+   "options": {},
+   "answer": "25.1245,121.4556",
+   "items": []
+  },
+  {
+   "q": "spot-4",
+   "h": "5c33aa99",
+   "t": "game",
+   "page": "explore",
+   "stem": "台北101大樓",
+   "options": {},
+   "answer": "25.0339,121.5644",
+   "items": []
+  },
+  {
+   "q": "spot-5",
+   "h": "278f923d",
+   "t": "game",
+   "page": "explore",
+   "stem": "翡翠水庫大壩",
+   "options": {},
+   "answer": "24.908,121.5734",
+   "items": []
+  },
+  {
+   "q": "spot-6",
+   "h": "b324978e",
+   "t": "game",
+   "page": "explore",
+   "stem": "曾文水庫大壩",
+   "options": {},
+   "answer": "23.2203,120.5081",
+   "items": []
+  },
+  {
+   "q": "spot-7",
+   "h": "4a28a375",
+   "t": "game",
+   "page": "explore",
+   "stem": "石門水庫溢洪道",
+   "options": {},
+   "answer": "24.8105,121.2468",
+   "items": []
+  },
+  {
+   "q": "spot-8",
+   "h": "37510667",
+   "t": "game",
+   "page": "explore",
+   "stem": "澎湖跨海大橋",
+   "options": {},
+   "answer": "23.6496,119.5488",
+   "items": []
+  },
+  {
+   "q": "spot-9",
+   "h": "b58da3d2",
+   "t": "game",
+   "page": "explore",
+   "stem": "碧潭吊橋",
+   "options": {},
+   "answer": "24.9567,121.5372",
+   "items": []
+  },
+  {
+   "q": "spot-10",
+   "h": "590d724f",
+   "t": "game",
+   "page": "explore",
+   "stem": "淡水情人橋",
+   "options": {},
+   "answer": "25.1828,121.4111",
+   "items": []
+  },
+  {
+   "q": "spot-11",
+   "h": "67393f2f",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北車站屋頂結構",
+   "options": {},
+   "answer": "25.0478,121.517",
+   "items": []
+  },
+  {
+   "q": "spot-12",
+   "h": "f564c50f",
+   "t": "game",
+   "page": "explore",
+   "stem": "南方澳跨港大橋(新)",
+   "options": {},
+   "answer": "24.5823,121.8672",
+   "items": []
+  },
+  {
+   "q": "spot-13",
+   "h": "821ccfab",
+   "t": "game",
+   "page": "explore",
+   "stem": "國道六號國姓交流道",
+   "options": {},
+   "answer": "23.9983,120.8524",
+   "items": []
+  },
+  {
+   "q": "spot-14",
+   "h": "fdf37e05",
+   "t": "game",
+   "page": "explore",
+   "stem": "五楊高架橋",
+   "options": {},
+   "answer": "25.06,121.36",
+   "items": []
+  },
+  {
+   "q": "spot-15",
+   "h": "632efdc4",
+   "t": "game",
+   "page": "explore",
+   "stem": "舊山線龍騰斷橋",
+   "options": {},
+   "answer": "24.3582,120.7733",
+   "items": []
+  },
+  {
+   "q": "spot-16",
+   "h": "8466b70b",
+   "t": "game",
+   "page": "explore",
+   "stem": "下淡水溪鐵橋(高屏溪舊鐵橋)",
+   "options": {},
+   "answer": "22.6598,120.4269",
+   "items": []
+  },
+  {
+   "q": "spot-17",
+   "h": "d85af29a",
+   "t": "game",
+   "page": "explore",
+   "stem": "大直橋",
+   "options": {},
+   "answer": "25.0769,121.5472",
+   "items": []
+  },
+  {
+   "q": "spot-18",
+   "h": "1fe5b361",
+   "t": "game",
+   "page": "explore",
+   "stem": "蘇花改觀音隧道",
+   "options": {},
+   "answer": "24.3751,121.785",
+   "items": []
+  },
+  {
+   "q": "spot-19",
+   "h": "e6f5f173",
+   "t": "game",
+   "page": "explore",
+   "stem": "雪山隧道通風豎井",
+   "options": {},
+   "answer": "24.9192,121.8025",
+   "items": []
+  },
+  {
+   "q": "spot-20",
+   "h": "3018a7f0",
+   "t": "game",
+   "page": "explore",
+   "stem": "鯉魚潭水庫鋸齒堰",
+   "options": {},
+   "answer": "24.3355,120.7788",
+   "items": []
+  },
+  {
+   "q": "spot-21",
+   "h": "fc7060c0",
+   "t": "game",
+   "page": "explore",
+   "stem": "明德水庫壩體",
+   "options": {},
+   "answer": "24.5866,120.8988",
+   "items": []
+  },
+  {
+   "q": "spot-22",
+   "h": "159ad47a",
+   "t": "game",
+   "page": "explore",
+   "stem": "大漢溪新月橋",
+   "options": {},
+   "answer": "25.0298,121.4503",
+   "items": []
+  },
+  {
+   "q": "spot-23",
+   "h": "27b20efe",
+   "t": "game",
+   "page": "explore",
+   "stem": "桃園機場第一航廈",
+   "options": {},
+   "answer": "25.0796,121.2342",
+   "items": []
+  },
+  {
+   "q": "spot-24",
+   "h": "382fc608",
+   "t": "game",
+   "page": "explore",
+   "stem": "南山廣場大樓",
+   "options": {},
+   "answer": "25.0326,121.567",
+   "items": []
+  },
+  {
+   "q": "spot-25",
+   "h": "6b836170",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄85大樓",
+   "options": {},
+   "answer": "22.6116,120.3002",
+   "items": []
+  },
+  {
+   "q": "spot-26",
+   "h": "1603a9d7",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北捷運劍潭站",
+   "options": {},
+   "answer": "25.0847,121.5249",
+   "items": []
+  },
+  {
+   "q": "spot-27",
+   "h": "0ae49faf",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺中國際機場航廈",
+   "options": {},
+   "answer": "24.2647,120.62",
+   "items": []
+  },
+  {
+   "q": "spot-28",
+   "h": "54c85b87",
+   "t": "game",
+   "page": "explore",
+   "stem": "林口發電廠卸煤碼頭",
+   "options": {},
+   "answer": "25.1172,121.2913",
+   "items": []
+  },
+  {
+   "q": "spot-29",
+   "h": "7c8de2bd",
+   "t": "game",
+   "page": "explore",
+   "stem": "台東池上大橋",
+   "options": {},
+   "answer": "23.1098,121.1965",
+   "items": []
+  },
+  {
+   "q": "spot-30",
+   "h": "8864b4fb",
+   "t": "game",
+   "page": "explore",
+   "stem": "清境高空觀景步道",
+   "options": {},
+   "answer": "24.0569,121.1578",
+   "items": []
+  },
+  {
+   "q": "spot-31",
+   "h": "40e1fb23",
+   "t": "game",
+   "page": "explore",
+   "stem": "台中大坑情人橋",
+   "options": {},
+   "answer": "24.1685,120.7303",
+   "items": []
+  },
+  {
+   "q": "spot-32",
+   "h": "0d1d798c",
+   "t": "game",
+   "page": "explore",
+   "stem": "新北大橋",
+   "options": {},
+   "answer": "25.0486,121.4828",
+   "items": []
+  },
+  {
+   "q": "spot-33",
+   "h": "aa375a88",
+   "t": "game",
+   "page": "explore",
+   "stem": "泰山收費站舊址",
+   "options": {},
+   "answer": "25.0609,121.4285",
+   "items": []
+  },
+  {
+   "q": "spot-34",
+   "h": "6b9285cb",
+   "t": "game",
+   "page": "explore",
+   "stem": "新竹高鐵站屋頂結構",
+   "options": {},
+   "answer": "24.808,121.0403",
+   "items": []
+  },
+  {
+   "q": "spot-35",
+   "h": "ef5b295b",
+   "t": "game",
+   "page": "explore",
+   "stem": "苗栗新東大橋",
+   "options": {},
+   "answer": "24.5516,120.8351",
+   "items": []
+  },
+  {
+   "q": "spot-36",
+   "h": "2c7283bf",
+   "t": "game",
+   "page": "explore",
+   "stem": "日月潭向山遊客中心",
+   "options": {},
+   "answer": "23.8519,120.9016",
+   "items": []
+  },
+  {
+   "q": "spot-37",
+   "h": "239c4bca",
+   "t": "game",
+   "page": "explore",
+   "stem": "員山子分洪道",
+   "options": {},
+   "answer": "25.1076,121.8058",
+   "items": []
+  },
+  {
+   "q": "spot-38",
+   "h": "319a7d1d",
+   "t": "game",
+   "page": "explore",
+   "stem": "新港溪橋（台南）",
+   "options": {},
+   "answer": "23.0375,120.2798",
+   "items": []
+  },
+  {
+   "q": "spot-39",
+   "h": "951df73a",
+   "t": "game",
+   "page": "explore",
+   "stem": "草山月世界吊橋",
+   "options": {},
+   "answer": "22.9513,120.3951",
+   "items": []
+  },
+  {
+   "q": "spot-40",
+   "h": "67d50c92",
+   "t": "game",
+   "page": "explore",
+   "stem": "阿公店水庫",
+   "options": {},
+   "answer": "22.8028,120.3547",
+   "items": []
+  },
+  {
+   "q": "spot-41",
+   "h": "c3103ae0",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄港過港隧道",
+   "options": {},
+   "answer": "22.5855,120.3011",
+   "items": []
+  },
+  {
+   "q": "spot-42",
+   "h": "6d91d43a",
+   "t": "game",
+   "page": "explore",
+   "stem": "金門大橋",
+   "options": {},
+   "answer": "24.4447,118.2838",
+   "items": []
+  },
+  {
+   "q": "spot-43",
+   "h": "24b3c851",
+   "t": "game",
+   "page": "explore",
+   "stem": "馬祖芹壁防波堤",
+   "options": {},
+   "answer": "26.2238,119.9841",
+   "items": []
+  },
+  {
+   "q": "spot-44",
+   "h": "f93936e1",
+   "t": "game",
+   "page": "explore",
+   "stem": "南迴公路草埔隧道",
+   "options": {},
+   "answer": "22.2541,120.8033",
+   "items": []
+  },
+  {
+   "q": "spot-45",
+   "h": "109595fb",
+   "t": "game",
+   "page": "explore",
+   "stem": "基隆港橋式起重機群",
+   "options": {},
+   "answer": "25.1328,121.7397",
+   "items": []
+  },
+  {
+   "q": "spot-46",
+   "h": "98cc5b70",
+   "t": "game",
+   "page": "explore",
+   "stem": "東石漁人碼頭觀景台",
+   "options": {},
+   "answer": "23.4475,120.1347",
+   "items": []
+  },
+  {
+   "q": "spot-47",
+   "h": "6e907ba7",
+   "t": "game",
+   "page": "explore",
+   "stem": "合歡山公路武嶺亭",
+   "options": {},
+   "answer": "24.1372,121.2758",
+   "items": []
+  },
+  {
+   "q": "spot-48",
+   "h": "aaf5cd0f",
+   "t": "game",
+   "page": "explore",
+   "stem": "台南七股觀海樓",
+   "options": {},
+   "answer": "23.1364,120.0886",
+   "items": []
+  },
+  {
+   "q": "spot-49",
+   "h": "323e5e12",
+   "t": "game",
+   "page": "explore",
+   "stem": "中橫公路九曲洞明隧道",
+   "options": {},
+   "answer": "24.1713,121.5311",
+   "items": []
+  },
+  {
+   "q": "spot-50",
+   "h": "a587dbe7",
+   "t": "game",
+   "page": "explore",
+   "stem": "台中國家歌劇院",
+   "options": {},
+   "answer": "24.1624,120.6413",
+   "items": []
+  },
+  {
+   "q": "spot-51",
+   "h": "022ad777",
+   "t": "game",
+   "page": "explore",
+   "stem": "台北表演藝術中心",
+   "options": {},
+   "answer": "25.0852,121.5244",
+   "items": []
+  },
+  {
+   "q": "spot-52",
+   "h": "f7c17c17",
+   "t": "game",
+   "page": "explore",
+   "stem": "淡江大橋",
+   "options": {},
+   "answer": "25.1746,121.4172",
+   "items": []
+  },
+  {
+   "q": "spot-53",
+   "h": "e064b6a1",
+   "t": "game",
+   "page": "explore",
+   "stem": "衛武營國家藝術文化中心",
+   "options": {},
+   "answer": "22.6254,120.3421",
+   "items": []
+  },
+  {
+   "q": "spot-54",
+   "h": "5ae2c5cb",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄流行音樂中心",
+   "options": {},
+   "answer": "22.6186,120.2917",
+   "items": []
+  },
+  {
+   "q": "spot-55",
+   "h": "22714b01",
+   "t": "game",
+   "page": "explore",
+   "stem": "蘭陽博物館",
+   "options": {},
+   "answer": "24.8688,121.8315",
+   "items": []
+  },
+  {
+   "q": "spot-56",
+   "h": "9734d1c8",
+   "t": "game",
+   "page": "explore",
+   "stem": "故宮南院",
+   "options": {},
+   "answer": "23.4725,120.2936",
+   "items": []
+  },
+  {
+   "q": "spot-57",
+   "h": "ef0b16c1",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北流行音樂中心",
+   "options": {},
+   "answer": "25.0526,121.6006",
+   "items": []
+  },
+  {
+   "q": "spot-58",
+   "h": "3e72258b",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北大巨蛋",
+   "options": {},
+   "answer": "25.0422,121.5587",
+   "items": []
+  },
+  {
+   "q": "spot-59",
+   "h": "afb47b04",
+   "t": "game",
+   "page": "explore",
+   "stem": "嘉義火車站新站體(願景)",
+   "options": {},
+   "answer": "23.4791,120.4402",
+   "items": []
+  },
+  {
+   "q": "spot-60",
+   "h": "4435d9cb",
+   "t": "game",
+   "page": "explore",
+   "stem": "桃園市立圖書館新總館",
+   "options": {},
+   "answer": "25.0178,121.3",
+   "items": []
+  },
+  {
+   "q": "spot-61",
+   "h": "3be9ba84",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺中綠美圖",
+   "options": {},
+   "answer": "24.1856,120.6542",
+   "items": []
+  },
+  {
+   "q": "spot-62",
+   "h": "b01ecc66",
+   "t": "game",
+   "page": "explore",
+   "stem": "新北市立美術館",
+   "options": {},
+   "answer": "24.9452,121.3503",
+   "items": []
+  },
+  {
+   "q": "spot-63",
+   "h": "775d3b12",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺南美術館二館",
+   "options": {},
+   "answer": "22.9904,120.2016",
+   "items": []
+  },
+  {
+   "q": "spot-64",
+   "h": "acfd16f9",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄車站（新站）",
+   "options": {},
+   "answer": "22.6394,120.3025",
+   "items": []
+  },
+  {
+   "q": "spot-65",
+   "h": "2edd80d6",
+   "t": "game",
+   "page": "explore",
+   "stem": "屏東縣民公園",
+   "options": {},
+   "answer": "22.6583,120.4851",
+   "items": []
+  },
+  {
+   "q": "spot-66",
+   "h": "9878efd4",
+   "t": "game",
+   "page": "explore",
+   "stem": "富邦信義A25總部大樓",
+   "options": {},
+   "answer": "25.0378,121.5694",
+   "items": []
+  },
+  {
+   "q": "spot-67",
+   "h": "8a125f0e",
+   "t": "game",
+   "page": "explore",
+   "stem": "亞洲大學現代美術館",
+   "options": {},
+   "answer": "24.047,120.6872",
+   "items": []
+  },
+  {
+   "q": "spot-68",
+   "h": "7f0d7870",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺中國際會展中心",
+   "options": {},
+   "answer": "24.1805,120.6508",
+   "items": []
+  },
+  {
+   "q": "spot-69",
+   "h": "929cb68a",
+   "t": "game",
+   "page": "explore",
+   "stem": "南科考古館",
+   "options": {},
+   "answer": "23.1042,120.2811",
+   "items": []
+  },
+  {
+   "q": "spot-70",
+   "h": "bc61327a",
+   "t": "game",
+   "page": "explore",
+   "stem": "花蓮新城火車站",
+   "options": {},
+   "answer": "24.1264,121.6428",
+   "items": []
+  },
+  {
+   "q": "spot-71",
+   "h": "8fbed09c",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺東大學圖書館",
+   "options": {},
+   "answer": "22.7533,121.0664",
+   "items": []
+  },
+  {
+   "q": "spot-72",
+   "h": "3318b20d",
+   "t": "game",
+   "page": "explore",
+   "stem": "雲林高鐵站",
+   "options": {},
+   "answer": "23.7314,120.4072",
+   "items": []
+  },
+  {
+   "q": "spot-73",
+   "h": "1d5e9faf",
+   "t": "game",
+   "page": "explore",
+   "stem": "彰化高鐵站",
+   "options": {},
+   "answer": "23.8732,120.5746",
+   "items": []
+  },
+  {
+   "q": "spot-74",
+   "h": "3fe6839a",
+   "t": "game",
+   "page": "explore",
+   "stem": "嘉義高鐵站",
+   "options": {},
+   "answer": "23.4581,120.3261",
+   "items": []
+  },
+  {
+   "q": "spot-75",
+   "h": "ffe7a574",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺南左鎮化石園區",
+   "options": {},
+   "answer": "23.0573,120.4014",
+   "items": []
+  },
+  {
+   "q": "spot-76",
+   "h": "14ce516a",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄世運主場館",
+   "options": {},
+   "answer": "22.7025,120.2941",
+   "items": []
+  },
+  {
+   "q": "spot-77",
+   "h": "fb3b4f46",
+   "t": "game",
+   "page": "explore",
+   "stem": "宜蘭羅東文化工場",
+   "options": {},
+   "answer": "24.6713,121.7675",
+   "items": []
+  },
+  {
+   "q": "spot-78",
+   "h": "f971edc2",
+   "t": "game",
+   "page": "explore",
+   "stem": "國立臺灣歷史博物館",
+   "options": {},
+   "answer": "23.0592,120.2248",
+   "items": []
+  },
+  {
+   "q": "spot-79",
+   "h": "9100804c",
+   "t": "game",
+   "page": "explore",
+   "stem": "桃園陽光劇場(流行音樂露天劇場)",
+   "options": {},
+   "answer": "25.0242,121.2184",
+   "items": []
+  },
+  {
+   "q": "spot-80",
+   "h": "953beb3a",
+   "t": "game",
+   "page": "explore",
+   "stem": "新竹市圖書館新總館(建)",
+   "options": {},
+   "answer": "24.8105,120.9701",
+   "items": []
+  },
+  {
+   "q": "spot-81",
+   "h": "64d39bd6",
+   "t": "game",
+   "page": "explore",
+   "stem": "中原大學圖書館",
+   "options": {},
+   "answer": "24.9575,121.2405",
+   "items": []
+  },
+  {
+   "q": "spot-82",
+   "h": "f55431fb",
+   "t": "game",
+   "page": "explore",
+   "stem": "元智大學遠東有庠通訊大樓",
+   "options": {},
+   "answer": "24.9698,121.2641",
+   "items": []
+  },
+  {
+   "q": "spot-83",
+   "h": "595fa91e",
+   "t": "game",
+   "page": "explore",
+   "stem": "高美濕地景觀橋",
+   "options": {},
+   "answer": "24.3125,120.5488",
+   "items": []
+  },
+  {
+   "q": "spot-84",
+   "h": "e7707e60",
+   "t": "game",
+   "page": "explore",
+   "stem": "星巴克洄瀾門市(貨櫃屋)",
+   "options": {},
+   "answer": "23.9723,121.5948",
+   "items": []
+  },
+  {
+   "q": "spot-85",
+   "h": "8c2d6394",
+   "t": "game",
+   "page": "explore",
+   "stem": "宏匯i-Tower（新莊）",
+   "options": {},
+   "answer": "25.0593,121.4485",
+   "items": []
+  },
+  {
+   "q": "spot-86",
+   "h": "e4ebbdfa",
+   "t": "game",
+   "page": "explore",
+   "stem": "東海大學路思義教堂",
+   "options": {},
+   "answer": "24.1788,120.6006",
+   "items": []
+  },
+  {
+   "q": "spot-87",
+   "h": "63f09846",
+   "t": "game",
+   "page": "explore",
+   "stem": "桃園高鐵站",
+   "options": {},
+   "answer": "25.0132,121.2148",
+   "items": []
+  },
+  {
+   "q": "spot-88",
+   "h": "f7190b88",
+   "t": "game",
+   "page": "explore",
+   "stem": "北投圖書館",
+   "options": {},
+   "answer": "25.1364,121.5065",
+   "items": []
+  },
+  {
+   "q": "spot-89",
+   "h": "5712ccc2",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北大縱走圓山微波站",
+   "options": {},
+   "answer": "25.0811,121.5284",
+   "items": []
+  },
+  {
+   "q": "spot-90",
+   "h": "b199c695",
+   "t": "game",
+   "page": "explore",
+   "stem": "三創數位生活園區",
+   "options": {},
+   "answer": "25.0445,121.5312",
+   "items": []
+  },
+  {
+   "q": "spot-91",
+   "h": "1193eaf5",
+   "t": "game",
+   "page": "explore",
+   "stem": "新北圖書館總館",
+   "options": {},
+   "answer": "25.0039,121.4518",
+   "items": []
+  },
+  {
+   "q": "spot-92",
+   "h": "a8742e2e",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺中市政府新市政大樓",
+   "options": {},
+   "answer": "24.1627,120.6468",
+   "items": []
+  },
+  {
+   "q": "spot-93",
+   "h": "45cf1409",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄市圖書總館",
+   "options": {},
+   "answer": "22.6101,120.3015",
+   "items": []
+  },
+  {
+   "q": "spot-94",
+   "h": "cf911fdd",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺東轉運站（舊火車站）",
+   "options": {},
+   "answer": "22.7533,121.1444",
+   "items": []
+  },
+  {
+   "q": "spot-95",
+   "h": "86e6c803",
+   "t": "game",
+   "page": "explore",
+   "stem": "花蓮富里車站",
+   "options": {},
+   "answer": "23.1786,121.2505",
+   "items": []
+  },
+  {
+   "q": "spot-96",
+   "h": "1c985172",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺南台江文化中心",
+   "options": {},
+   "answer": "23.0531,120.1834",
+   "items": []
+  },
+  {
+   "q": "spot-97",
+   "h": "dc2007b8",
+   "t": "game",
+   "page": "explore",
+   "stem": "嘉義市立美術館",
+   "options": {},
+   "answer": "23.4777,120.4431",
+   "items": []
+  },
+  {
+   "q": "spot-98",
+   "h": "ee7721ec",
+   "t": "game",
+   "page": "explore",
+   "stem": "新竹波光市集",
+   "options": {},
+   "answer": "24.8475,120.9272",
+   "items": []
+  },
+  {
+   "q": "spot-99",
+   "h": "8f8cfd7e",
+   "t": "game",
+   "page": "explore",
+   "stem": "誠品生活新店（裕隆城）",
+   "options": {},
+   "answer": "24.9768,121.5458",
+   "items": []
+  },
+  {
+   "q": "spot-100",
+   "h": "537d7b72",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄大港橋",
+   "options": {},
+   "answer": "22.6178,120.2838",
+   "items": []
+  },
+  {
+   "q": "spot-101",
+   "h": "12b646e4",
+   "t": "game",
+   "page": "explore",
+   "stem": "國道一號 ETC 門架 (新竹)",
+   "options": {},
+   "answer": "24.7887,121.005",
+   "items": []
+  },
+  {
+   "q": "spot-102",
+   "h": "05c467b7",
+   "t": "game",
+   "page": "explore",
+   "stem": "國道三號 ETC 門架 (大甲)",
+   "options": {},
+   "answer": "24.3641,120.6128",
+   "items": []
+  },
+  {
+   "q": "spot-103",
+   "h": "44942723",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北捷運文湖線 (高架段)",
+   "options": {},
+   "answer": "25.0782,121.5794",
+   "items": []
+  },
+  {
+   "q": "spot-104",
+   "h": "ddd09e0f",
+   "t": "game",
+   "page": "explore",
+   "stem": "桃園機場旅客捷運系統(PMS)",
+   "options": {},
+   "answer": "25.076,121.223",
+   "items": []
+  },
+  {
+   "q": "spot-105",
+   "h": "bb780b04",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄輕軌 (真愛碼頭站)",
+   "options": {},
+   "answer": "22.6189,120.2882",
+   "items": []
+  },
+  {
+   "q": "spot-106",
+   "h": "2b0be7a6",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄港第七貨櫃中心",
+   "options": {},
+   "answer": "22.5458,120.3175",
+   "items": []
+  },
+  {
+   "q": "spot-107",
+   "h": "c5726ae7",
+   "t": "game",
+   "page": "explore",
+   "stem": "貓空纜車 (轉角二站)",
+   "options": {},
+   "answer": "24.9754,121.5901",
+   "items": []
+  },
+  {
+   "q": "spot-108",
+   "h": "a891c211",
+   "t": "game",
+   "page": "explore",
+   "stem": "日月潭纜車 (九族站)",
+   "options": {},
+   "answer": "23.8647,120.9405",
+   "items": []
+  },
+  {
+   "q": "spot-109",
+   "h": "e3be80ff",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北車站月台門系統",
+   "options": {},
+   "answer": "25.0478,121.517",
+   "items": []
+  },
+  {
+   "q": "spot-110",
+   "h": "1643af88",
+   "t": "game",
+   "page": "explore",
+   "stem": "淡海輕軌 (藍海橋)",
+   "options": {},
+   "answer": "25.1856,121.4255",
+   "items": []
+  },
+  {
+   "q": "spot-111",
+   "h": "03af535a",
+   "t": "game",
+   "page": "explore",
+   "stem": "蘇花改自動科技執法",
+   "options": {},
+   "answer": "24.462,121.803",
+   "items": []
+  },
+  {
+   "q": "spot-112",
+   "h": "3cb98b7e",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺中捷運綠線 (高架段)",
+   "options": {},
+   "answer": "24.1622,120.6496",
+   "items": []
+  },
+  {
+   "q": "spot-113",
+   "h": "b3391a8c",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北建國高架橋下停車場",
+   "options": {},
+   "answer": "25.0345,121.5372",
+   "items": []
+  },
+  {
+   "q": "spot-114",
+   "h": "4a7205cd",
+   "t": "game",
+   "page": "explore",
+   "stem": "桃園高鐵站聯外機捷系統",
+   "options": {},
+   "answer": "25.0132,121.2148",
+   "items": []
+  },
+  {
+   "q": "spot-115",
+   "h": "94b97b05",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄鐵路地下化通風塔",
+   "options": {},
+   "answer": "22.6395,120.302",
+   "items": []
+  },
+  {
+   "q": "spot-116",
+   "h": "f1f8970e",
+   "t": "game",
+   "page": "explore",
+   "stem": "台糖蒜頭糖廠五分車",
+   "options": {},
+   "answer": "23.48,120.2988",
+   "items": []
+  },
+  {
+   "q": "spot-117",
+   "h": "1e62efd3",
+   "t": "game",
+   "page": "explore",
+   "stem": "八斗子海科館齒輪牆",
+   "options": {},
+   "answer": "25.1432,121.8021",
+   "items": []
+  },
+  {
+   "q": "spot-118",
+   "h": "9b337056",
+   "t": "game",
+   "page": "explore",
+   "stem": "高鐵燕巢總機廠",
+   "options": {},
+   "answer": "22.7667,120.3478",
+   "items": []
+  },
+  {
+   "q": "spot-119",
+   "h": "30710767",
+   "t": "game",
+   "page": "explore",
+   "stem": "彰化扇形車庫",
+   "options": {},
+   "answer": "24.0864,120.5406",
+   "items": []
+  },
+  {
+   "q": "spot-120",
+   "h": "ee531d06",
+   "t": "game",
+   "page": "explore",
+   "stem": "大稻埕碼頭水門",
+   "options": {},
+   "answer": "25.0569,121.5061",
+   "items": []
+  },
+  {
+   "q": "spot-121",
+   "h": "7afc8c66",
+   "t": "game",
+   "page": "explore",
+   "stem": "宜蘭梅花湖(天然蓄水埤)",
+   "options": {},
+   "answer": "24.6465,121.7312",
+   "items": []
+  },
+  {
+   "q": "spot-122",
+   "h": "68840658",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北微風南山 3D 影城",
+   "options": {},
+   "answer": "25.0346,121.5672",
+   "items": []
+  },
+  {
+   "q": "spot-123",
+   "h": "5e5af6f2",
+   "t": "game",
+   "page": "explore",
+   "stem": "桃園機場塔台",
+   "options": {},
+   "answer": "25.0772,121.233",
+   "items": []
+  },
+  {
+   "q": "spot-124",
+   "h": "ee7282ab",
+   "t": "game",
+   "page": "explore",
+   "stem": "中科巨大集團全球營運總部",
+   "options": {},
+   "answer": "24.2185,120.612",
+   "items": []
+  },
+  {
+   "q": "spot-125",
+   "h": "dc551c74",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄岡山空軍官校",
+   "options": {},
+   "answer": "22.7845,120.2766",
+   "items": []
+  },
+  {
+   "q": "spot-126",
+   "h": "aaa286e5",
+   "t": "game",
+   "page": "explore",
+   "stem": "新北環狀線 (十四張站)",
+   "options": {},
+   "answer": "24.9836,121.5284",
+   "items": []
+  },
+  {
+   "q": "spot-127",
+   "h": "b0cfed44",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北101 阻尼器觀景台",
+   "options": {},
+   "answer": "25.0339,121.5644",
+   "items": []
+  },
+  {
+   "q": "spot-128",
+   "h": "74658a09",
+   "t": "game",
+   "page": "explore",
+   "stem": "左營軍港海軍艦艇",
+   "options": {},
+   "answer": "22.6865,120.2766",
+   "items": []
+  },
+  {
+   "q": "spot-129",
+   "h": "07e41658",
+   "t": "game",
+   "page": "explore",
+   "stem": "墾丁龍磐公園雷達站",
+   "options": {},
+   "answer": "21.9288,120.8436",
+   "items": []
+  },
+  {
+   "q": "spot-130",
+   "h": "61b1053b",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北天文館宇宙探險車",
+   "options": {},
+   "answer": "25.0958,121.5175",
+   "items": []
+  },
+  {
+   "q": "spot-131",
+   "h": "0076ed09",
+   "t": "game",
+   "page": "explore",
+   "stem": "台積電中科 15 廠 (天橋)",
+   "options": {},
+   "answer": "24.2086,120.6175",
+   "items": []
+  },
+  {
+   "q": "spot-132",
+   "h": "fc385326",
+   "t": "game",
+   "page": "explore",
+   "stem": "新竹物流林口自動化倉儲",
+   "options": {},
+   "answer": "25.0716,121.3688",
+   "items": []
+  },
+  {
+   "q": "spot-133",
+   "h": "276dafec",
+   "t": "game",
+   "page": "explore",
+   "stem": "台南高鐵站太陽光能樹",
+   "options": {},
+   "answer": "22.9245,120.2856",
+   "items": []
+  },
+  {
+   "q": "spot-134",
+   "h": "3882511a",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺中麗寶樂園斷軌飛車",
+   "options": {},
+   "answer": "24.3216,120.6955",
+   "items": []
+  },
+  {
+   "q": "spot-135",
+   "h": "f9e34859",
+   "t": "game",
+   "page": "explore",
+   "stem": "新北投溫泉博物館 (閥門)",
+   "options": {},
+   "answer": "25.1368,121.506",
+   "items": []
+  },
+  {
+   "q": "spot-136",
+   "h": "030a361d",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄世運捷運站動態藝術",
+   "options": {},
+   "answer": "22.7025,120.2941",
+   "items": []
+  },
+  {
+   "q": "spot-137",
+   "h": "0f0bc318",
+   "t": "game",
+   "page": "explore",
+   "stem": "阿里山林鐵 (獨立山螺旋)",
+   "options": {},
+   "answer": "23.5358,120.6052",
+   "items": []
+  },
+  {
+   "q": "spot-138",
+   "h": "64a4beed",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北大巨蛋空調換氣系統",
+   "options": {},
+   "answer": "25.0422,121.5587",
+   "items": []
+  },
+  {
+   "q": "spot-139",
+   "h": "fec26431",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北玉成抽水站",
+   "options": {},
+   "answer": "25.0524,121.5827",
+   "items": []
+  },
+  {
+   "q": "spot-140",
+   "h": "1de1981f",
+   "t": "game",
+   "page": "explore",
+   "stem": "竹科旺宏電子總部",
+   "options": {},
+   "answer": "24.7744,121.0116",
+   "items": []
+  },
+  {
+   "q": "spot-141",
+   "h": "39f8f8dc",
+   "t": "game",
+   "page": "explore",
+   "stem": "台中港三井摩天輪(台中之星)",
+   "options": {},
+   "answer": "24.287,120.531",
+   "items": []
+  },
+  {
+   "q": "spot-142",
+   "h": "bc968ccc",
+   "t": "game",
+   "page": "explore",
+   "stem": "花蓮海洋公園纜車",
+   "options": {},
+   "answer": "23.9015,121.6033",
+   "items": []
+  },
+  {
+   "q": "spot-143",
+   "h": "847febdf",
+   "t": "game",
+   "page": "explore",
+   "stem": "高屏溪攔河堰閘門",
+   "options": {},
+   "answer": "22.6841,120.4486",
+   "items": []
+  },
+  {
+   "q": "spot-144",
+   "h": "a02ab5e9",
+   "t": "game",
+   "page": "explore",
+   "stem": "台江國家公園遊客中心",
+   "options": {},
+   "answer": "23.0188,120.1333",
+   "items": []
+  },
+  {
+   "q": "spot-145",
+   "h": "bf488a22",
+   "t": "game",
+   "page": "explore",
+   "stem": "中鋼高雄總部大樓",
+   "options": {},
+   "answer": "22.6058,120.3019",
+   "items": []
+  },
+  {
+   "q": "spot-146",
+   "h": "fa7c492d",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北小巨蛋冰上樂園",
+   "options": {},
+   "answer": "25.0519,121.5533",
+   "items": []
+  },
+  {
+   "q": "spot-147",
+   "h": "41d0e8c8",
+   "t": "game",
+   "page": "explore",
+   "stem": "信義區智慧路燈示範區",
+   "options": {},
+   "answer": "25.034,121.5645",
+   "items": []
+  },
+  {
+   "q": "spot-148",
+   "h": "a59df14c",
+   "t": "game",
+   "page": "explore",
+   "stem": "松山機場空橋",
+   "options": {},
+   "answer": "25.0688,121.5525",
+   "items": []
+  },
+  {
+   "q": "spot-149",
+   "h": "c4241217",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺南科學園區資源再生中心",
+   "options": {},
+   "answer": "23.1118,120.2721",
+   "items": []
+  },
+  {
+   "q": "spot-150",
+   "h": "0968f763",
+   "t": "game",
+   "page": "explore",
+   "stem": "台電四湖陸域風場",
+   "options": {},
+   "answer": "23.6421,120.1505",
+   "items": []
+  },
+  {
+   "q": "spot-151",
+   "h": "34aeebbf",
+   "t": "game",
+   "page": "explore",
+   "stem": "清水地熱發電廠",
+   "options": {},
+   "answer": "24.612,121.637",
+   "items": []
+  },
+  {
+   "q": "spot-152",
+   "h": "44ae9905",
+   "t": "game",
+   "page": "explore",
+   "stem": "沙崙綠能科技示範場域",
+   "options": {},
+   "answer": "22.911,120.286",
+   "items": []
+  },
+  {
+   "q": "spot-153",
+   "h": "632e9a28",
+   "t": "game",
+   "page": "explore",
+   "stem": "日月光半導體(高雄楠梓廠)",
+   "options": {},
+   "answer": "22.7302,120.2921",
+   "items": []
+  },
+  {
+   "q": "spot-154",
+   "h": "b4684b40",
+   "t": "game",
+   "page": "explore",
+   "stem": "台積電竹科 12 廠",
+   "options": {},
+   "answer": "24.7732,121.0125",
+   "items": []
+  },
+  {
+   "q": "spot-155",
+   "h": "151a3fec",
+   "t": "game",
+   "page": "explore",
+   "stem": "台積電南科 18 廠",
+   "options": {},
+   "answer": "23.1165,120.2642",
+   "items": []
+  },
+  {
+   "q": "spot-156",
+   "h": "c63f2605",
+   "t": "game",
+   "page": "explore",
+   "stem": "苗栗海洋竹南離岸風場",
+   "options": {},
+   "answer": "24.6855,120.8011",
+   "items": []
+  },
+  {
+   "q": "spot-157",
+   "h": "a0b7a0a6",
+   "t": "game",
+   "page": "explore",
+   "stem": "彰化彰濱太陽光電區",
+   "options": {},
+   "answer": "24.1042,120.3865",
+   "items": []
+  },
+  {
+   "q": "spot-158",
+   "h": "f2b2d489",
+   "t": "game",
+   "page": "explore",
+   "stem": "台電臺中發電廠 (中火)",
+   "options": {},
+   "answer": "24.2136,120.4815",
+   "items": []
+  },
+  {
+   "q": "spot-159",
+   "h": "f048ba21",
+   "t": "game",
+   "page": "explore",
+   "stem": "桃園大潭發電廠",
+   "options": {},
+   "answer": "25.0286,121.0453",
+   "items": []
+  },
+  {
+   "q": "spot-160",
+   "h": "7e2a7056",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺南七股鹽田太陽光電場",
+   "options": {},
+   "answer": "23.1415,120.0886",
+   "items": []
+  },
+  {
+   "q": "spot-161",
+   "h": "13c804ba",
+   "t": "game",
+   "page": "explore",
+   "stem": "明潭抽蓄水力發電廠",
+   "options": {},
+   "answer": "23.8344,120.8712",
+   "items": []
+  },
+  {
+   "q": "spot-162",
+   "h": "e03aa560",
+   "t": "game",
+   "page": "explore",
+   "stem": "屏東林邊光采濕地",
+   "options": {},
+   "answer": "22.4286,120.5052",
+   "items": []
+  },
+  {
+   "q": "spot-163",
+   "h": "72cb1dd8",
+   "t": "game",
+   "page": "explore",
+   "stem": "台電大甲溪發電廠 (谷關)",
+   "options": {},
+   "answer": "24.2052,121.0094",
+   "items": []
+  },
+  {
+   "q": "spot-164",
+   "h": "483f1a56",
+   "t": "game",
+   "page": "explore",
+   "stem": "核三廠 (墾丁)",
+   "options": {},
+   "answer": "21.9568,120.7511",
+   "items": []
+  },
+  {
+   "q": "spot-165",
+   "h": "9bc9bf2b",
+   "t": "game",
+   "page": "explore",
+   "stem": "竹科聯發科總部大樓",
+   "options": {},
+   "answer": "24.7788,121.0101",
+   "items": []
+  },
+  {
+   "q": "spot-166",
+   "h": "1c50c244",
+   "t": "game",
+   "page": "explore",
+   "stem": "林口電廠超超臨界機組",
+   "options": {},
+   "answer": "25.1206,121.2933",
+   "items": []
+  },
+  {
+   "q": "spot-167",
+   "h": "a254483a",
+   "t": "game",
+   "page": "explore",
+   "stem": "烏山頭水庫水面型光電",
+   "options": {},
+   "answer": "23.2086,120.3667",
+   "items": []
+  },
+  {
+   "q": "spot-168",
+   "h": "6903e443",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北內湖科技園區",
+   "options": {},
+   "answer": "25.0754,121.5721",
+   "items": []
+  },
+  {
+   "q": "spot-169",
+   "h": "2431b06a",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄興達發電廠",
+   "options": {},
+   "answer": "22.8611,120.1972",
+   "items": []
+  },
+  {
+   "q": "spot-170",
+   "h": "e7c52e4b",
+   "t": "game",
+   "page": "explore",
+   "stem": "台積電中科 15 廠 (7奈米)",
+   "options": {},
+   "answer": "24.2091,120.6178",
+   "items": []
+  },
+  {
+   "q": "spot-171",
+   "h": "2ef4fa81",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺南沙崙自駕車測試場",
+   "options": {},
+   "answer": "22.908,120.283",
+   "items": []
+  },
+  {
+   "q": "spot-172",
+   "h": "6c9f3ce4",
+   "t": "game",
+   "page": "explore",
+   "stem": "雲林麥寮六輕工業區",
+   "options": {},
+   "answer": "23.7916,120.1872",
+   "items": []
+  },
+  {
+   "q": "spot-173",
+   "h": "801592ba",
+   "t": "game",
+   "page": "explore",
+   "stem": "台泥 DAKA 園區 (和平)",
+   "options": {},
+   "answer": "24.3072,121.7513",
+   "items": []
+  },
+  {
+   "q": "spot-174",
+   "h": "64f9ba30",
+   "t": "game",
+   "page": "explore",
+   "stem": "國家太空中心衛星整測廠房",
+   "options": {},
+   "answer": "24.7797,121.0093",
+   "items": []
+  },
+  {
+   "q": "spot-175",
+   "h": "1646d79e",
+   "t": "game",
+   "page": "explore",
+   "stem": "中研院量子電腦中心",
+   "options": {},
+   "answer": "25.0401,121.6133",
+   "items": []
+  },
+  {
+   "q": "spot-176",
+   "h": "025f20a7",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄軟體園區 (鴻海研發)",
+   "options": {},
+   "answer": "22.6068,120.2974",
+   "items": []
+  },
+  {
+   "q": "spot-177",
+   "h": "73dd8fe7",
+   "t": "game",
+   "page": "explore",
+   "stem": "竹南科學園區 (群創)",
+   "options": {},
+   "answer": "24.7113,120.9125",
+   "items": []
+  },
+  {
+   "q": "spot-178",
+   "h": "ed0ec67d",
+   "t": "game",
+   "page": "explore",
+   "stem": "台電彰一開閉所",
+   "options": {},
+   "answer": "24.1082,120.3939",
+   "items": []
+  },
+  {
+   "q": "spot-179",
+   "h": "4c4af006",
+   "t": "game",
+   "page": "explore",
+   "stem": "台船基隆廠",
+   "options": {},
+   "answer": "25.1416,121.7613",
+   "items": []
+  },
+  {
+   "q": "spot-180",
+   "h": "24fc9e99",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北南港生技園區",
+   "options": {},
+   "answer": "25.0456,121.6115",
+   "items": []
+  },
+  {
+   "q": "spot-181",
+   "h": "9c7779f8",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄捷運北機廠太陽能",
+   "options": {},
+   "answer": "22.7561,120.3112",
+   "items": []
+  },
+  {
+   "q": "spot-182",
+   "h": "358b28e0",
+   "t": "game",
+   "page": "explore",
+   "stem": "金門塔山發電廠",
+   "options": {},
+   "answer": "24.4172,118.2985",
+   "items": []
+  },
+  {
+   "q": "spot-183",
+   "h": "816dac09",
+   "t": "game",
+   "page": "explore",
+   "stem": "澎湖中屯風力發電區",
+   "options": {},
+   "answer": "23.6065,119.5968",
+   "items": []
+  },
+  {
+   "q": "spot-184",
+   "h": "88979789",
+   "t": "game",
+   "page": "explore",
+   "stem": "蘭嶼核廢料貯存場",
+   "options": {},
+   "answer": "22.005,121.5922",
+   "items": []
+  },
+  {
+   "q": "spot-185",
+   "h": "68dc4dcb",
+   "t": "game",
+   "page": "explore",
+   "stem": "國研院半導體中心",
+   "options": {},
+   "answer": "24.7923,120.9984",
+   "items": []
+  },
+  {
+   "q": "spot-186",
+   "h": "e105af62",
+   "t": "game",
+   "page": "explore",
+   "stem": "新店溪粗坑發電廠",
+   "options": {},
+   "answer": "24.9351,121.5456",
+   "items": []
+  },
+  {
+   "q": "spot-187",
+   "h": "d40c7a5e",
+   "t": "game",
+   "page": "explore",
+   "stem": "臺北榮總重粒子治療站",
+   "options": {},
+   "answer": "25.1215,121.5226",
+   "items": []
+  },
+  {
+   "q": "spot-188",
+   "h": "6466725e",
+   "t": "game",
+   "page": "explore",
+   "stem": "大臺南會展中心",
+   "options": {},
+   "answer": "22.9298,120.2863",
+   "items": []
+  },
+  {
+   "q": "spot-189",
+   "h": "a5630ad8",
+   "t": "game",
+   "page": "explore",
+   "stem": "台電彰工風力發電站(彰濱)",
+   "options": {},
+   "answer": "24.1165,120.3951",
+   "items": []
+  },
+  {
+   "q": "spot-190",
+   "h": "d8cd0dc0",
+   "t": "game",
+   "page": "explore",
+   "stem": "高雄大林發電廠",
+   "options": {},
+   "answer": "22.5361,120.3346",
+   "items": []
+  },
+  {
+   "q": "spot-191",
+   "h": "e2990d75",
+   "t": "game",
+   "page": "explore",
+   "stem": "屏東核三廠南部展示館",
+   "options": {},
+   "answer": "21.9491,120.7448",
+   "items": []
+  },
+  {
+   "q": "spot-192",
+   "h": "ade00057",
+   "t": "game",
+   "page": "explore",
+   "stem": "花蓮和平電廠",
+   "options": {},
+   "answer": "24.3015,121.7501",
+   "items": []
+  },
+  {
+   "q": "spot-193",
+   "h": "99c8b9d0",
+   "t": "game",
+   "page": "explore",
+   "stem": "台電高屏供電區營運處",
+   "options": {},
+   "answer": "22.6515,120.3168",
+   "items": []
+  },
+  {
+   "q": "spot-194",
+   "h": "fc061704",
+   "t": "game",
+   "page": "explore",
+   "stem": "國家地震工程研究中心",
+   "options": {},
+   "answer": "25.0152,121.5386",
+   "items": []
+  },
+  {
+   "q": "spot-195",
+   "h": "9f48e79d",
+   "t": "game",
+   "page": "explore",
+   "stem": "新竹科學園區汙水處理廠",
+   "options": {},
+   "answer": "24.7816,121.0028",
+   "items": []
+  },
+  {
+   "q": "spot-196",
+   "h": "e5ec0a55",
+   "t": "game",
+   "page": "explore",
+   "stem": "台達電內湖總部綠建築",
+   "options": {},
+   "answer": "25.0745,121.5723",
+   "items": []
+  },
+  {
+   "q": "spot-197",
+   "h": "cddc9823",
+   "t": "game",
+   "page": "explore",
+   "stem": "中油第三天然氣接收站",
+   "options": {},
+   "answer": "25.0352,121.0368",
+   "items": []
+  },
+  {
+   "q": "spot-198",
+   "h": "7ed7459d",
+   "t": "game",
+   "page": "explore",
+   "stem": "中央大學鹿林天文台",
+   "options": {},
+   "answer": "23.4686,120.8728",
+   "items": []
+  },
+  {
+   "q": "spot-199",
+   "h": "5177b357",
+   "t": "game",
+   "page": "explore",
+   "stem": "屏東大鵬灣水上飛機景觀台",
+   "options": {},
+   "answer": "22.4485,120.4851",
+   "items": []
+  },
+  {
+   "q": "loc-geo-101",
+   "h": "f1a1fab5",
+   "t": "game",
+   "page": "explore",
+   "stem": "台北 101",
+   "options": {},
+   "answer": "25.0337,121.5645",
+   "items": []
+  },
+  {
+   "q": "loc-geo-cks",
+   "h": "a9618b45",
+   "t": "game",
+   "page": "explore",
+   "stem": "中正紀念堂",
+   "options": {},
+   "answer": "25.036,121.5218",
+   "items": []
+  },
+  {
+   "q": "loc-geo-sunmoon",
+   "h": "6feb90b5",
+   "t": "game",
+   "page": "explore",
+   "stem": "日月潭",
+   "options": {},
+   "answer": "23.853,120.915",
+   "items": []
+  },
+  {
+   "q": "loc-geo-taroko",
+   "h": "eeb6b2e6",
+   "t": "game",
+   "page": "explore",
+   "stem": "太魯閣峽谷",
+   "options": {},
+   "answer": "24.173,121.492",
+   "items": []
+  },
+  {
+   "q": "loc-geo-alishan",
+   "h": "080c2529",
+   "t": "game",
+   "page": "explore",
+   "stem": "阿里山",
+   "options": {},
+   "answer": "23.51,120.803",
+   "items": []
+  },
+  {
+   "q": "loc-geo-anping",
+   "h": "5b660a0c",
+   "t": "game",
+   "page": "explore",
+   "stem": "安平古堡",
+   "options": {},
+   "answer": "23.001,120.161",
+   "items": []
+  },
+  {
+   "q": "loc-geo-taichung",
+   "h": "4fc0b814",
+   "t": "game",
+   "page": "explore",
+   "stem": "台中國家歌劇院",
+   "options": {},
+   "answer": "24.162,120.6405",
+   "items": []
+  },
+  {
+   "q": "loc-geo-jiufen",
+   "h": "8afedda8",
+   "t": "game",
+   "page": "explore",
+   "stem": "九份老街",
+   "options": {},
+   "answer": "25.109,121.844",
+   "items": []
+  },
+  {
+   "q": "loc-geo-eluanbi",
+   "h": "eebb34b5",
+   "t": "game",
+   "page": "explore",
+   "stem": "鵝鑾鼻燈塔",
+   "options": {},
+   "answer": "21.902,120.851",
+   "items": []
+  },
+  {
+   "q": "loc-geo-palace",
+   "h": "ca27a7bc",
+   "t": "game",
+   "page": "explore",
+   "stem": "國立故宮博物院",
+   "options": {},
+   "answer": "25.1023,121.5485",
+   "items": []
+  },
+  {
+   "q": "pr-water-1",
+   "h": "6b4df19d",
+   "t": "single",
+   "page": "explore",
+   "stem": "【水利設施（水庫／攔河堰／抽水站）】德基、翡翠這類「拱壩」的壩體比重力壩薄，它主要靠什麼抵抗水壓？",
+   "options": {
+    "A": "拱形把水壓傳到兩岸與基礎岩盤",
+    "B": "壩體自身重量壓住基礎抵抗水壓",
+    "C": "壩後堆填的大量土石頂住壩體",
+    "D": "壩內預埋鋼索把壩體拉向兩岸"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-water-2",
+   "h": "bc141d5f",
+   "t": "single",
+   "page": "explore",
+   "stem": "【水利設施（水庫／攔河堰／抽水站）】「重力壩」是怎麼抵抗水庫的水壓？",
+   "options": {
+    "A": "依靠自身重量維持穩定",
+    "B": "把水壓傳到峽谷兩岸的岩壁",
+    "C": "用鋼纜把壩頂拉向下游錨碇",
+    "D": "讓水從壩身孔隙滲過以降低水壓"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-water-3",
+   "h": "5426a05c",
+   "t": "single",
+   "page": "explore",
+   "stem": "【水利設施（水庫／攔河堰／抽水站）】都市的雨水抽水站，在「平時」河川水位低的時候，怎麼把市區雨水排出去？",
+   "options": {
+    "A": "開啟重力閘門，雨水靠重力流進河川",
+    "B": "抽水機持續低速運轉把雨水抽出",
+    "C": "關閉閘門，把雨水暫存在前池",
+    "D": "把雨水抽到上游的滯洪池"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-harbor-1",
+   "h": "7c4b87a7",
+   "t": "single",
+   "page": "explore",
+   "stem": "【港灣設施】港口最外圍的「防波堤」，主要功能是什麼？",
+   "options": {
+    "A": "減少波浪進入港內，並防止漂砂淤積",
+    "B": "提供大型貨輪在堤上裝卸貨櫃",
+    "C": "把海水導入港內以維持水深",
+    "D": "把沿岸海流導向港內幫船進港"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-harbor-2",
+   "h": "b7ecf958",
+   "t": "single",
+   "page": "explore",
+   "stem": "【港灣設施】宜蘭烏石港擴建防波堤後，港口南北兩側的海灘出現了什麼變化？",
+   "options": {
+    "A": "北側外澳沙灘變寬，南側頭城沙灘流失",
+    "B": "南側頭城沙灘變寬，北側外澳流失",
+    "C": "南北兩側沙灘都逐年變寬",
+    "D": "南北兩側沙灘都逐年流失"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-bridge-1",
+   "h": "0d8a1161",
+   "t": "single",
+   "page": "explore",
+   "stem": "【橋梁】理想的桁架（Truss）中，每一根桿件承受的是哪一種力？",
+   "options": {
+    "A": "只有沿桿件方向的拉力或壓力",
+    "B": "主要是垂直桿件的彎矩",
+    "C": "主要是繞桿件軸心的扭轉",
+    "D": "拉壓力與彎矩約各占一半"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-bridge-2",
+   "h": "c36a479a",
+   "t": "single",
+   "page": "explore",
+   "stem": "【橋梁】斜張橋的鋼纜承受很大的拉力，這會讓橋塔與橋面版承受什麼力？",
+   "options": {
+    "A": "相當大的軸壓力",
+    "B": "相當大的軸拉力",
+    "C": "幾乎不受軸向力",
+    "D": "只受扭矩不受軸力"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-bridge-3",
+   "h": "07c00b56",
+   "t": "single",
+   "page": "explore",
+   "stem": "【橋梁】高屏溪斜張橋細長、質輕又柔軟，它的監測系統除了地震之外，特別重視哪一項？",
+   "options": {
+    "A": "風力（裝有三維風速計）",
+    "B": "河水鹽度（裝有鹽度計）",
+    "C": "車流噪音（裝有噪音計）",
+    "D": "橋面溫度（裝有紅外線熱像儀）"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-tunnel-1",
+   "h": "d8b2268b",
+   "t": "single",
+   "page": "explore",
+   "stem": "【隧道】雪山隧道的空氣品質偵測器與能見度偵測器，偵測到空氣變差時會怎樣？",
+   "options": {
+    "A": "連動風機自動啟動，把污濁空氣排出",
+    "B": "連動照明自動調暗，減少廢熱",
+    "C": "連動可變標誌自動把速限降到 30",
+    "D": "連動灑水系統降低粉塵與溫度"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-tunnel-2",
+   "h": "0fa91df7",
+   "t": "single",
+   "page": "explore",
+   "stem": "【隧道】雪山隧道發生火警時，火災點上游 250 公尺到下游 500 公尺之間的風機為什麼「不啟動」？",
+   "options": {
+    "A": "以免破壞煙層",
+    "B": "避免風機搶走供電",
+    "C": "避免風機過熱損壞",
+    "D": "讓廣播聲音不被風聲蓋過"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-tunnel-3",
+   "h": "73942f27",
+   "t": "single",
+   "page": "explore",
+   "stem": "【隧道】雪山隧道的人行與車行聯絡隧道，為什麼設計成「氣密並保持正壓」？",
+   "options": {
+    "A": "防止主線的空氣與煙進入聯絡隧道",
+    "B": "把新鮮空氣從聯絡隧道送進主線",
+    "C": "讓聯絡隧道的門關得比較緊",
+    "D": "平衡兩孔主線隧道之間的氣壓"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-power-1",
+   "h": "967e5ed8",
+   "t": "single",
+   "page": "explore",
+   "stem": "【發電／能源設施】抽蓄水力電廠（例如大觀二廠）配合太陽光電，現在為什麼會在「中午」抽水到上池？",
+   "options": {
+    "A": "把太陽光電的過剩電能存成水的位能",
+    "B": "中午河川流量最大，順便抽水",
+    "C": "中午用電尖峰，需要放水發電",
+    "D": "中午水溫高，抽水比較省電"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-power-2",
+   "h": "ac23fc9f",
+   "t": "single",
+   "page": "explore",
+   "stem": "【發電／能源設施】核能發電和燃煤的火力（汽力）發電，最主要的共同點是什麼？",
+   "options": {
+    "A": "都用熱產生蒸汽推動汽輪機再帶動發電機",
+    "B": "都要燃燒化石燃料取得熱能",
+    "C": "都直接把熱轉成電，不需旋轉機械",
+    "D": "都用燃氣渦輪機的排氣再發電"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-rail-1",
+   "h": "2813b008",
+   "t": "single",
+   "page": "explore",
+   "stem": "【軌道／纜車運輸】捷運列車的「再生電力煞車」，減速時牽引馬達扮演什麼角色？",
+   "options": {
+    "A": "當發電機，把動能轉成電能",
+    "B": "反向出力，把列車往後推",
+    "C": "斷電空轉，讓列車自己滑行",
+    "D": "當壓縮機，把空氣存進儲氣槽"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-rail-2",
+   "h": "1b229f51",
+   "t": "single",
+   "page": "explore",
+   "stem": "【軌道／纜車運輸】依交通部規定，「第三種鐵路平交道」不派看柵工駐守，靠什麼保護用路人？",
+   "options": {
+    "A": "自動警報裝置與自動遮斷器",
+    "B": "只設平交道警告標誌",
+    "C": "看柵工在列車通過時手動操作",
+    "D": "列車接近時由司機鳴笛示警"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-rail-3",
+   "h": "4d228f5c",
+   "t": "single",
+   "page": "explore",
+   "stem": "【軌道／纜車運輸】貓空纜車營運區域發生落雷時，系統會怎麼處理？",
+   "options": {
+    "A": "儘速停止營運並清車，確認安全後才恢復",
+    "B": "加速把車廂送回站內後照常營運",
+    "C": "改由備用電源供電，照常營運",
+    "D": "只停開水晶車廂，其餘照常營運"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-air-1",
+   "h": "d3cf47e4",
+   "t": "single",
+   "page": "explore",
+   "stem": "【航空設施】航管用的「初級雷達」怎麼量出航機的距離與方位？",
+   "options": {
+    "A": "發射電磁波並接收回波，用往返時間與天線角度計算",
+    "B": "接收航機廣播的 GPS 位置並換算距離與方位",
+    "C": "由航機詢答器回覆高度與識別碼後計算",
+    "D": "比對兩座雷達收到的信號強度差推算位置"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-air-2",
+   "h": "f85f3cb1",
+   "t": "single",
+   "page": "explore",
+   "stem": "【航空設施】「次級雷達」比初級雷達能提供更多航機資訊，關鍵在於？",
+   "options": {
+    "A": "採一問一答，由航機機載設備回覆",
+    "B": "發射功率比初級雷達大得多",
+    "C": "天線轉速比初級雷達快一倍",
+    "D": "改用可見光而不是無線電波"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-air-3",
+   "h": "b022d70d",
+   "t": "single",
+   "page": "explore",
+   "stem": "【航空設施】「廣播式自動回報監視系統」（ADS-B）是怎麼讓航管知道航機位置的？",
+   "options": {
+    "A": "機載設備接收 GPS 位置後自行廣播",
+    "B": "地面雷達發射電磁波再接收反射波",
+    "C": "地面站詢問航機、航機再回覆",
+    "D": "多座地面站量測信號時間差來定位"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-culture-1",
+   "h": "3136545c",
+   "t": "single",
+   "page": "explore",
+   "stem": "【文化／教育場館】依故宮的文物展覽保存規定，哪一類文物的展櫃「相對濕度」要求最低？",
+   "options": {
+    "A": "金屬器",
+    "B": "書畫、紙、絹等有機材質",
+    "C": "漆器、墨",
+    "D": "三類要求相同"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-culture-2",
+   "h": "131ceec4",
+   "t": "single",
+   "page": "explore",
+   "stem": "【文化／教育場館】故宮規定限展書畫的年累積照度不高於 16,000 Lux·h。若展櫃照度 50 Lux、每天展出 8 小時，一年最多可展幾天？",
+   "options": {
+    "A": "40 天",
+    "B": "20 天",
+    "C": "80 天",
+    "D": "320 天"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-tower-1",
+   "h": "3d38e3b4",
+   "t": "single",
+   "page": "explore",
+   "stem": "【高樓建築】台北 101 的「風阻尼器」（調諧質量阻尼器）由哪三個部分組成、如何減少大樓晃動？",
+   "options": {
+    "A": "質量塊、彈簧、阻尼：產生反作用力抵銷震盪",
+    "B": "馬達、齒輪、螺桿：主動把大樓推回原位",
+    "C": "水箱、泵浦、閥門：把水抽到迎風面配重",
+    "D": "鋼纜、錨碇、千斤頂：把大樓往下拉住"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-tower-2",
+   "h": "2c0d4b79",
+   "t": "single",
+   "page": "explore",
+   "stem": "【高樓建築】截至 2019 年的紀錄，台北 101 風阻尼器擺幅最大的一次發生在什麼情況？",
+   "options": {
+    "A": "2015 年蘇迪勒颱風",
+    "B": "2019 年花蓮地震",
+    "C": "2018 年花蓮地震",
+    "D": "2016 年跨年煙火施放"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-industry-1",
+   "h": "502d3850",
+   "t": "single",
+   "page": "explore",
+   "stem": "【產業園區／廠房】半導體無塵室常說的「Class 100」代表什麼？",
+   "options": {
+    "A": "每立方英尺空氣中 ≥0.5 μm 微粒不超過 100 顆",
+    "B": "每立方公尺空氣中 ≥1 μm 微粒不超過 100 顆",
+    "C": "室內每小時換氣 100 次以上",
+    "D": "室內外壓差維持 100 帕斯卡以上"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-industry-2",
+   "h": "5de7f8a2",
+   "t": "single",
+   "page": "explore",
+   "stem": "【產業園區／廠房】潔淨室為什麼要對周圍較低等級的區域保持「正壓」？",
+   "options": {
+    "A": "讓過濾後的空氣往外流，擋住外面的微粒",
+    "B": "讓外面的新鮮空氣流進來稀釋微粒",
+    "C": "讓室內溫度比周圍低，減少靜電",
+    "D": "讓機台排出的化學氣體往外擴散"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-park-1",
+   "h": "e24f2627",
+   "t": "single",
+   "page": "explore",
+   "stem": "【景觀／遊憩設施】綠建築的「基地保水」指標鼓勵透水鋪面與貯留滲透水池，主要想解決什麼問題？",
+   "options": {
+    "A": "減緩都市熱島，並減輕下水道排水負擔",
+    "B": "讓雨水盡快排入公共下水道",
+    "C": "增加地下室開挖面積與停車位",
+    "D": "減少建築物的外牆日照量"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-park-2",
+   "h": "563c784a",
+   "t": "single",
+   "page": "explore",
+   "stem": "【景觀／遊憩設施】綠建築「基地保水」指標只針對哪一類土壤評估？",
+   "options": {
+    "A": "透水性較好的粉土、砂土",
+    "B": "透水性不良的黏土",
+    "C": "地下有岩盤的基地",
+    "D": "所有土壤一律評估"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-road-1",
+   "h": "3bdb68f3",
+   "t": "single",
+   "page": "explore",
+   "stem": "【公路設施】eTag 沒有電池，它怎麼和國道門架感應？",
+   "options": {
+    "A": "門架發射無線電波，觸動並供能給被動式 eTag",
+    "B": "連接汽車的 12 V 電瓶取得電力",
+    "C": "背面的太陽能薄膜白天充電",
+    "D": "透過駕駛手機的藍牙轉傳訊號"
+   },
+   "answer": "A",
+   "items": []
+  },
+  {
+   "q": "pr-road-2",
+   "h": "aea7c6f9",
+   "t": "single",
+   "page": "explore",
+   "stem": "【公路設施】國道計程收費，小型車一天內在國道 1 號行駛 50 公里（標準費率），通行費是多少？",
+   "options": {
+    "A": "36 元",
+    "B": "60 元",
+    "C": "45 元",
+    "D": "0 元"
+   },
+   "answer": "A",
+   "items": []
+  }
+ ]
+}

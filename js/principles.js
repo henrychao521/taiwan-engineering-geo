@@ -1,14 +1,15 @@
 /* ============================================================
  * 台灣工程地景探索 — 深度模式第 2 題：依設施類型出的工程原理題
  * 鍵 = js/explore.js FACILITY_TYPES 的類型名稱；「其他工程地景」不出題。
- * 每題：q 題目、options 選項、answer 正解索引（顯示時會洗牌）、
- *       explain 解說、src 出處（名稱＋網址）。
+ * 每題：id 穩定代號（作答紀錄用，題目改寫時沿用、刪題時不要重複使用）、q 題目、
+ *       options 選項、answer 正解索引（顯示時會洗牌）、explain 解說、src 出處（名稱＋網址）。
  * 規則：答案與解說只寫出處查得到的內容，查不到的不出題（2026-09-30 查證）。
  * ============================================================ */
 
 const PRINCIPLE_QS = {
   '水利設施（水庫／攔河堰／抽水站）': [
     {
+      id: 'pr-water-1',
       q: '德基、翡翠這類「拱壩」的壩體比重力壩薄，它主要靠什麼抵抗水壓？',
       options: [
         '拱形把水壓傳到兩岸與基礎岩盤',
@@ -21,6 +22,7 @@ const PRINCIPLE_QS = {
       src: ['經濟部水利署〈水利名詞：拱壩〉', 'https://www.wra.gov.tw/NewsRiverNoun.aspx?n=25142&sms=500&page=17&PageSize=20'],
     },
     {
+      id: 'pr-water-2',
       q: '「重力壩」是怎麼抵抗水庫的水壓？',
       options: [
         '依靠自身重量維持穩定',
@@ -33,6 +35,7 @@ const PRINCIPLE_QS = {
       src: ['經濟部水利署〈水利名詞：重力壩〉', 'https://www.wra.gov.tw/NewsRiverNoun.aspx?n=25142&sms=500&page=17&PageSize=20'],
     },
     {
+      id: 'pr-water-3',
       q: '都市的雨水抽水站，在「平時」河川水位低的時候，怎麼把市區雨水排出去？',
       options: [
         '開啟重力閘門，雨水靠重力流進河川',
@@ -48,6 +51,7 @@ const PRINCIPLE_QS = {
 
   '港灣設施': [
     {
+      id: 'pr-harbor-1',
       q: '港口最外圍的「防波堤」，主要功能是什麼？',
       options: [
         '減少波浪進入港內，並防止漂砂淤積',
@@ -60,6 +64,7 @@ const PRINCIPLE_QS = {
       src: ['國立海洋科技博物館〈防波堤〉', 'https://ship.nmmst.gov.tw/ship/shipother/33'],
     },
     {
+      id: 'pr-harbor-2',
       q: '宜蘭烏石港擴建防波堤後，港口南北兩側的海灘出現了什麼變化？',
       options: [
         '北側外澳沙灘變寬，南側頭城沙灘流失',
@@ -75,6 +80,7 @@ const PRINCIPLE_QS = {
 
   '橋梁': [
     {
+      id: 'pr-bridge-1',
       q: '理想的桁架（Truss）中，每一根桿件承受的是哪一種力？',
       options: [
         '只有沿桿件方向的拉力或壓力',
@@ -87,6 +93,7 @@ const PRINCIPLE_QS = {
       src: ['PC13110《工程設計》第 3 章 3-1 桁架結構（工程設計學習平台）', 'https://henrychao521.github.io/pc13110-platform/ch3-mechanism/pages/truss.html'],
     },
     {
+      id: 'pr-bridge-2',
       q: '斜張橋的鋼纜承受很大的拉力，這會讓橋塔與橋面版承受什麼力？',
       options: [
         '相當大的軸壓力',
@@ -99,6 +106,7 @@ const PRINCIPLE_QS = {
       src: ['交通部高速公路局〈高屏溪斜張橋監測系統——結構狀況長期監測〉', 'https://www.freeway.gov.tw/Upload/201309/1000725-%E4%B8%AD%E7%BE%8E%E4%BA%A4%E6%B5%81%E7%B0%A1%E5%A0%B1%E5%B0%88%E6%96%87%E5%AE%9A%E7%A8%BF.pdf'],
     },
     {
+      id: 'pr-bridge-3',
       q: '高屏溪斜張橋細長、質輕又柔軟，它的監測系統除了地震之外，特別重視哪一項？',
       options: [
         '風力（裝有三維風速計）',
@@ -114,6 +122,7 @@ const PRINCIPLE_QS = {
 
   '隧道': [
     {
+      id: 'pr-tunnel-1',
       q: '雪山隧道的空氣品質偵測器與能見度偵測器，偵測到空氣變差時會怎樣？',
       options: [
         '連動風機自動啟動，把污濁空氣排出',
@@ -126,6 +135,7 @@ const PRINCIPLE_QS = {
       src: ['交通部高速公路局〈雪山隧道〉', 'https://www.freeway.gov.tw/Publish.aspx?cnid=610&p=120'],
     },
     {
+      id: 'pr-tunnel-2',
       q: '雪山隧道發生火警時，火災點上游 250 公尺到下游 500 公尺之間的風機為什麼「不啟動」？',
       options: [
         '以免破壞煙層',
@@ -138,6 +148,7 @@ const PRINCIPLE_QS = {
       src: ['交通部高速公路局〈雪山隧道〉', 'https://www.freeway.gov.tw/Publish.aspx?cnid=610&p=120'],
     },
     {
+      id: 'pr-tunnel-3',
       q: '雪山隧道的人行與車行聯絡隧道，為什麼設計成「氣密並保持正壓」？',
       options: [
         '防止主線的空氣與煙進入聯絡隧道',
@@ -153,6 +164,7 @@ const PRINCIPLE_QS = {
 
   '發電／能源設施': [
     {
+      id: 'pr-power-1',
       q: '抽蓄水力電廠（例如大觀二廠）配合太陽光電，現在為什麼會在「中午」抽水到上池？',
       options: [
         '把太陽光電的過剩電能存成水的位能',
@@ -165,6 +177,7 @@ const PRINCIPLE_QS = {
       src: ['台電綠網〈一滴水發N次電 扮演「關鍵少數」的抽蓄水力〉', 'https://service.taipower.com.tw/greennet/about/theme/375'],
     },
     {
+      id: 'pr-power-2',
       q: '核能發電和燃煤的火力（汽力）發電，最主要的共同點是什麼？',
       options: [
         '都用熱產生蒸汽推動汽輪機再帶動發電機',
@@ -180,6 +193,7 @@ const PRINCIPLE_QS = {
 
   '軌道／纜車運輸': [
     {
+      id: 'pr-rail-1',
       q: '捷運列車的「再生電力煞車」，減速時牽引馬達扮演什麼角色？',
       options: [
         '當發電機，把動能轉成電能',
@@ -192,6 +206,7 @@ const PRINCIPLE_QS = {
       src: ['新北市政府捷運工程局說明（聯合新聞網 2026-08-10 三鶯線報導）', 'https://udn.com/news/story/7323/9682962'],
     },
     {
+      id: 'pr-rail-2',
       q: '依交通部規定，「第三種鐵路平交道」不派看柵工駐守，靠什麼保護用路人？',
       options: [
         '自動警報裝置與自動遮斷器',
@@ -204,6 +219,7 @@ const PRINCIPLE_QS = {
       src: ['交通部《鐵路立體交叉及平交道防護設施設置標準與費用分擔規則》第 11、14、19 條', 'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=K0030009'],
     },
     {
+      id: 'pr-rail-3',
       q: '貓空纜車營運區域發生落雷時，系統會怎麼處理？',
       options: [
         '儘速停止營運並清車，確認安全後才恢復',
@@ -219,6 +235,7 @@ const PRINCIPLE_QS = {
 
   '航空設施': [
     {
+      id: 'pr-air-1',
       q: '航管用的「初級雷達」怎麼量出航機的距離與方位？',
       options: [
         '發射電磁波並接收回波，用往返時間與天線角度計算',
@@ -231,6 +248,7 @@ const PRINCIPLE_QS = {
       src: ['交通部民用航空局飛航服務總臺〈監視裝備〉', 'https://www.anws.gov.tw/FlightService/Electronic/services/Surveillance.htm'],
     },
     {
+      id: 'pr-air-2',
       q: '「次級雷達」比初級雷達能提供更多航機資訊，關鍵在於？',
       options: [
         '採一問一答，由航機機載設備回覆',
@@ -243,6 +261,7 @@ const PRINCIPLE_QS = {
       src: ['交通部民用航空局飛航服務總臺〈監視裝備〉', 'https://www.anws.gov.tw/FlightService/Electronic/services/Surveillance.htm'],
     },
     {
+      id: 'pr-air-3',
       q: '「廣播式自動回報監視系統」（ADS-B）是怎麼讓航管知道航機位置的？',
       options: [
         '機載設備接收 GPS 位置後自行廣播',
@@ -258,6 +277,7 @@ const PRINCIPLE_QS = {
 
   '文化／教育場館': [
     {
+      id: 'pr-culture-1',
       q: '依故宮的文物展覽保存規定，哪一類文物的展櫃「相對濕度」要求最低？',
       options: [
         '金屬器',
@@ -270,6 +290,7 @@ const PRINCIPLE_QS = {
       src: ['國立故宮博物院〈文物展覽保存維護要點〉附表一', 'https://law.npm.gov.tw/LawContent.aspx?media=print&id=GL000071'],
     },
     {
+      id: 'pr-culture-2',
       q: '故宮規定限展書畫的年累積照度不高於 16,000 Lux·h。若展櫃照度 50 Lux、每天展出 8 小時，一年最多可展幾天？',
       options: ['40 天', '20 天', '80 天', '320 天'],
       answer: 0,
@@ -280,6 +301,7 @@ const PRINCIPLE_QS = {
 
   '高樓建築': [
     {
+      id: 'pr-tower-1',
       q: '台北 101 的「風阻尼器」（調諧質量阻尼器）由哪三個部分組成、如何減少大樓晃動？',
       options: [
         '質量塊、彈簧、阻尼：產生反作用力抵銷震盪',
@@ -292,6 +314,7 @@ const PRINCIPLE_QS = {
       src: ['中央社 2019-08-08〈台北101阻尼器擺幅達15公分 歷年地震第2大〉', 'https://www.cna.com.tw/news/ahel/201908080069.aspx'],
     },
     {
+      id: 'pr-tower-2',
       q: '截至 2019 年的紀錄，台北 101 風阻尼器擺幅最大的一次發生在什麼情況？',
       options: [
         '2015 年蘇迪勒颱風',
@@ -307,6 +330,7 @@ const PRINCIPLE_QS = {
 
   '產業園區／廠房': [
     {
+      id: 'pr-industry-1',
       q: '半導體無塵室常說的「Class 100」代表什麼？',
       options: [
         '每立方英尺空氣中 ≥0.5 μm 微粒不超過 100 顆',
@@ -319,6 +343,7 @@ const PRINCIPLE_QS = {
       src: ['美國聯邦標準 FED-STD-209E（已由 ISO 14644-1 取代）', 'https://www.iso.org/standard/53394.html'],
     },
     {
+      id: 'pr-industry-2',
       q: '潔淨室為什麼要對周圍較低等級的區域保持「正壓」？',
       options: [
         '讓過濾後的空氣往外流，擋住外面的微粒',
@@ -334,6 +359,7 @@ const PRINCIPLE_QS = {
 
   '景觀／遊憩設施': [
     {
+      id: 'pr-park-1',
       q: '綠建築的「基地保水」指標鼓勵透水鋪面與貯留滲透水池，主要想解決什麼問題？',
       options: [
         '減緩都市熱島，並減輕下水道排水負擔',
@@ -346,6 +372,7 @@ const PRINCIPLE_QS = {
       src: ['台灣建築中心〈綠建築九大評估指標：基地保水〉（內政部建築研究所綠建築標章）', 'https://gb.tabc.org.tw/modules/pages/water'],
     },
     {
+      id: 'pr-park-2',
       q: '綠建築「基地保水」指標只針對哪一類土壤評估？',
       options: [
         '透水性較好的粉土、砂土',
@@ -361,6 +388,7 @@ const PRINCIPLE_QS = {
 
   '公路設施': [
     {
+      id: 'pr-road-1',
       q: 'eTag 沒有電池，它怎麼和國道門架感應？',
       options: [
         '門架發射無線電波，觸動並供能給被動式 eTag',
@@ -373,6 +401,7 @@ const PRINCIPLE_QS = {
       src: ['遠通電收〈常見問題：eTag〉', 'https://www.fetc.net.tw/Qa/Index/f220e30d-e42f-4d2c-a15e-762e7976fa63'],
     },
     {
+      id: 'pr-road-2',
       q: '國道計程收費，小型車一天內在國道 1 號行駛 50 公里（標準費率），通行費是多少？',
       options: ['36 元', '60 元', '45 元', '0 元'],
       answer: 0,
