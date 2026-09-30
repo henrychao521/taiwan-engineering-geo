@@ -376,6 +376,27 @@ const PHASES = [
       '驗證：node --check；Playwright 深度模式完整跑兩局（機電主題與全部主題各 10 題）：作答時提示框無「設施類型」、揭曉後有；第 2 題皆為原理題且有出處；畫面總分＝逐題得分＋答對數×300、存檔 maxScore＝10000＋實際追問數×300；motion_qc explore、intro 桌機＋手機零 console 錯誤，PC13110 猜地點頁手機通過、桌機 1 個 404 在未含本次修改的 pc13110-platform 主工作目錄同樣出現（既有問題）',
     ],
   },
+  {
+    tag: '段落 20',
+    date: '2026-09-30',
+    title: '作答紀錄送到老師的 Google 試算表（猜地點遊戲，預設不送）',
+    commit: 'ee68d7b',
+    verbatim: '一局猜地點遊戲結束時送一筆 kind=game：每一題（景點）q=景點代號（資料索引穩定代號，例如 spot-139），t=game，ok＝距離在某門檻內或得分達標（依遊戲既有判定定義，寫清楚），a／k 可空，meta 帶總分、滿分、秒數；深度模式的原理題（js/principles.js）當作 single 題另外記（q=原理題 id）；學習單若有對錯題也接。遊戲已有暱稱／成績碼等身分設定——本任務只用 SPEC 的班級座號元件（sessionStorage），不要把暱稱送出。assets/sheet-items.json 收原理題（有題幹選項）與景點（stem＝景點名稱）。',
+    context: '四個教學平台共用 classroom-sheets/SPEC.md 的送出協定。遊戲本身沒有「單題對錯」，只有單題得分 1000·e^(−距離/55) 與結算等級；答對門檻沿用結算「在地通」＝滿分 60% 的等級套到單題：得分 ≥ 600（約 28 km 內）。景點代號用 SITES 陣列索引（和成績碼、WIKI_REFS 同一套，段落 19 換第 139 筆時也是原地替換）；指紋含名稱與座標，換景點或改座標就分成新版。原理題原本沒有 id，補上 pr-<類型>-<序號>。深度模式第 1 題主題分類不記：試玩 20 題＋20 原理題剛好到每筆 40 題上限。Mapillary 即時街景每次地點都不同、沒有穩定代號，不送。學習單只有開放題與參考答案，沒有對錯題可接。班級座號元件的浮動版放在全螢幕對話框底下（z-index 900），開始畫面裡另放一份同步的，學生開局前就能填。',
+    decisions: [
+      '單題答對＝得分 ≥ 600（≈ 28 km 內），沿用「在地通」門檻',
+      'q：spot-<SITES 索引>、loc-<精選圖檔名>、原理題 id；a／k 對景點留空',
+      '主題分類追問不記；Mapillary 模式不送；不送暱稱、年齡、性別、成績碼',
+      '作答紀錄用的欄位設為不可列舉，不會混進本機紀錄與成績碼',
+      '開始／結算畫面改 margin:auto 安全置中＋空框不畫，修掉載入時整塊位移（CLS）',
+    ],
+    outputs: [
+      'js/sheet-log.js、js/sheet-config.js（endpoint 預設空）；explore.html 載入',
+      'js/explore.js：sendSheetLog（一局結束送一筆）、開始畫面告知＋班級座號元件、結算畫面告知',
+      'js/principles.js：29 題加 id；assets/sheet-items.json 239 題（景點 200＋精選 10＋原理題 29），由 tools/sheets/build_items.py 以 node 載入前端資料檔產生',
+      '驗證（只用本機假 endpoint）：tools/sheets/test_sheet_log.py 34 項全過——一般模式 10 題（填班級座號、暱稱不外送）、深度模式試玩 20 題（原理題 a／k 換回原始順序、指紋和題庫一致）、精選地景、離線佇列與下次開頁補送、endpoint 空時不顯示不送；node --check 全部 js；motion_qc explore.html 桌機＋手機（endpoint 空與有設定兩種）全部通過',
+    ],
+  },
 ];
 /* ---- 渲染時間軸 ---- */
 (function render() {
