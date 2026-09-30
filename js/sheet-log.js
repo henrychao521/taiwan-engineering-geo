@@ -174,9 +174,10 @@
 
   /* ---------- 小元件：右下角「📝 填班級座號（選填）」＋告知文字 ----------
    * 浮動元件 z-index 900：低於平台自己的全螢幕對話框（通常 ≥1000），對話框開著時不會互相遮蓋；
+   * 右下角已有其他浮動按鈕的平台，在自己的 CSS 設 :root { --sl-right: …; --sl-bottom: … } 讓開；
    * 對話框裡要讓學生填，就用 SheetLog.mountInline(容器) 在對話框內放一份同功能的元件（內容同步）。 */
   var CSS =
-    '.sl-wrap{position:fixed;right:12px;bottom:12px;z-index:900;font:14px/1.5 system-ui,-apple-system,"Noto Sans TC",sans-serif;max-width:calc(100vw - 24px)}' +
+    '.sl-wrap{position:fixed;right:var(--sl-right,12px);bottom:var(--sl-bottom,12px);z-index:900;font:14px/1.5 system-ui,-apple-system,"Noto Sans TC",sans-serif;max-width:calc(100vw - var(--sl-right,12px) - 12px)}' +
     '.sl-inline{font:14px/1.5 system-ui,-apple-system,"Noto Sans TC",sans-serif;margin:8px 0;text-align:left}' +
     '.sl-btn{display:block;margin-left:auto;background:#fff;color:#1f2937;border:1px solid #9ca3af;border-radius:999px;padding:6px 12px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.15);font:inherit;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
     '.sl-inline .sl-btn{margin:6px 0 0;box-shadow:none;width:auto;padding:3px 10px;font-size:13px}' +
