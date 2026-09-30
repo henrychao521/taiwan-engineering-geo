@@ -153,9 +153,12 @@ def main():
             check(d.get("page") == "explore.trial.deep", f"page={d.get('page')}")
             its = d.get("items", [])
             spots = [i for i in its if i["t"] == "game"]; prs = [i for i in its if i["t"] == "single"]
-            check(len(spots) == 20 and len(prs) == len(picks) and len(its) <= 40, f"20 景點＋{len(prs)} 原理題（作答 {len(picks)}）")
+            # 同一原理題在一局出現兩次時只記第一次作答
+            seen_pid = set(); first_picks = [pk for pk in picks if not (pk["pid"] in seen_pid or seen_pid.add(pk["pid"]))]
+            check(len(spots) == 20 and len(prs) == len(first_picks) and len(its) <= 40 and len({i["q"] for i in its}) == len(its),
+                  f"20 景點＋{len(prs)} 原理題（作答 {len(picks)}、不重複 {len(first_picks)}），題號不重複")
             ok_map = True
-            for it, pk in zip(prs, picks):
+            for it, pk in zip(prs, first_picks):
                 p = principles[pk["pid"]]
                 exp_a = "ABCDEF"[p["options"].index(pk["label"])]
                 exp_k = "ABCDEF"[p["answer"]]

@@ -397,6 +397,15 @@ const PHASES = [
       '驗證（只用本機假 endpoint）：tools/sheets/test_sheet_log.py 34 項全過——一般模式 10 題（填班級座號、暱稱不外送）、深度模式試玩 20 題（原理題 a／k 換回原始順序、指紋和題庫一致）、精選地景、離線佇列與下次開頁補送、endpoint 空時不顯示不送；node --check 全部 js；motion_qc explore.html 桌機＋手機（endpoint 空與有設定兩種）全部通過',
     ],
   },
+  {
+    tag: '段落 21',
+    date: '2026-09-30',
+    title: '作答紀錄：深度模式原理題同一局不重複出、送出時同題只記第一次',
+    verbatim: '主控用正式 Code.gs 驗證各平台測試實際送出的內容時，發現深度模式一局有重複題號，整筆會被試算表拒收。',
+    context: '每種設施類型只有 2–3 題原理題，一局 20 題時同類景點多次出現就會重複抽到同一題；試算表端規定同一次作答題號不可重複。',
+    decisions: ['抽題時同一局優先抽沒出過的原理題，該類用完才重複', '送出時同一題只記第一次作答（鑑別度看第一次）'],
+    outputs: ['js/explore.js：usedPrinciples、送出前依題號去重', 'tools/sheets/test_sheet_log.py：改以不重複的第一次作答比對，並檢查題號不重複', '驗證：測試全部通過；5 筆送出內容經正式 Code.gs 驗證函式全數收下'],
+  },
 ];
 /* ---- 渲染時間軸 ---- */
 (function render() {

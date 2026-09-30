@@ -101,6 +101,7 @@ let mode, rounds, idx, total, guess, actual, state, current, roundCount, zoomIdx
 let deepMode = false;
 let sessionRounds = [];   /* 收集本局每題的紀錄 */
 let gameStart = 0;        /* 本局開始時間（作答紀錄的秒數） */
+let usedPrinciples = new Set();   /* 本局已出過的原理題 id：同類題目用完之前不重複出 */
 
 /* 工程地景：依目前視野等級，把衛星迷你地圖切到對應 Leaflet zoom */
 function applyZoom() {
@@ -298,6 +299,7 @@ function startGame(m, theme) {
   idx = 0; total = 0;
   sessionRounds = [];
   gameStart = Date.now();
+  usedPrinciples = new Set();
   $('score').textContent = 0;
   $('overlay').classList.add('hidden');
   deepMode = (localStorage.getItem(DEEP_KEY) === '1');
@@ -489,7 +491,10 @@ function makeFollowups(site) {
   const typeLabel = typeHint(site.name);
   const bank = (typeof PRINCIPLE_QS !== 'undefined') ? PRINCIPLE_QS[typeLabel] : null;
   if (bank && bank.length) {
-    const p = bank[Math.floor(Math.random() * bank.length)];
+    const fresh = bank.filter(x => !usedPrinciples.has(x.id));   // 同一局優先出沒出過的；該類用完才重複
+    const pool = fresh.length ? fresh : bank;
+    const p = pool[Math.floor(Math.random() * pool.length)];
+    usedPrinciples.add(p.id);
     const [srcName, srcUrl] = p.src;
     out.push({
       q: `🔧 【${typeLabel}】${p.q}`,
@@ -756,7 +761,9 @@ function sendSheetLog(s) {
         .then(h => ({ q: p.id, h, t: 'single', ok: r.principle.ok ? 1 : 0, a: SheetLog.optCode(r.principle.pick), k: key })));
     }
   });
-  Promise.all(jobs).then(items => SheetLog.send({
+  // 同一題在一局裡出現兩次時只記第一次作答（鑑別度看第一次；試算表端同一次作答不收重複題號）
+  Promise.all(jobs).then(all => { const seen = new Set(); return all.filter(it => !seen.has(it.q) && seen.add(it.q)); })
+    .then(items => SheetLog.send({
     sid, page: sheetPage(s), kind: 'game', items,
     meta: { score: s.totalScore, max: s.maxScore, sec },
   }));
