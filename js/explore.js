@@ -21,8 +21,9 @@ const lmap = L.map('map', {
   minZoom: 6, zoomControl: true, attributionControl: true,
   maxBounds: [[20.4, 117.4], [26.9, 123.6]], maxBoundsViscosity: 0.85,
 }).setView(TW_VIEW, TW_ZOOM);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-  subdomains: 'abcd', maxZoom: 16, attribution: '© OpenStreetMap, © CARTO',
+// CARTO 免費底圖已改為需金鑰（無金鑰只回「API KEY REQUIRED」浮水印），改用內政部國土測繪中心臺灣通用電子地圖（中文地名、政府資料開放授權、免金鑰）；注意路徑是 {z}/{y}/{x}
+L.tileLayer('https://wmts.nlsc.gov.tw/wmts/EMAP/default/GoogleMapsCompatible/{z}/{y}/{x}', {
+  maxZoom: 16, attribution: '© <a href="https://maps.nlsc.gov.tw/" target="_blank" rel="noopener">內政部國土測繪中心</a>',
 }).addTo(lmap);
 const GUESS_ICON = L.divIcon({ className: '', iconSize: [22, 22],
   html: '<div class="gm gm-guess">你</div>' });

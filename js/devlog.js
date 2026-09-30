@@ -406,6 +406,15 @@ const PHASES = [
     decisions: ['抽題時同一局優先抽沒出過的原理題，該類用完才重複', '送出時同一題只記第一次作答（鑑別度看第一次）'],
     outputs: ['js/explore.js：usedPrinciples、送出前依題號去重', 'tools/sheets/test_sheet_log.py：改以不重複的第一次作答比對，並檢查題號不重複', '驗證：測試全部通過；5 筆送出內容經正式 Code.gs 驗證函式全數收下'],
   },
+  {
+    tag: '段落 22',
+    date: '2026-09-30',
+    title: '底圖改用內政部國土測繪中心電子地圖（CARTO 已改需金鑰，地圖整片空白）',
+    verbatim: '作答紀錄代理回報猜測地圖顯示「API KEY REQUIRED」。',
+    context: 'CARTO 免費底圖改為需金鑰，無金鑰時仍回 HTTP 200，但圖磚只剩浮水印，學生猜位置時看不到地圖。',
+    decisions: ['先試 Esri 街道圖（免金鑰但地名是英文），改用內政部國土測繪中心臺灣通用電子地圖 EMAP：中文地名、政府資料開放授權、免金鑰；台灣以外的陸地只有素色，對只考台灣景點的遊戲影響不大'],
+    outputs: ['js/explore.js、js/intro.js：底圖 URL 與出處標示（© 內政部國土測繪中心）', '驗證：explore 6／6、intro 12／12 圖磚載入，無 console 錯誤；截圖確認中文縣市名'],
+  },
 ];
 /* ---- 渲染時間軸 ---- */
 (function render() {
