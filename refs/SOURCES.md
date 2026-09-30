@@ -115,7 +115,7 @@
 | 135 | 新北投溫泉博物館 (閥門) | [北投溫泉博物館](https://zh.wikipedia.org/wiki/%E5%8C%97%E6%8A%95%E6%BA%AB%E6%B3%89%E5%8D%9A%E7%89%A9%E9%A4%A8) | wiki-135.jpg |
 | 137 | 阿里山林鐵 (獨立山螺旋) | [阿里山林業鐵路](https://zh.wikipedia.org/wiki/%E9%98%BF%E9%87%8C%E5%B1%B1%E6%9E%97%E6%A5%AD%E9%90%B5%E8%B7%AF) | wiki-137.jpg |
 | 138 | 臺北大巨蛋活動屋頂機房 | [臺北大巨蛋](https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8C%97%E5%A4%A7%E5%B7%A8%E8%9B%8B) | wiki-138.jpg |
-| 139 | 彰化王功漁港景觀橋 | [王功漁港](https://zh.wikipedia.org/wiki/%E7%8E%8B%E5%8A%9F%E6%BC%81%E6%B8%AF) | wiki-139.jpg |
+| 139 | 臺北玉成抽水站 | [泵站](https://zh.wikipedia.org/wiki/%E6%B3%B5%E7%AB%99)（玉成抽水站無獨立條目，對應抽水站概念條目） | wiki-139.jpg |
 | 140 | 竹科旺宏電子總部 | [旺宏電子](https://zh.wikipedia.org/wiki/%E6%97%BA%E5%AE%8F%E9%9B%BB%E5%AD%90) | wiki-140.jpg |
 | 141 | 台中港三井摩天輪(台中之星) | [MITSUI OUTLET PARK 台中港](https://zh.wikipedia.org/wiki/MITSUI_OUTLET_PARK_%E5%8F%B0%E4%B8%AD%E6%B8%AF) | wiki-141.jpg |
 | 142 | 花蓮海洋公園纜車 | [遠雄海洋公園](https://zh.wikipedia.org/wiki/%E9%81%A0%E9%9B%84%E6%B5%B7%E6%B4%8B%E5%85%AC%E5%9C%92) | wiki-142.jpg |
@@ -156,6 +156,7 @@
 | 186 | 新店溪粗坑發電廠 | [桂山發電廠粗坑機組](https://zh.wikipedia.org/wiki/%E6%A1%82%E5%B1%B1%E7%99%BC%E9%9B%BB%E5%BB%A0%E7%B2%97%E5%9D%91%E6%A9%9F%E7%B5%84) | wiki-186.jpg |
 | 188 | 大臺南會展中心 | [大臺南會展中心](https://zh.wikipedia.org/wiki/%E5%A4%A7%E8%87%BA%E5%8D%97%E6%9C%83%E5%B1%95%E4%B8%AD%E5%BF%83) | wiki-188.jpg |
 | 190 | 高雄大林發電廠 | [大林發電廠](https://zh.wikipedia.org/wiki/%E5%A4%A7%E6%9E%97%E7%99%BC%E9%9B%BB%E5%BB%A0) | wiki-190.jpg |
+| 139 | 臺北玉成抽水站 | 臺北市政府工務局水利工程處〈抽水站〉https://heo.gov.taipei/cp.aspx?n=4A2CABB77DBEBFA5 （重力閘門與抽水機的操作時機、豎軸式機組由柴油引擎經離合器與角齒輪減速機帶動葉輪）；〈抽水站自動化〉https://heo.gov.taipei/cp.aspx?n=16A56A5E039B08AD （中控系統與自動運轉程式依前池水位自動啟動機組、專用光纖回傳分區管理中心）；中央社 2016-12-08〈玉成抽水站更新機組 3年後完工〉https://www.cna.com.tw/news/aloc/201612080243.aspx （7 台機組、每台每秒 26.3 噸、東南亞最大）；座標：OpenStreetMap relation 19674294（南港路三段 268 之 1 號） | 2026-09-30 |
 | 191 | 屏東核三廠南部展示館 | [第三核能發電廠](https://zh.wikipedia.org/wiki/%E7%AC%AC%E4%B8%89%E6%A0%B8%E8%83%BD%E7%99%BC%E9%9B%BB%E5%BB%A0) | wiki-191.jpg |
 | 192 | 花蓮和平電廠 | [和平電廠](https://zh.wikipedia.org/wiki/%E5%92%8C%E5%B9%B3%E9%9B%BB%E5%BB%A0) | wiki-192.jpg |
 | 194 | 國家地震工程研究中心 | [國家地震工程研究中心](https://zh.wikipedia.org/wiki/%E5%9C%8B%E5%AE%B6%E5%9C%B0%E9%9C%87%E5%B7%A5%E7%A8%8B%E7%A0%94%E7%A9%B6%E4%B8%AD%E5%BF%83) | wiki-194.jpg |
