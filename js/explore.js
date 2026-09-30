@@ -1,7 +1,8 @@
 /* ============================================================
  * 台灣工程地景探索 — 主要遊戲邏輯
  * 三種模式：工程地景（200 景點 / 四主題）、精選地景、Mapillary 即時
- * 深度模式：揭曉後追問 2 題（主題分類、設施類型）
+ * 深度模式：揭曉後追問 2 題（主題分類、依設施類型出的工程原理題 js/principles.js）；
+ *           作答時不顯示設施類型提示，揭曉後才顯示
  * 結果存到 localStorage 給學習單與教師端使用
  * ============================================================ */
 
@@ -242,14 +243,15 @@ function regionHint(lat, lon) {
 }
 
 const FACILITY_TYPES = [
-  [/攔河堰|水庫|壩|堰/, '水利設施（水庫／攔河堰）'],
+  [/攔河堰|水庫|壩|堰|抽水站|分洪|水門/, '水利設施（水庫／攔河堰／抽水站）'],
   [/起重機/,            '港灣設施'],   // 「橋式起重機」不是橋梁
+  [/\(天橋\)/,          '產業園區／廠房'],   // 「台積電中科 15 廠 (天橋)」是廠內 OHT 軌道，不是橋梁
   [/橋/,                '橋梁'],
   [/隧道/,              '隧道'],
   [/發電|電廠|風場|風力|光電|地熱|機組|核三|核能/, '發電／能源設施'],
   [/高鐵|捷運|輕軌|車站|火車站|機廠|林鐵|五分車|纜車/, '軌道／纜車運輸'],
   [/機場|航廈|塔台|空橋/, '航空設施'],
-  [/港|碼頭/,            '港灣設施'],
+  [/港|碼頭|防波堤/,     '港灣設施'],
   [/圖書館|美術館|博物館|歌劇院|文化中心|藝術中心|考古館|天文/, '文化／教育場館'],
   [/大樓|總部|大廈|101|塔|i-Tower/, '高樓建築'],
   [/科學園區|工業區|科技園區|產業園區|園區|廠/, '產業園區／廠房'],
@@ -259,6 +261,13 @@ const FACILITY_TYPES = [
 function typeHint(name) {
   for (const [re, label] of FACILITY_TYPES) if (re.test(name)) return label;
   return '其他工程地景';
+}
+
+function renderClue(s, showType) {
+  $('photoClue').innerHTML =
+    '📍 <b>地區</b>：' + regionHint(s.lat, s.lon) + '<br>' +
+    (showType ? '🏗 <b>設施類型</b>：' + typeHint(s.name) + '<br>' : '') +
+    '🔍 <b>觀察重點</b>：' + s.tip;
 }
 
 /* ---------- 主流程 ---------- */
@@ -354,10 +363,8 @@ async function loadRound() {
       $('result').innerHTML = '影像載入失敗，按下方「重試」再試一次。';
       $('actBtn').textContent = '重試'; $('actBtn').disabled = false;
     };
-    $('photoClue').innerHTML =
-      '📍 <b>地區</b>：' + regionHint(s.lat, s.lon) + '<br>' +
-      '🏗 <b>設施類型</b>：' + typeHint(s.name) + '<br>' +
-      '🔍 <b>觀察重點</b>：' + s.tip;
+    /* 深度模式作答時不給設施類型（揭曉後才補上），避免提示直接洩漏追問答案 */
+    renderClue(s, !deepMode);
     $('photoClue').classList.add('on');
     state = 'loading';
     let shot = null;
@@ -474,16 +481,18 @@ function makeFollowups(site) {
       kind: 'theme',
     });
   }
-  /* Q2：設施類型 —— 名稱可辨識時才問 */
+  /* Q2：依設施類型出的工程原理題（題庫 js/principles.js）——
+     類型可辨識且該類有題目時才問；kind 沿用 'type'，成績碼第 2 位元意義不變（第 2 題答對） */
   const typeLabel = typeHint(site.name);
-  if (typeLabel !== '其他工程地景') {
-    const allTypes = FACILITY_TYPES.map(([, label]) => label);
-    const distractors = shuffle(allTypes.filter(t => t !== typeLabel)).slice(0, 3);
-    const options = shuffle([typeLabel, ...distractors].map(t => ({ label: t, ok: t === typeLabel })));
+  const bank = (typeof PRINCIPLE_QS !== 'undefined') ? PRINCIPLE_QS[typeLabel] : null;
+  if (bank && bank.length) {
+    const p = bank[Math.floor(Math.random() * bank.length)];
+    const [srcName, srcUrl] = p.src;
     out.push({
-      q: '🏗 從規模與功能來看，這座工程主要屬於哪一類設施？',
-      options,
-      explain: `從名稱與外觀可辨識為「${typeLabel}」。對於同類設施，可以注意它常用的結構形式、機構方式與感測／控制系統，這通常就是學習重點。`,
+      q: `🔧 【${typeLabel}】${p.q}`,
+      options: shuffle(p.options.map((label, i) => ({ label, ok: i === p.answer }))),
+      explain: p.explain +
+        `<div class="fu-src">出處：<a href="${srcUrl}" target="_blank" rel="noopener">${srcName}</a></div>`,
       kind: 'type',
     });
   }
@@ -582,7 +591,10 @@ function confirmGuess() {
   }
   $('result').innerHTML = head +
     `距離 <b>${d < 1 ? '<1' : Math.round(d)}</b> 公里・本題 <b>${pts}</b> 分`;
-  if ((mode === 'engineering' || mode === 'trial')) showRefs(current.idx);
+  if ((mode === 'engineering' || mode === 'trial')) {
+    showRefs(current.idx);
+    if (deepMode) renderClue(rounds[idx], true);   // 揭曉後才補上設施類型提示
+  }
 
   actualMarker = L.marker([actual.lat, actual.lon], { icon: ACTUAL_ICON }).addTo(lmap);
   distLine = L.polyline([[guess.lat, guess.lon], [actual.lat, actual.lon]],
@@ -592,7 +604,7 @@ function confirmGuess() {
   /* 深度模式：渲染追問 */
   if (deepMode && (mode === 'engineering' || mode === 'trial')) {
     activeFollowups = makeFollowups(current);
-    rec.fuMax = activeFollowups.length;   // 這題實際有幾題追問（Q2 只在名稱可辨識時出題），供 maxScore 計算
+    rec.fuMax = activeFollowups.length;   // 這題實際有幾題追問（Q2 只在該設施類型有原理題時出題），供 maxScore 計算
     fuIndex = 0;
     if (activeFollowups.length) renderFollowup(rec);
   } else {
@@ -849,7 +861,7 @@ function showStart() {
     `<div class="ov-deep">
       <input type="checkbox" id="deepChk" ${isDeep ? 'checked' : ''}>
       <label for="deepChk"><b>啟用深度模式</b>
-        <small>揭曉後追問 2 題（主題分類、設施類型），答對每題 +300 分。建議熟悉操作後啟用。</small></label>
+        <small>揭曉後追問 2 題（主題分類、該類設施的工程原理），答對每題 +300 分；作答時不顯示設施類型提示。建議熟悉操作後啟用。</small></label>
     </div>` +
     `<div class="ov-divider">完整模式（成績可記錄）</div>` +
     `<div class="ov-modes">

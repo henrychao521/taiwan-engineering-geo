@@ -347,7 +347,7 @@ if (new URLSearchParams(location.search).get('demo') &&
       { idx: 0, name: '西螺大橋', lat: 23.8113, lon: 120.4606, ch: 3,
         tip: '桁架結構分析（Truss）、靜定與靜不定結構判斷、拉壓桿件受力與材料降伏強度分析。', type: '橋梁', distance: 2.4, score: 957 },
       { idx: 5, name: '翡翠水庫大壩', lat: 24.908, lon: 121.5734, ch: 0,
-        tip: '三心雙向彎曲變厚度混凝土拱壩。', type: '水利設施（水庫／攔河堰）', distance: 5.1, score: 911 },
+        tip: '三心雙向彎曲變厚度混凝土拱壩。', type: '水利設施（水庫／攔河堰／抽水站）', distance: 5.1, score: 911 },
       { idx: 50, name: '台中國家歌劇院', lat: 24.1624, lon: 120.6413, ch: 2,
         tip: '連續曲面殼體結構（Sound Cave）。', type: '文化／教育場館', distance: 0.6, score: 989 },
       { idx: 100, name: '高雄大港橋', lat: 22.6178, lon: 120.2838, ch: 3,
@@ -363,7 +363,7 @@ if (new URLSearchParams(location.search).get('demo') &&
       { idx: 32, name: '大漢溪新月橋', lat: 25.0298, lon: 121.4503, ch: 0,
         tip: '雙跨不對稱鋼拱橋。', type: '橋梁', distance: 14, score: 775 },
       { idx: 1, name: '德基水庫大壩', lat: 24.2586, lon: 121.1544, ch: 3,
-        tip: '雙曲線混凝土拱壩受力與靜水壓力。', type: '水利設施（水庫／攔河堰）', distance: 10, score: 834 },
+        tip: '雙曲線混凝土拱壩受力與靜水壓力。', type: '水利設施（水庫／攔河堰／抽水站）', distance: 10, score: 834 },
     ],
   }];
   localStorage.setItem('tweg_profile', JSON.stringify(p));
